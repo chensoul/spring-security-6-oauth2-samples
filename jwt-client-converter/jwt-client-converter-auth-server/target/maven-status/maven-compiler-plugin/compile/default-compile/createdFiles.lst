@@ -1,0 +1,7 @@
+com/chensoul/oauth2/config/AuthorizationServerConfig.class
+com/chensoul/oauth2/jose/KeyGeneratorUtils.class
+com/chensoul/oauth2/config/DefaultSecurityConfig.class
+com/chensoul/oauth2/AuthServerApplication.class
+com/chensoul/oauth2/config/AccessTokenCustomizerConfig.class
+com/chensoul/oauth2/jose/Jwks.class
+com/chensoul/oauth2/controller/UserInfoController.class

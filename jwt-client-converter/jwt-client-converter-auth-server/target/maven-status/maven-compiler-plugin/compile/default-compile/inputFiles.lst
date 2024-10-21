@@ -1,0 +1,7 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/AuthServerApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/config/AccessTokenCustomizerConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/config/AuthorizationServerConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/config/DefaultSecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/controller/UserInfoController.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/jose/Jwks.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-auth-server/src/main/java/com/chensoul/oauth2/jose/KeyGeneratorUtils.java

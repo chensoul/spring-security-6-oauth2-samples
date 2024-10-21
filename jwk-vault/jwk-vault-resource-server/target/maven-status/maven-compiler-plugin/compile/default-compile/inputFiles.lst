@@ -1,0 +1,4 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-vault/jwk-vault-resource-server/src/main/java/com/chensoul/oauth2/ResourceServiceApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-vault/jwk-vault-resource-server/src/main/java/com/chensoul/oauth2/config/ResourceServerConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-vault/jwk-vault-resource-server/src/main/java/com/chensoul/oauth2/controller/ResourceTestController.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-vault/jwk-vault-resource-server/src/main/java/com/chensoul/oauth2/jwt/VaultJwtDecoder.java

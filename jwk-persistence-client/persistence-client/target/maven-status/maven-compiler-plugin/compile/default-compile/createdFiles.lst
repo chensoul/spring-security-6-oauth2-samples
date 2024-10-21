@@ -1,0 +1,8 @@
+com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationParametersMapper.class
+com/chensoul/oauth2/controller/LoginPageController.class
+com/chensoul/oauth2/controller/PersistenceClientController.class
+com/chensoul/oauth2/config/JdbcClientRegistrationRepository.class
+com/chensoul/oauth2/PersistenceClientApplication.class
+com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationRowMapper$1.class
+com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationRowMapper.class
+com/chensoul/oauth2/config/SecurityConfig.class

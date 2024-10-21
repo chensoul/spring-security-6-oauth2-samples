@@ -1,0 +1,4 @@
+com/chensoul/oauth2/config/DefaultSecurityConfig.class
+com/chensoul/oauth2/jwt/VaultJwtEncoder.class
+com/chensoul/oauth2/config/AuthorizationServerConfig.class
+com/chensoul/oauth2/AuthorizationServiceApplication.class

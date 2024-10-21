@@ -1,0 +1,4 @@
+com/chensoul/oauth2/config/ResourceServerConfig.class
+com/chensoul/oauth2/GatewayResourceServerApplication.class
+com/chensoul/oauth2/controller/ArticleController$1.class
+com/chensoul/oauth2/controller/ArticleController.class

@@ -1,0 +1,6 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/OAuth2LoginClientApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/config/DefaultJsonOAuth2UserService.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/config/JsonHelper.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/config/OAuth2UserSetHeaderRequestEntityConverter.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/config/SecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwt-client-converter/jwt-client-converter-client/src/main/java/com/chensoul/oauth2/controller/HomeController.java

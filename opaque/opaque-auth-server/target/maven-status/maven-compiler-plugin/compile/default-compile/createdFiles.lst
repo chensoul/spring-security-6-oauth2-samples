@@ -1,0 +1,3 @@
+com/chensoul/oauth2/config/AuthorizationServerConfig.class
+com/chensoul/oauth2/AuthorizationServerWithOpaqueTokenApplication.class
+com/chensoul/oauth2/config/SecurityConfig.class

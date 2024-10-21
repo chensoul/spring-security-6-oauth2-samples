@@ -1,0 +1,4 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-redis/jwk-redis-resource-server/src/main/java/com/chensoul/oauth2/ResourceServerJwkCacheApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-redis/jwk-redis-resource-server/src/main/java/com/chensoul/oauth2/config/RedisConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-redis/jwk-redis-resource-server/src/main/java/com/chensoul/oauth2/config/SecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-redis/jwk-redis-resource-server/src/main/java/com/chensoul/oauth2/controller/ArticleController.java

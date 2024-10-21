@@ -1,0 +1,4 @@
+com/chensoul/oauth2/controller/ArticleController.class
+com/chensoul/oauth2/ResourceServerJwkCacheApplication.class
+com/chensoul/oauth2/config/RedisConfig.class
+com/chensoul/oauth2/config/SecurityConfig.class

@@ -1,0 +1,6 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/ClientRegistrationApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/config/JdbcClientRegistrationRepository.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/config/SecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/controller/ClientTestController.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/event/OAuth2ClientRegistrationEvent.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-custom-auth-server/client-registration/src/main/java/com/chensoul/oauth2/event/OAuth2ClientRegistrationMapper.java

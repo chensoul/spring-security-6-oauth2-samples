@@ -1,0 +1,5 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-resource-server/src/main/java/com/chensoul/oauth2/ResourceWithConsulApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-resource-server/src/main/java/com/chensoul/oauth2/config/SecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-resource-server/src/main/java/com/chensoul/oauth2/controller/ArticleController.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-resource-server/src/main/java/com/chensoul/oauth2/jose/ConsulKeySourceException.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-resource-server/src/main/java/com/chensoul/oauth2/jose/jwk/source/ConsulJWKSet.java

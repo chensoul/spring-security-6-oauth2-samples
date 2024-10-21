@@ -1,0 +1,13 @@
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/ResourceServerApplication.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/authentication/IntrospectiveIssuerJwtAuthenticationManagerResolver.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/configure/OAuth2IntrospectiveResourceServerAuthorizationConfigurer.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/configure/OAuth2IntrospectiveResourceServerConfiguration.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/configure/SecurityConfig.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/controller/ArticleController.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/CacheOpaqueTokenIntrospectorSupport.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/CachingOAuth2IntrospectionService.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/CachingOpaqueTokenIntrospector.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/JdbcOAuth2IntrospectionService.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/OAuth2Introspection.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/OAuth2IntrospectionService.java
+/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-introspection/jwt-introspection-resource-server/src/main/java/com/chensoul/oauth2/introspection/OpaqueTokenIntrospectorSupport.java

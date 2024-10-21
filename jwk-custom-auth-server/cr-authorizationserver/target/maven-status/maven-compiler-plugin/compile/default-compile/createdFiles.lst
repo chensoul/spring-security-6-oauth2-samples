@@ -1,0 +1,9 @@
+com/chensoul/oauth2/config/CustomClientMetadataConfig$CustomRegisteredClientConverter.class
+com/chensoul/oauth2/controller/UserController.class
+com/chensoul/oauth2/config/CustomClientMetadataConfig.class
+com/chensoul/oauth2/config/AuthorizationServerConfig.class
+com/chensoul/oauth2/AuthorizationServerApplication.class
+com/chensoul/oauth2/config/CustomClientMetadataConfig$CustomClientRegistrationConverter.class
+com/chensoul/oauth2/jose/KeyGeneratorUtils.class
+com/chensoul/oauth2/jose/Jwks.class
+com/chensoul/oauth2/config/SecurityConfig.class

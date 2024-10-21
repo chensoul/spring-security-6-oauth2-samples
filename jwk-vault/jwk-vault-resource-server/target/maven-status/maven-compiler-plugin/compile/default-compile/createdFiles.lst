@@ -1,0 +1,4 @@
+com/chensoul/oauth2/config/ResourceServerConfig.class
+com/chensoul/oauth2/controller/ResourceTestController.class
+com/chensoul/oauth2/jwt/VaultJwtDecoder.class
+com/chensoul/oauth2/ResourceServiceApplication.class

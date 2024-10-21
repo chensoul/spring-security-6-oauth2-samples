@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Custom consent page - Consent required</title>
+    <style>
+        body {
+            background-color: #f6f8fa;
+        }
+
+        #submit-consent {
+            width: 45%;
+            float: right;
+            height: 40px;
+            font-size: 18px;
+            border-color: #cccccc;
+            margin-right: 3%;
+        }
+
+        #cancel-consent {
+            width: 45%;
+            height: 40px;
+            font-size: 18px;
+            color: black;
+            background-color: #cccccc;
+            border-color: #cccccc;
+            float: left;
+            margin-left: 3%;
+        }
+    </style>
+    <script>
+        function cancelConsent() {
+            document.consent_form.reset();
+            document.consent_form.submit();
+        }
+    </script>
+</head>
+<body>
+<div style="width: 500px;height: 600px;margin: 100px auto">
+    <h5 style="text-align: center"><b th:text="${clientName}"></b>希望获得以下许可：</h5>
+    <div style="width: 100%;height: 500px;border: #cccccc 1px solid;border-radius: 10px">
+        <form name="consent_form" method="post" action="/oauth2/authorize">
+            <input type="hidden" name="client_id" th:value="${clientId}">
+            <input type="hidden" name="state" th:value="${state}">
+
+            <div th:each="scope: ${scopes}" class="form-group form-check py-1" style="margin-left: 5%">
+                <input class="form-check-input"
+                       type="checkbox"
+                       name="scope"
+                       th:value="${scope.scope}"
+                       th:id="${scope.scope}"
+                       checked>
+                <label class="form-check-label font-weight-bold" th:for="${scope.scope}"
+                       th:text="${scope.scope}=='profile'?(${scope.description}+'('+${principalName}+')'):${scope.description}"></label>
+            </div>
+
+            <hr style="width: 90%">
+            <p style="margin-left: 5%"><b th:text="${clientName}"></b>尚未安装在您有权访问的任何账户上。</p>
+            <hr style="width: 90%">
+            <div class="form-group pt-3" style="width: 100%;height: 80px;">
+                <button class="btn btn-primary btn-lg" type="submit" id="submit-consent">
+                    授权同意
+                </button>
+                <button class="btn btn-primary btn-lg" type="button" id="cancel-consent" onclick="cancelConsent();">
+                    取消
+                </button>
+            </div>
+            <div style="margin-top: 5px;width: 100%;height: 50px">
+                <p style="text-align: center;font-size: 14px">授权将重定向到</p>
+                <p style="text-align: center;font-size: 14px"><b th:text="${redirectUri}"></b></p>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

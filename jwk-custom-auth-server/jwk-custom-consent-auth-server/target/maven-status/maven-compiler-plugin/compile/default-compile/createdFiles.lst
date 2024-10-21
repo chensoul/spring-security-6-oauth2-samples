@@ -1,0 +1,7 @@
+com/chensoul/oauth2/CustomOAuth2ConsentApplication.class
+com/chensoul/oauth2/config/AuthorizationServerConfig.class
+com/chensoul/oauth2/controller/AuthorizationConsentController$ScopeWithDescription.class
+com/chensoul/oauth2/jose/KeyGeneratorUtils.class
+com/chensoul/oauth2/controller/AuthorizationConsentController.class
+com/chensoul/oauth2/config/DefaultSecurityConfig.class
+com/chensoul/oauth2/jose/Jwks.class
