@@ -11,12 +11,10 @@
 
     <artifactId>jwk-redis</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>jwk-redis-auth-server</module>
         <module>jwk-redis-resource-server</module>
         <module>jwk-redis-client</module>
     </modules>
-
-
-
 </project>

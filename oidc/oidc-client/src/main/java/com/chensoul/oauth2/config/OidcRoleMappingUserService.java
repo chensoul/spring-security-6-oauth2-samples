@@ -3,6 +3,11 @@ package com.chensoul.oauth2.config;
 import com.chensoul.oauth2.entity.OAuth2ClientRole;
 import com.chensoul.oauth2.entity.Role;
 import com.chensoul.oauth2.repository.OAuth2ClientRoleRepository;
+import java.net.URI;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -22,12 +27,6 @@ import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.util.Assert;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class OidcRoleMappingUserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
     private OidcUserService oidcUserService;

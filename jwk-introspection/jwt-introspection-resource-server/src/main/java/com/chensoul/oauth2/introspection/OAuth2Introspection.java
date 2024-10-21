@@ -1,9 +1,8 @@
 package com.chensoul.oauth2.introspection;
 
+import java.io.Serializable;
 import lombok.Data;
 import org.springframework.util.Assert;
-
-import java.io.Serializable;
 
 
 @Data

@@ -2,6 +2,7 @@ package com.chensoul.oauth2.config;
 
 import com.chensoul.oauth2.authentication.DeviceClientAuthenticationConverter;
 import com.chensoul.oauth2.authentication.DeviceClientAuthenticationProvider;
+import java.util.Map;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -15,8 +16,6 @@ import org.springframework.security.oauth2.server.authorization.settings.Authori
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
-
-import java.util.Map;
 
 
 public class DeviceClientAuthenticationConfigurer extends AbstractHttpConfigurer<DeviceClientAuthenticationConfigurer, HttpSecurity> {

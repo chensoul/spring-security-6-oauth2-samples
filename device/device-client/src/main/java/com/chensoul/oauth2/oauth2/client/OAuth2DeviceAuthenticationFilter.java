@@ -5,6 +5,7 @@ import com.chensoul.oauth2.oauth2.client.endpoint.OAuth2DeviceAuthorizationReque
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -20,8 +21,6 @@ import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.util.Assert;
-
-import java.io.IOException;
 
 
 public class OAuth2DeviceAuthenticationFilter extends AbstractAuthenticationProcessingFilter {

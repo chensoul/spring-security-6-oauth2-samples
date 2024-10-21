@@ -1,6 +1,7 @@
 package com.chensoul.oauth2.config;
 
 import com.chensoul.oauth2.jwt.VaultJwtEncoder;
+import java.time.Duration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -26,8 +27,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.vault.core.VaultTemplate;
-
-import java.time.Duration;
 
 
 @Configuration(proxyBeanMethods = false)

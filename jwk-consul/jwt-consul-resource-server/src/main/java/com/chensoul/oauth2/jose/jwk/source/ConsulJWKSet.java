@@ -1,17 +1,16 @@
 package com.chensoul.oauth2.jose.jwk.source;
 
+import com.chensoul.oauth2.jose.ConsulKeySourceException;
 import com.nimbusds.jose.KeySourceException;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.chensoul.oauth2.jose.ConsulKeySourceException;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.StringUtils;
-
 import java.text.ParseException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 
 
 public class ConsulJWKSet<C extends SecurityContext> implements JWKSource<C> {

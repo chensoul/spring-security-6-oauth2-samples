@@ -1,6 +1,8 @@
 package com.chensoul.oauth2.authentication;
 
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.http.HttpMethod;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
@@ -16,9 +18,6 @@ import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class DeviceClientAuthenticationConverter implements AuthenticationConverter {

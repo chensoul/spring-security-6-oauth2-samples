@@ -1,7 +1,6 @@
 package com.chensoul.oauth2.jose.jwk.source;
 
 import com.nimbusds.jose.jwk.JWK;
-
 import java.util.Date;
 
 

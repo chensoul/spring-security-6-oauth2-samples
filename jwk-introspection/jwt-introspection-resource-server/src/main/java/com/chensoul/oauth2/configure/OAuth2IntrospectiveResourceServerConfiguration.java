@@ -1,10 +1,14 @@
 package com.chensoul.oauth2.configure;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
 import com.chensoul.oauth2.introspection.CachingOAuth2IntrospectionService;
 import com.chensoul.oauth2.introspection.JdbcOAuth2IntrospectionService;
 import com.chensoul.oauth2.introspection.OAuth2Introspection;
 import com.chensoul.oauth2.introspection.OAuth2IntrospectionService;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import java.time.Duration;
+import java.util.Collections;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +20,6 @@ import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSeriali
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.jdbc.core.JdbcTemplate;
-
-import java.time.Duration;
-import java.util.Collections;
-import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 
 @Configuration(proxyBeanMethods = false)

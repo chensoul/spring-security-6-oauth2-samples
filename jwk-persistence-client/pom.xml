@@ -11,12 +11,10 @@
 
     <artifactId>jwk-persistence-client</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>persistence-client</module>
         <module>persistence-auth-server</module>
         <module>persistence-resource-server</module>
     </modules>
-
-
-
 </project>

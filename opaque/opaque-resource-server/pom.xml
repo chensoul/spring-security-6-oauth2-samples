@@ -11,10 +11,7 @@
 
     <artifactId>opaque-resource-server</artifactId>
 
-
-
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -33,7 +30,5 @@
             <version>9.43.1</version>
             <scope>runtime</scope>
         </dependency>
-
-
     </dependencies>
 </project>

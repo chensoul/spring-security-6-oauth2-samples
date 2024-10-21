@@ -7,6 +7,7 @@ import com.chensoul.oauth2.oauth2.client.authentication.OAuth2DeviceAuthorizatio
 import com.chensoul.oauth2.oauth2.client.authentication.OAuth2DeviceCodeAuthenticationProvider;
 import com.chensoul.oauth2.oauth2.client.endpoint.DefaultDeviceCodeTokenResponseClient;
 import com.chensoul.oauth2.oauth2.client.endpoint.OAuth2DeviceCodeGrantRequest;
+import java.util.Map;
 import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
@@ -24,8 +25,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.util.StringUtils;
-
-import java.util.Map;
 
 
 public class OAuth2DeviceClientAuthenticationConfigurer extends AbstractHttpConfigurer<OAuth2DeviceClientAuthenticationConfigurer, HttpSecurity> {

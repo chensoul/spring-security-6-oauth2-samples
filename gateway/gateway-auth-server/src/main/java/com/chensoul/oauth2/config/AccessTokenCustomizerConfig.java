@@ -2,6 +2,7 @@ package com.chensoul.oauth2.config;
 
 import com.chensoul.oauth2.entity.Permission;
 import com.chensoul.oauth2.repository.RoleRepository;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
-
-import java.util.stream.Collectors;
 
 @Configuration(proxyBeanMethods = false)
 public class AccessTokenCustomizerConfig {

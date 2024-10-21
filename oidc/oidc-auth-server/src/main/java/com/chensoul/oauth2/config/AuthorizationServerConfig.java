@@ -1,11 +1,14 @@
 package com.chensoul.oauth2.config;
 
+import com.chensoul.oauth2.jose.Jwks;
+import com.chensoul.oauth2.service.OidcUserInfoService;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.chensoul.oauth2.jose.Jwks;
-import com.chensoul.oauth2.service.OidcUserInfoService;
+import java.time.Duration;
+import java.util.UUID;
+import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,10 +37,6 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-
-import java.time.Duration;
-import java.util.UUID;
-import java.util.function.Function;
 
 
 @Configuration(proxyBeanMethods = false)

@@ -11,12 +11,10 @@
 
     <artifactId>opaque</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>opaque-auth-server</module>
         <module>opaque-client</module>
         <module>opaque-resource-server</module>
     </modules>
-
-
-
 </project>

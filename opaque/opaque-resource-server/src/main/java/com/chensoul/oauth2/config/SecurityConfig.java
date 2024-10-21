@@ -1,5 +1,6 @@
 package com.chensoul.oauth2.config;
 
+import java.time.Duration;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -10,8 +11,6 @@ import org.springframework.security.oauth2.server.resource.introspection.NimbusO
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.client.RestOperations;
-
-import java.time.Duration;
 
 
 @Configuration(proxyBeanMethods = false)

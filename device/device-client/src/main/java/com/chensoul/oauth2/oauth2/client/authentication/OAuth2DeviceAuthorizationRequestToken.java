@@ -1,11 +1,10 @@
 package com.chensoul.oauth2.oauth2.client.authentication;
 
+import java.util.Collections;
 import org.springframework.lang.Nullable;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.util.Assert;
-
-import java.util.Collections;
 
 
 public class OAuth2DeviceAuthorizationRequestToken extends AbstractAuthenticationToken {

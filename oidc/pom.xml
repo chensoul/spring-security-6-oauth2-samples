@@ -11,11 +11,9 @@
 
     <artifactId>oidc</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>oidc-auth-server</module>
         <module>oidc-client</module>
     </modules>
-
-
-
 </project>

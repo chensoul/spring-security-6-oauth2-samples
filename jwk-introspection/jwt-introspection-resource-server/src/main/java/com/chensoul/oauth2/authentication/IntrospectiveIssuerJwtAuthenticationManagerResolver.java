@@ -3,6 +3,8 @@ package com.chensoul.oauth2.authentication;
 import com.chensoul.oauth2.introspection.OAuth2Introspection;
 import com.chensoul.oauth2.introspection.OAuth2IntrospectionService;
 import com.chensoul.oauth2.introspection.OpaqueTokenIntrospectorSupport;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.log.LogMessage;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -10,9 +12,6 @@ import org.springframework.security.authentication.AuthenticationManagerResolver
 import org.springframework.security.oauth2.server.resource.authentication.OpaqueTokenAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
 import org.springframework.util.Assert;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 
 @Slf4j

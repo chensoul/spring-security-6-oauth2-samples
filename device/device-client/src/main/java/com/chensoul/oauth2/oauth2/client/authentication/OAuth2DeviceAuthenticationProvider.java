@@ -1,6 +1,8 @@
 package com.chensoul.oauth2.oauth2.client.authentication;
 
 import com.chensoul.oauth2.oauth2.client.endpoint.OAuth2DeviceCodeGrantRequest;
+import java.util.Collection;
+import java.util.Map;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -15,9 +17,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthorizationException;
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
-import java.util.Map;
 
 
 public class OAuth2DeviceAuthenticationProvider implements AuthenticationProvider {

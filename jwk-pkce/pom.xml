@@ -11,12 +11,10 @@
 
     <artifactId>jwk-pkce</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>pkce-auth-server</module>
         <module>pkce-client</module>
         <module>pkce-resource-server</module>
     </modules>
-
-
-
 </project>

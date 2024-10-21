@@ -4,14 +4,13 @@ import com.chensoul.oauth2.entity.Role;
 import com.chensoul.oauth2.entity.User;
 import com.chensoul.oauth2.repository.RoleRepository;
 import com.chensoul.oauth2.repository.UserRepository;
+import java.util.Arrays;
+import java.util.function.Consumer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 @Component
 @RequiredArgsConstructor

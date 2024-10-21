@@ -1,13 +1,16 @@
 package com.chensoul.oauth2.config;
 
+import com.chensoul.oauth2.jose.jwk.source.RedisJWKSetCache;
+import com.chensoul.oauth2.jose.jwk.source.RotateJwkSource;
 import com.nimbusds.jose.KeySourceException;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKMatcher;
 import com.nimbusds.jose.jwk.JWKSelector;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import com.chensoul.oauth2.jose.jwk.source.RedisJWKSetCache;
-import com.chensoul.oauth2.jose.jwk.source.RotateJwkSource;
+import java.time.Duration;
+import java.util.List;
+import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -31,10 +34,6 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.UUID;
 
 
 @Configuration(proxyBeanMethods = false)

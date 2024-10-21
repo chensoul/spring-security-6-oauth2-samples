@@ -11,11 +11,11 @@
 
     <artifactId>gateway</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>gateway-client</module>
         <module>gateway-auth-server</module>
         <module>gateway-resource-server</module>
     </modules>
-
 
 </project>

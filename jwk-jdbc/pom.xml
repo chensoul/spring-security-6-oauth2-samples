@@ -11,12 +11,10 @@
 
     <artifactId>jwk-jdbc</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>jwk-jdbc-client</module>
         <module>jwk-jdbc-auth-server</module>
         <module>jwk-jdbc-resource-server</module>
     </modules>
-
-
-
 </project>

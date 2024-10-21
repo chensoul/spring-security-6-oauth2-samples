@@ -11,11 +11,9 @@
 
     <artifactId>oauth2-custom-consent-page-with-vue</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>openid-provider</module>
         <module>relying-party</module>
     </modules>
-
-
-
 </project>

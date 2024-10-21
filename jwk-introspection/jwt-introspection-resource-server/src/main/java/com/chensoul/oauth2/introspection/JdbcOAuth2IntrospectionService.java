@@ -1,15 +1,18 @@
 package com.chensoul.oauth2.introspection;
 
-import org.springframework.dao.DuplicateKeyException;
-import org.springframework.jdbc.core.*;
-import org.springframework.util.Assert;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.ArgumentPreparedStatementSetter;
+import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameterValue;
+import org.springframework.util.Assert;
 
 
 public class JdbcOAuth2IntrospectionService implements OAuth2IntrospectionService {

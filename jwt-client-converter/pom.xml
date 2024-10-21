@@ -11,11 +11,10 @@
 
     <artifactId>jwt-client-converter</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>jwt-client-converter-auth-server</module>
         <module>jwt-client-converter-client</module>
     </modules>
-
-
 
 </project>

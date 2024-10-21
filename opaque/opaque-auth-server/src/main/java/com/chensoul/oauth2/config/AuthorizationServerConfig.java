@@ -1,5 +1,7 @@
 package com.chensoul.oauth2.config;
 
+import java.time.Duration;
+import java.util.UUID;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -17,9 +19,6 @@ import org.springframework.security.oauth2.server.authorization.settings.OAuth2T
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
-
-import java.time.Duration;
-import java.util.UUID;
 
 
 @Configuration(proxyBeanMethods = false)

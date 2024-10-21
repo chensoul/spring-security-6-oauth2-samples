@@ -1,5 +1,7 @@
 package com.chensoul.oauth2.oauth2.client.endpoint;
 
+import java.net.URI;
+import java.util.Collections;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -10,9 +12,6 @@ import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import java.net.URI;
-import java.util.Collections;
 
 
 public class OAuth2DeviceCodeGrantRequestEntityConverter implements Converter<OAuth2DeviceCodeGrantRequest, RequestEntity<?>> {
