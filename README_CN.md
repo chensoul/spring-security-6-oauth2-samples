@@ -1,6 +1,6 @@
 ![video_spider](https://socialify.git.ci/chensoul/learn-spring-authorization-server/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-# <font size="6p">spring-oauth2-sample</font> <font size="5p">  | [English Documentation](README.md)</font>
+# <font size="6p">learn-spring-authorization-server</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 <p align="left">
 	<a href="https://github.com/chensoul/learn-spring-authorization-server/stargazers"><img src="https://img.shields.io/github/stars/chensoul/learn-spring-authorization-server?style=flat-square&logo=GitHub"></a>
@@ -18,7 +18,7 @@ Security 6 之上， 这里的模块涵盖了 Spring Authorization Server 的许
 
 ## 构建项目
 
-spring-oauth2-sample 使用基于 [Maven](https://maven.apache.org/) 的构建系统。
+learn-spring-authorization-server 使用基于 [Maven](https://maven.apache.org/) 的构建系统。
 
 ### 先决条件
 
@@ -45,4 +45,4 @@ git clone git@github.com:chensoul/learn-spring-authorization-server.git
 
 ## 许可
 
-spring-oauth2-sample 是在 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0.html) 下发布的开源软件 。
+learn-spring-authorization-server 是在 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0.html) 下发布的开源软件 。

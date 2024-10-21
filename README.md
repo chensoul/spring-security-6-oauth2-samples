@@ -1,6 +1,6 @@
 ![video_spider](https://socialify.git.ci/chensoul/learn-spring-authorization-server/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-# <font size="6p">spring-oauth2-sample</font> <font size="5p">  | [中文文档](README_CN.md)</font>
+# <font size="6p">learn-spring-authorization-server</font> <font size="5p">  | [中文文档](README_CN.md)</font>
 
 <p align="left">
 	<a href="https://github.com/chensoul/learn-spring-authorization-server/stargazers"><img src="https://img.shields.io/github/stars/chensoul/learn-spring-authorization-server?style=flat-square&logo=GitHub"></a>
@@ -20,7 +20,7 @@ Server.
 
 ## Building from Source
 
-spring-oauth2-sample uses a [Maven](https://maven.apache.org/) based build system.
+learn-spring-authorization-server uses a [Maven](https://maven.apache.org/) based build system.
 
 ### Prerequisites
 
@@ -51,5 +51,5 @@ git clone git@github.com:chensoul/learn-spring-authorization-server.git
 
 ## License
 
-spring-oauth2-sample is Open Source software released under the
+learn-spring-authorization-server is Open Source software released under the
 [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).
