@@ -25,7 +25,7 @@ learn-spring-authorization-server uses a [Maven](https://maven.apache.org/) base
 ### Prerequisites
 
 [Git](https://help.github.com/set-up-git-redirect) and
-the [JDK17 build](https://www.oracle.com/technetwork/java/javase/downloads).
+the [JDK21 build](https://www.oracle.com/technetwork/java/javase/downloads).
 
 Be sure that your `JAVA_HOME` environment variable points to the `jdk-21` folder extracted from the JDK download.
 

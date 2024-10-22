@@ -22,7 +22,7 @@ learn-spring-authorization-server 使用基于 [Maven](https://maven.apache.org/
 
 ### 先决条件
 
-[Git](https://help.github.com/set-up-git-redirect) 和 [JDK17](https://www.oracle.com/technetwork/java/javase/downloads)
+[Git](https://help.github.com/set-up-git-redirect) 和 [JDK21](https://www.oracle.com/technetwork/java/javase/downloads)
 构建。
 
 确保您的 `JAVA_HOME` 环境变量指向 `jdk-21` 从 JDK 下载中提取的文件夹。
