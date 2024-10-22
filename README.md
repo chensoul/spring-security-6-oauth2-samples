@@ -16,8 +16,6 @@ Server.
 
 > 💡 Note: Don’t forget to give a star🌟 to the project if you like it!
 
-## Relevant Articles:
-
 ## Building from Source
 
 learn-spring-authorization-server uses a [Maven](https://maven.apache.org/) based build system.
