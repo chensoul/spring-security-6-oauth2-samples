@@ -1,13 +1,13 @@
-![video_spider](https://socialify.git.ci/chensoul/learn-spring-authorization-server/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
+![video_spider](https://socialify.git.ci/chensoul/spring-security-6-oauth2-samples/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-# <font size="6p">learn-spring-authorization-server</font> <font size="5p">  | [English Documentation](README.md)</font>
+# <font size="6p">spring-security-6-oauth2-samples</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 <p align="left">
-	<a href="https://github.com/chensoul/learn-spring-authorization-server/stargazers"><img src="https://img.shields.io/github/stars/chensoul/learn-spring-authorization-server?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/learn-spring-authorization-server/network/members"><img src="https://img.shields.io/github/forks/chensoul/learn-spring-authorization-server?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/learn-spring-authorization-server/watchers"><img src="https://img.shields.io/github/watchers/chensoul/learn-spring-authorization-server?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/learn-spring-authorization-server/issues"><img src="https://img.shields.io/github/issues/chensoul/learn-spring-authorization-server.svg?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/learn-spring-authorization-server/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/learn-spring-authorization-server.svg?style=flat-square"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/stargazers"><img src="https://img.shields.io/github/stars/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/network/members"><img src="https://img.shields.io/github/forks/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/watchers"><img src="https://img.shields.io/github/watchers/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/issues"><img src="https://img.shields.io/github/issues/chensoul/spring-security-6-oauth2-samples.svg?style=flat-square&logo=GitHub"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/spring-security-6-oauth2-samples.svg?style=flat-square"></a>
 </p>
 
 这个项目是一个 [Spring Authorization Server](https://spring.io/projects/spring-authorization-server) 示例教程的集合。它建立在
@@ -18,7 +18,7 @@ Security 6 之上， 这里的模块涵盖了 Spring Authorization Server 的许
 
 ## 构建项目
 
-learn-spring-authorization-server 使用基于 [Maven](https://maven.apache.org/) 的构建系统。
+spring-security-6-oauth2-samples 使用基于 [Maven](https://maven.apache.org/) 的构建系统。
 
 ### 先决条件
 
@@ -30,7 +30,7 @@ learn-spring-authorization-server 使用基于 [Maven](https://maven.apache.org/
 ### 检查来源
 
 ```
-git clone git@github.com:chensoul/learn-spring-authorization-server.git
+git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 ```
 
 ### 构建并安装项目：
@@ -45,4 +45,4 @@ git clone git@github.com:chensoul/learn-spring-authorization-server.git
 
 ## 许可
 
-learn-spring-authorization-server 是在 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0.html) 下发布的开源软件 。
+spring-security-6-oauth2-samples 是在 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0.html) 下发布的开源软件 。
