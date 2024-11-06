@@ -1,6 +1,0 @@
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/AuthServerApplication.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/jose/ConsulConfigKeySourceException.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/jose/KeyIDStrategy.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/jose/source/ConsulConfigRotateJWKSource.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/security/AuthorizationServerConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-consul/jwt-consul-auth-server/src/main/java/com/chensoul/oauth2/security/SecurityConfig.java

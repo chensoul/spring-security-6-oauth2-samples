@@ -1,6 +1,0 @@
-com/chensoul/oauth2/jose/ConsulConfigKeySourceException.class
-com/chensoul/oauth2/security/SecurityConfig.class
-com/chensoul/oauth2/jose/KeyIDStrategy.class
-com/chensoul/oauth2/security/AuthorizationServerConfig.class
-com/chensoul/oauth2/jose/source/ConsulConfigRotateJWKSource.class
-com/chensoul/oauth2/AuthServerApplication.class

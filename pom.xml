@@ -4,10 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>spring-boot-starter-parent</artifactId>
         <groupId>org.springframework.boot</groupId>
-        <version>3.3.4</version>
-        <relativePath/>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.chensoul</groupId>
@@ -16,26 +16,17 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <java.version>21</java.version>
     </properties>
 
     <modules>
-        <module>jwk-persistence-client</module>
-        <module>jwk-jdbc</module>
-        <module>jwt-client-converter</module>
-        <module>jwk</module>
-        <module>jwk-pkce</module>
-        <module>jwk-redis</module>
-        <module>jwk-consul</module>
-        <module>jwk-vault</module>
-        <module>jwk-custom-auth-server</module>
-        <module>jwk-introspection</module>
-        <module>oidc</module>
-        <module>opaque</module>
-        <module>oauth2-custom-consent-page-with-vue</module>
-        <module>device</module>
-        <module>gateway</module>
+        <module>official-samples</module>
+        <module>oauth2-login-jte</module>
+        <module>spring-authorization-server</module>
+        <module>spring-authorization-server-durability</module>
+        <module>spring-authorization-server-message</module>
+        <module>spring-authorization-server-book</module>
+        <module>bootiful-spring-boot-2024</module>
     </modules>
 
     <dependencyManagement>
@@ -52,21 +43,46 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>4.5.3</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

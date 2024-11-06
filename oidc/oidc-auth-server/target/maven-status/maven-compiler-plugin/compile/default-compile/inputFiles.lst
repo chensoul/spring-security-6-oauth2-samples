@@ -1,7 +1,0 @@
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/IdpApplication.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/config/AuthorizationServerConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/config/DefaultSecurityConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/config/IdTokenCustomizerConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/jose/Jwks.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/jose/KeyGeneratorUtils.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/oidc/oidc-auth-server/src/main/java/com/chensoul/oauth2/service/OidcUserInfoService.java

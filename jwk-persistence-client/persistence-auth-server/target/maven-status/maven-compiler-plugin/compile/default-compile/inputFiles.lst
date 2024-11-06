@@ -1,5 +1,0 @@
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-auth-server/src/main/java/com/chensoul/oauth2/OAuth2ServerApplication.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-auth-server/src/main/java/com/chensoul/oauth2/config/DefaultSecurityConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-auth-server/src/main/java/com/chensoul/oauth2/config/OAuth2ServerConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-auth-server/src/main/java/com/chensoul/oauth2/jose/Jwks.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-auth-server/src/main/java/com/chensoul/oauth2/jose/KeyGeneratorUtils.java

@@ -18,6 +18,16 @@ Server.
 
 > 💡 Note: Don’t forget to give a star🌟 to the project if you like it!
 
+## Modules
+
+- [official-samples](https://github.com/spring-projects/spring-authorization-server/tree/main/samples)
+- spring-authorization-server: [Spring Tips: The Spring Authorization Server](https://www.youtube.com/watch?v=Yh8t04NG_K4)
+- spring-authorization-server-message-flow: [Spring Tips: the Spring Authorization Server: securing SPAs and messaging flows](https://www.youtube.com/watch?v=p3aLjH2VPzU)
+- spring-authorization-server-durability: [Spring Tips: the Spring Authorization Server: durability of data
+  ](https://www.youtube.com/watch?v=GVsKQ4dp_pQ)
+- [spring-authorization-server-book](https://github.com/spring-tips/spring-authorization-server-book/)
+- [bootiful-spring-boot-2024](https://github.com/joshlong/bootiful-spring-boot-2024)
+
 ## Building from Source
 
 spring-security-6-oauth2-samples uses a [Maven](https://maven.apache.org/) based build system.
@@ -46,6 +56,7 @@ git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 - https://github.com/spring-tips/spring-security-5-oauth-client
 - https://github.com/spring-tips/spring-authorization-server-book
 - https://github.com/spring-tips/spring-authorization-server
+- https://github.com/atquil/spring-security/tree/JWT-oauth2
 
 ## Contributing
 

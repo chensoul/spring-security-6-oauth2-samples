@@ -1,8 +1,0 @@
-com/chensoul/oauth2/config/DefaultJsonOAuth2UserService.class
-com/chensoul/oauth2/config/DefaultJsonOAuth2UserService$1.class
-com/chensoul/oauth2/controller/HomeController.class
-com/chensoul/oauth2/config/JsonHelper$MapTypeReference.class
-com/chensoul/oauth2/config/JsonHelper.class
-com/chensoul/oauth2/config/OAuth2UserSetHeaderRequestEntityConverter.class
-com/chensoul/oauth2/OAuth2LoginClientApplication.class
-com/chensoul/oauth2/config/SecurityConfig.class

@@ -1,5 +1,0 @@
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-jdbc/jwk-jdbc-auth-server/src/main/java/com/chensoul/oauth2/AuthServerApplication.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-jdbc/jwk-jdbc-auth-server/src/main/java/com/chensoul/oauth2/config/AuthorizationServerConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-jdbc/jwk-jdbc-auth-server/src/main/java/com/chensoul/oauth2/config/DefaultSecurityConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-jdbc/jwk-jdbc-auth-server/src/main/java/com/chensoul/oauth2/jose/Jwks.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-jdbc/jwk-jdbc-auth-server/src/main/java/com/chensoul/oauth2/jose/KeyGeneratorUtils.java

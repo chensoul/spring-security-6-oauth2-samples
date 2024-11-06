@@ -1,5 +1,0 @@
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-client/src/main/java/com/chensoul/oauth2/PersistenceClientApplication.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-client/src/main/java/com/chensoul/oauth2/config/JdbcClientRegistrationRepository.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-client/src/main/java/com/chensoul/oauth2/config/SecurityConfig.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-client/src/main/java/com/chensoul/oauth2/controller/LoginPageController.java
-/Users/chensoul/codes/github/learn-spring-authorization-server/jwk-persistence-client/persistence-client/src/main/java/com/chensoul/oauth2/controller/PersistenceClientController.java

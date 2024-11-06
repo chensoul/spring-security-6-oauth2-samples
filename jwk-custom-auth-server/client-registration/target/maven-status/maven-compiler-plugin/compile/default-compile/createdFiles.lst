@@ -1,9 +1,0 @@
-com/chensoul/oauth2/event/OAuth2ClientRegistrationMapper.class
-com/chensoul/oauth2/controller/ClientTestController.class
-com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationParametersMapper.class
-com/chensoul/oauth2/event/OAuth2ClientRegistrationEvent.class
-com/chensoul/oauth2/ClientRegistrationApplication.class
-com/chensoul/oauth2/config/JdbcClientRegistrationRepository.class
-com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationRowMapper$1.class
-com/chensoul/oauth2/config/JdbcClientRegistrationRepository$ClientRegistrationRowMapper.class
-com/chensoul/oauth2/config/SecurityConfig.class
