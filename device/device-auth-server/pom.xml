@@ -11,8 +11,6 @@
 
     <artifactId>device-auth-server</artifactId>
 
-
-
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
