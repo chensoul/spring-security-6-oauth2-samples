@@ -20,13 +20,6 @@ Server.
 
 ## Modules
 
-- [official-samples](https://github.com/spring-projects/spring-authorization-server/tree/main/samples)
-- spring-authorization-server: [Spring Tips: The Spring Authorization Server](https://www.youtube.com/watch?v=Yh8t04NG_K4)
-- spring-authorization-server-message-flow: [Spring Tips: the Spring Authorization Server: securing SPAs and messaging flows](https://www.youtube.com/watch?v=p3aLjH2VPzU)
-- spring-authorization-server-durability: [Spring Tips: the Spring Authorization Server: durability of data
-  ](https://www.youtube.com/watch?v=GVsKQ4dp_pQ)
-- [spring-authorization-server-book](https://github.com/spring-tips/spring-authorization-server-book/)
-- [bootiful-spring-boot-2024](https://github.com/joshlong/bootiful-spring-boot-2024)
 
 ## Building from Source
 
@@ -57,6 +50,20 @@ git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 - https://github.com/spring-tips/spring-authorization-server-book
 - https://github.com/spring-tips/spring-authorization-server
 - https://github.com/atquil/spring-security/tree/JWT-oauth2
+- https://github.com/joshlong-attic/2024-11-06-jfall-nl/
+- https://github.com/spring-projects/spring-authorization-server/tree/main/samples
+- https://www.youtube.com/watch?v=Yh8t04NG_K4
+- https://www.youtube.com/watch?v=p3aLjH2VPzU
+- https://www.youtube.com/watch?v=GVsKQ4dp_pQ
+- https://github.com/spring-tips/spring-authorization-server-book/
+- https://github.com/joshlong/bootiful-spring-boot-2024
+- https://github.com/danvega/golf-scheduler 客户端验证 + RestClient
+- https://github.com/wdkeyser02/SpringBootOAuth2
+- https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer
+- https://github.com/wdkeyser02/SpringSecurityCloudGatewayAngularCSRFTutorial
+- https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer/
+- https://github.com/wdkeyser02/SpringMfaAuthorizationServer
+- https://github.com/wdkeyser02/SpringAuthorizationServerCustomPasswordGrantType
 
 ## Contributing
 
