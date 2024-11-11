@@ -1,0 +1,14 @@
+server.port: 8090
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # 如果没有启用 oidc, 则不能使用 issuer-uri
+          # ssuer-uri: http://localhost:9000
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+
+logging:
+  level:
+    org.springframework.security: trace

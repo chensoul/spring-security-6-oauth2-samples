@@ -9,6 +9,15 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>part01-min-config</module>
+        <module>part01-default</module>
+        <module>part02-InMemoryRegisteredClientRepository</module>
+        <module>part03-CustomAccessTokenResponseHandler</module>
+        <module>part04-OAuth2TokenCustomizer</module>
+        <module>part05-GrantedAuthoritiesMapper</module>
+        <module>part06-OAuth2UserService</module>
+        <module>part07-pkce</module>
+        <module>part08-webclient</module>
+        <module>part09-resttemplate</module>
+        <module>part10-jwks</module>
     </modules>
 </project>
