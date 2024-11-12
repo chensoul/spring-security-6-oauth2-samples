@@ -20,7 +20,6 @@ Server.
 
 ## Modules
 
-
 ## Building from Source
 
 spring-security-6-oauth2-samples uses a [Maven](https://maven.apache.org/) based build system.
@@ -57,7 +56,7 @@ git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 - https://www.youtube.com/watch?v=GVsKQ4dp_pQ
 - https://github.com/spring-tips/spring-authorization-server-book/
 - https://github.com/joshlong/bootiful-spring-boot-2024
-- https://github.com/danvega/golf-scheduler 客户端验证 + RestClient
+- https://github.com/danvega/golf-scheduler RestClient + 客户端验证
 - https://github.com/wdkeyser02/SpringBootOAuth2
 - https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer
 - https://github.com/wdkeyser02/SpringSecurityCloudGatewayAngularCSRFTutorial

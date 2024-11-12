@@ -1,0 +1,14 @@
+package com.chensoul;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
+
+@SpringBootApplication
+public class Part11OauthClientApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Part11OauthClientApplication.class, args);
+    }
+
+}
