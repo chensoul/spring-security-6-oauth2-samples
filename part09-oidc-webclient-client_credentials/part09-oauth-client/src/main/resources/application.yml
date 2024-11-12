@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          spring:
+            provider: spring
+            client-id: client
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            client-authentication-method: client_secret_post
+            scope: openid
+        provider:
+          spring:
+            token-uri: http://auth-server:9000/oauth2/token

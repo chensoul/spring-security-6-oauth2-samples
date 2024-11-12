@@ -9,15 +9,19 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>part01-default</module>
-        <module>part02-InMemoryRegisteredClientRepository</module>
-        <module>part03-CustomAccessTokenResponseHandler</module>
-        <module>part04-OAuth2TokenCustomizer</module>
-        <module>part05-GrantedAuthoritiesMapper</module>
-        <module>part06-OAuth2UserService</module>
-        <module>part07-pkce</module>
-        <module>part08-webclient</module>
-        <module>part09-resttemplate</module>
-        <module>part10-jwks</module>
+        <module>part01-min-config</module>
+        <module>part02-min-code</module>
+        <module>part03-default</module>
+        <module>part04-webclient-client_credentials</module>
+        <module>part08-oidc-webclient-authorization_code</module>
+        <module>part09-oidc-webclient-client_credentials</module>
+        <module>part10-oidc-resttemplate-authorization_code</module>
+        <module>part11-oidc-resttemplate-client_credentials</module>
+        <module>part14-oidc-OAuth2TokenCustomizer-AccessTokenResponseHandler</module>
+        <module>part15-oidc-GrantedAuthoritiesMapper</module>
+        <module>part16-oidc-OAuth2UserService</module>
+        <module>part21-oidc-pkce</module>
+        <module>part22-oidc-JwtBearerGrantAuthentication</module>
+        <module>part23-oidc-CustomPasswordAuthentication</module>
     </modules>
 </project>

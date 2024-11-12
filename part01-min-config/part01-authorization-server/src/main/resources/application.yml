@@ -1,0 +1,39 @@
+server:
+  port: 9000
+
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        issuer: http://auth-server:9000
+        client:
+          client-1:
+            registration:
+              client-id: client
+              client-secret: "{noop}secret"
+              client-authentication-methods: # 客户端认证方式
+                - client_secret_basic
+                - client_secret_post
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris: # 不建议使用 127.0.0.1，建议使用 localhost
+                - https://oidcdebugger.com/debug
+                - https://oauthdebugger.com/debug
+                - http://localhost:8080/login/oauth2/code/spring
+                - http://localhost:8080/authorized
+              scopes:
+                - openid # 用户的唯一标识
+                - profile # 用户的基本信息
+            require-authorization-consent: true # 需要设置为true，否则 scopes 为空
+            token:
+              access-token-time-to-live: 1d
+              refresh-token-time-to-live: 10d
+
+
+logging:
+  level:
+    org.springframework.security: trace
