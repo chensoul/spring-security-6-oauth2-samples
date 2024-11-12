@@ -21,18 +21,8 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(a -> a.anyRequest().authenticated())
-//                .oauth2Login(oauth2Login -> {
-//                    oauth2Login.loginPage("/oauth2/authorization/spring");
-//                })
                 .oauth2Login(withDefaults())
                 .oauth2Client(withDefaults())
                 .build();
-    }
-
-    @Bean
-    DefaultOAuth2UserService defaultOAuth2UserService() {
-        DefaultOAuth2UserService defaultOAuth2UserService = new DefaultOAuth2UserService();
-        defaultOAuth2UserService.setRequestEntityConverter(new BearerOAuth2UserRequestEntityConverter());
-        return defaultOAuth2UserService;
     }
 }

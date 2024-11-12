@@ -20,8 +20,12 @@
         <module>part14-oidc-OAuth2TokenCustomizer-AccessTokenResponseHandler</module>
         <module>part15-oidc-GrantedAuthoritiesMapper</module>
         <module>part16-oidc-OAuth2UserService</module>
+        <module>part17-oidc-jdbc</module>
+        <module>part18-oidc-opaque</module>
+        <module>part19-oidc-AccessTokenLimit</module>
         <module>part21-oidc-pkce</module>
         <module>part22-oidc-JwtBearerGrantAuthentication</module>
         <module>part23-oidc-CustomPasswordAuthentication</module>
+        <module>part24-oidc-introspction</module>
     </modules>
 </project>
