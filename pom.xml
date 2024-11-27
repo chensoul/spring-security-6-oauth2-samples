@@ -9,26 +9,11 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>part01-min-config</module>
-        <module>part02-min-code</module>
-        <module>part03-default</module>
-        <module>part04-webclient-client_credentials</module>
-        <module>part08-oidc-webclient-authorization_code</module>
-        <module>part09-oidc-webclient-client_credentials</module>
-        <module>part10-oidc-resttemplate-authorization_code</module>
-        <!--        <module>part11-oidc-resttemplate-client_credentials</module>-->
-        <!--        <module>part12-oidc-restclient-authorization_code</module>-->
-        <module>part13-oidc-restclient-client_credentials</module>
-        <module>part14-oidc-OAuth2TokenCustomizer-AccessTokenResponseHandler</module>
-        <module>part15-oidc-GrantedAuthoritiesMapper</module>
-        <module>part16-oidc-OAuth2UserService</module>
-        <module>part17-oidc-jdbc</module>
-        <module>part18-oidc-opaque</module>
-        <module>part19-oidc-AccessTokenLimit</module>
-        <module>part21-oidc-pkce</module>
-        <module>part22-oidc-JwtBearerGrantAuthentication</module>
-        <module>part23-oidc-CustomPasswordAuthentication</module>
-        <module>part24-oidc-introspction</module>
-        <module>part30-social-login-jte</module>
+        <module>sso-ch1-min</module>
+        <module>sso-ch2-default</module>
+        <module>sso-ch3-webclient</module>
+        <module>sso-ch4-resttemplate</module>
+        <module>sso-ch5-restclient</module>
+        <module>sso-ch7-jdbc</module>
     </modules>
 </project>

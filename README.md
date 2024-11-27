@@ -1,59 +1,56 @@
 ![video_spider](https://socialify.git.ci/chensoul/spring-security-6-oauth2-samples/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-# <font size="6p">spring-security-6-oauth2-samples</font> <font size="5p">  | [中文文档](README_CN.md)</font>
+# <font size="6p">spring-security-6-oauth2-samples</font> <font size="5p">  | [English Documentation](README.md)</font>
 
 <p align="left">
- <a href="https://github.com/chensoul/spring-security-6-oauth2-samples/workflows/maven-build.yml"><img src="https://github.com/chensoul/spring-security-6-oauth2-samples/actions/workflows/maven-build.yml/badge.svg"></a>
- <a href="/pom.xml"><img src="https://img.shields.io/badge/Spring%20Boot%20Version-3.3.5-blue"></a>
- <a href="/pom.xml"><img src="https://img.shields.io/badge/Java%20Version-21-blue"></a>
+	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/stargazers"><img src="https://img.shields.io/github/stars/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/network/members"><img src="https://img.shields.io/github/forks/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/watchers"><img src="https://img.shields.io/github/watchers/chensoul/spring-security-6-oauth2-samples?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/issues"><img src="https://img.shields.io/github/issues/chensoul/spring-security-6-oauth2-samples.svg?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/spring-security-6-oauth2-samples.svg?style=flat-square"></a>
 </p>
 
-This project is a collection of [Spring Authorization Server](https://spring.io/projects/spring-authorization-server)
-example tutorials. It builds on top of Spring Security 6, the modules here cover many aspects of Spring Authorization
-Server.
+这个项目是一个 [Spring Authorization Server](https://spring.io/projects/spring-authorization-server) 示例教程的集合。它建立在
+Spring
+Security 6 之上， 这里的模块涵盖了 Spring Authorization Server 的许多方面。
 
-> 💡 Note: Don’t forget to give a star🌟 to the project if you like it!
+> 💡注意：喜欢的话别忘了给项目一个star🌟哦！
 
-## Modules
+## 构建项目
 
-## Building from Source
+spring-security-6-oauth2-samples 使用基于 [Maven](https://maven.apache.org/) 的构建系统。
 
-spring-security-6-oauth2-samples uses a [Maven](https://maven.apache.org/) based build system.
+### 先决条件
 
-### Prerequisites
+[Git](https://help.github.com/set-up-git-redirect) 和 [JDK21](https://www.oracle.com/technetwork/java/javase/downloads)
+构建。
 
-[Git](https://help.github.com/set-up-git-redirect) and
-the [JDK21 build](https://www.oracle.com/technetwork/java/javase/downloads).
+确保您的 `JAVA_HOME` 环境变量指向 `jdk-21` 从 JDK 下载中提取的文件夹。
 
-Be sure that your `JAVA_HOME` environment variable points to the `jdk-21` folder extracted from the JDK download.
-
-### Check out sources
+### 检查来源
 
 ```
 git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 ```
 
-### Build and Install the Project:
+### 构建并安装项目：
 
 ```
 ./mvn clean install -Dmaven.test.skip=true
 ```
 
-## References
+## 参考
 
+- https://www.youtube.com/watch?v=Yh8t04NG_K4
+- https://www.youtube.com/watch?v=p3aLjH2VPzU
+- https://www.youtube.com/watch?v=GVsKQ4dp_pQ
+- https://github.com/eazybytes/springsecurity6
 - https://github.com/spring-tips/spring-security-5-oauth-client
 - https://github.com/spring-tips/spring-authorization-server-book
 - https://github.com/spring-tips/spring-authorization-server
 - https://github.com/atquil/spring-security/tree/JWT-oauth2
 - https://github.com/joshlong-attic/2024-11-06-jfall-nl/
 - https://github.com/spring-projects/spring-authorization-server/tree/main/samples
-- https://www.youtube.com/watch?v=Yh8t04NG_K4
-- https://www.youtube.com/watch?v=p3aLjH2VPzU
-- https://www.youtube.com/watch?v=GVsKQ4dp_pQ
 - https://github.com/spring-tips/spring-authorization-server-book/
 - https://github.com/joshlong/bootiful-spring-boot-2024
 - https://github.com/danvega/golf-scheduler RestClient + 客户端验证
@@ -63,16 +60,12 @@ git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 - https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer/
 - https://github.com/wdkeyser02/SpringMfaAuthorizationServer
 - https://github.com/wdkeyser02/SpringAuthorizationServerCustomPasswordGrantType
+- https://github.com/danvega/spring-boot-oauth-demo
 
-## Contributing
+## 工具
 
-[Pull requests](https://help.github.com/articles/creating-a-pull-request) are welcome.
+- https://www.oauth.com/playground
+- https://jwt.io/
+- https://oidcdebugger.com/debug
+- https://oauthdebugger.com/debug
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=chensoul/spring-security-6-oauth2-samples&type=Date)](https://star-history.com/#/chensoul/spring-security-6-oauth2-samples&Date)
-
-## License
-
-spring-security-6-oauth2-samples is Open Source software released under the
-[Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0.html).
