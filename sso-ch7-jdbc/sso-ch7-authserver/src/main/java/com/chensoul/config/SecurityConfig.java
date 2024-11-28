@@ -51,6 +51,7 @@ public class SecurityConfig {
     @Order(1)
     SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
+
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
         http
@@ -137,11 +138,18 @@ public class SecurityConfig {
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()).build();
 
         JdbcRegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcTemplate);
-        registeredClientRepository.save(clientCredClient);
-        registeredClientRepository.save(introspectClient);
-        registeredClientRepository.save(authCodeClient);
-        registeredClientRepository.save(pkceClient);
-
+        if (registeredClientRepository.findByClientId(clientCredClient.getClientId())==null) {
+            registeredClientRepository.save(clientCredClient);
+        }
+        if (registeredClientRepository.findByClientId(introspectClient.getClientId())==null) {
+            registeredClientRepository.save(introspectClient);
+        }
+        if (registeredClientRepository.findByClientId(authCodeClient.getClientId())==null) {
+            registeredClientRepository.save(authCodeClient);
+        }
+        if (registeredClientRepository.findByClientId(pkceClient.getClientId())==null) {
+            registeredClientRepository.save(pkceClient);
+        }
         return registeredClientRepository;
     }
 
