@@ -1,0 +1,14 @@
+server.port: 8091
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        opaquetoken:
+          introspection-uri: http://localhost:9000/oauth2/introspect
+          client-id: introspectClient
+          client-secret: introspectClient
+
+logging:
+  level:
+    org.springframework.security: trace

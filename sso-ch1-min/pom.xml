@@ -11,7 +11,9 @@
 
     <modules>
         <module>sso-ch1-authserver</module>
-        <module>sso-ch1-resource</module>
         <module>sso-ch1-client</module>
+        <module>sso-ch1-resource-jwt</module>
+        <module>sso-ch1-resource-opaque</module>
+        <module>sso-ch1-resource-multi-tenancy</module>
     </modules>
 </project>

@@ -61,6 +61,8 @@ git clone git@github.com:chensoul/spring-security-6-oauth2-samples.git
 - https://github.com/wdkeyser02/SpringMfaAuthorizationServer
 - https://github.com/wdkeyser02/SpringAuthorizationServerCustomPasswordGrantType
 - https://github.com/danvega/spring-boot-oauth-demo
+- https://github.com/rwinch/spring-enterprise-authorization-server
+- https://github.com/nguyenquangos0302git/learn-spring-security/
 
 ## 工具
 

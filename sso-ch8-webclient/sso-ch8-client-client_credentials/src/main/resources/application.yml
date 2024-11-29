@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          spring:
+            provider: spring
+            client-id: authCodeClient
+            client-secret: authCodeClient
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: Spring
+          github:
+            client-id: Ov23likOi21AwqpT9WUP
+            client-secret: 7a20e4bbec2dd26dff00172b6508e8abfc78e718
+            provider: github
+            scope: read:user,public_repo
+        provider:
+          spring:
+            issuer-uri: http://localhost:9000
+
+logging:
+  level:
+    org.springframework.security: TRACE

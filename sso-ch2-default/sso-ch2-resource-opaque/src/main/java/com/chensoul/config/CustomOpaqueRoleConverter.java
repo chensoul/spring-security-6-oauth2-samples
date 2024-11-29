@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class CustomOpaqueRoleConverter implements OpaqueTokenAuthenticationConverter {
     /**
-     * @param introspectedToken      the bearer token used to perform token introspection
-     * @param authenticatedPrincipal the result of token introspection
+     * @param introspectedToken      the bearer tokenlimit used to perform tokenlimit introspection
+     * @param authenticatedPrincipal the result of tokenlimit introspection
      * @return
      */
     @Override

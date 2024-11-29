@@ -11,9 +11,9 @@
     <modules>
         <module>sso-ch1-min</module>
         <module>sso-ch2-default</module>
-        <module>sso-ch3-webclient</module>
-        <module>sso-ch4-resttemplate</module>
-        <module>sso-ch5-restclient</module>
-        <module>sso-ch7-jdbc</module>
+        <module>sso-ch3-jwe</module>
+        <module>sso-ch4-jwk</module>
+        <module>sso-ch8-webclient</module>
+        <module>sso-ch6-jdbc</module>
     </modules>
 </project>

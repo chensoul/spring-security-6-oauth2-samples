@@ -1,8 +1,8 @@
 package com.chensoul.config;
 
-import com.chensoul.token.AccessTokenLimiter;
-import com.chensoul.token.AccessTokenRestrictionCustomizer;
-import com.chensoul.token.RedisAccessTokenLimiter;
+import com.chensoul.tokenlimit.AccessTokenLimiter;
+import com.chensoul.tokenlimit.AccessTokenRestrictionCustomizer;
+import com.chensoul.tokenlimit.RedisAccessTokenLimiter;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -111,7 +111,7 @@ public class SecurityConfig {
                 .clientSecret("{noop}clientCredClient")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, "ADMIN", "USER")))
+                .scopes(scopeConfig -> scopeConfig.addAll(List.of(OidcScopes.OPENID, "read", "write")))
                 .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofDays(10))
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()).build();
 
@@ -202,7 +202,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         var user1 = User.withUsername("user")
-                .password("{noop}pass")
+                .password("{noop}password")
                 .authorities("USER")
                 .build();
         return new InMemoryUserDetailsManager(user1);

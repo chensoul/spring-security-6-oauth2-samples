@@ -1,0 +1,13 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${mockwebserver.url}/.well-known/jwks.json
+        opaquetoken:
+          introspection-uri: ${mockwebserver.url}/introspect
+          client-id: client
+          client-secret: secret
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

@@ -17,7 +17,7 @@ spring:
           spring:
             issuer-uri: http://auth-server:9000
 #            authorization-uri: http://localhost:9000/oauth2/authorize
-#            token-uri: http://localhost:9000/oauth2/token
+#            tokenlimit-uri: http://localhost:9000/oauth2/token
 #            user-info-uri: http://localhost:9000/userinfo
 #            user-name-attribute: sub
 #            user-info-authentication-method: form

@@ -1,0 +1,17 @@
+server:
+  port: 8093
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:9000/oauth2/jwks
+        opaquetoken:
+          introspection-uri: http://localhost:9000/introspect
+          client-id: introspectClient
+          client-secret: introspectClient
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
