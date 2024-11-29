@@ -3,18 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.chensoul</groupId>
-    <artifactId>spring-security-6-oauth2-samples</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>sso-ch1-hello</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
-        <module>sso-ch1-hello</module>
-        <module>sso-ch2-authserver</module>
-        <module>sso-ch3-jwks-keypair</module>
-        <module>sso-ch4-jwe</module>
-        <module>sso-ch6-pkce</module>
-        <module>sso-ch9-webclient</module>
-        <module>sso-ch8-login</module>
+        <module>sso-ch1-auth-min</module>
+        <module>sso-ch1-auth-default</module>
+        <module>sso-ch1-resource-jwks</module>
+        <module>sso-ch1-resource-opaque</module>
+        <module>sso-ch1-resource-multi-tenant</module>
     </modules>
 </project>

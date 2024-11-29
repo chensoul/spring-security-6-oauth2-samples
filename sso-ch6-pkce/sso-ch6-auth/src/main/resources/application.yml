@@ -1,0 +1,12 @@
+server:
+  port: 9000
+
+sample:
+  private-key-location: classpath:simple.priv
+  public-key-location: classpath:simple.pub
+
+logging:
+  level:
+    org.springframework.security: trace
+
+
