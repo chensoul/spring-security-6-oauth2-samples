@@ -92,6 +92,7 @@ openssl pkcs12 -in simple.p12 -nodes -nocerts -out simple.priv
 - https://github.com/danvega/spring-boot-oauth-demo
 - https://github.com/rwinch/spring-enterprise-authorization-server
 - https://github.com/nguyenquangos0302git/learn-spring-security/
+- https://github.com/lorchr/light-docusaurus/tree/616a7e7e2098bd6ec8a6fd0f59ee7502ae5dd394/docs/zh-cn/spring-authorization-server
 
 ## 工具
 
