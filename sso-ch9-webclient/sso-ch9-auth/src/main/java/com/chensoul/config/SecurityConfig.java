@@ -2,7 +2,6 @@ package com.chensoul.config;
 
 import java.time.Duration;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;

@@ -10,14 +10,14 @@
 	<a href="https://github.com/chensoul/spring-security-6-oauth2-samples/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/spring-security-6-oauth2-samples.svg?style=flat-square"></a>
 </p>
 
-这个项目是一个 [Spring Authorization Server](https://spring.io/projects/spring-authorization-server) 示例教程的集合，基于 Spring Security 6，使用 Maven 构建。
+这个项目是一个 [Spring Authorization Server](https://spring.io/projects/spring-authorization-server) 示例教程的集合，基于
+Spring Security 6，使用 Maven 构建。
 
 > 💡注意：喜欢的话别忘了给项目一个star🌟哦！
 
 ## 构建项目
 
-JDK 版本 17+。
-
+JDK 版本 21+。
 
 ```bash
 ./mvnw clean install -Dmaven.test.skip=true
@@ -28,12 +28,16 @@ JDK 版本 17+。
 ### JWT
 
 名称解释：
+
 - JWT：JSON Web Token。包括 header、payload、signature 三部分。
-- JWS：Signed JWT，签名过的 JWT。其结构就是在之前 nonsecure JWT 的基础上，在头部声明签名算法，并在最后添加上签名。创建签名，是保证 JWT 不能被他人随意篡改。签名算法分为对称和非对称，签名的密钥或者密钥对称为 JWK。
+- JWS：Signed JWT，签名过的 JWT。其结构就是在之前 nonsecure JWT 的基础上，在头部声明签名算法，并在最后添加上签名。创建签名，是保证
+  JWT 不能被他人随意篡改。签名算法分为对称和非对称，签名的密钥或者密钥对称为 JWK。
 - JWK：JWT 的密钥
-- JWE：Encrypted JWT，payload 部分经过加密的 JWT。JWE 有五个部分，分别是 header、encrypted key、initialization vector、ciphertext、authentication tag。
+- JWE：Encrypted JWT，payload 部分经过加密的 JWT。JWE 有五个部分，分别是 header、encrypted key、initialization
+  vector、ciphertext、authentication tag。
 
 区别：
+
 1. JWS是去验证数据的，而JWE是保护数据不被第三方的人看到的。通过JWE，JWT变得更加安全。
 2. JWE和JWS的公钥私钥方案不相同，JWS中，私钥持有者加密令牌，公钥持有者验证令牌。而JWE中，私钥一方应该是唯一可以解密令牌的一方。
 3. 在JWE中，公钥持有可以将新的数据放入JWT中，但是JWS中，公钥持有者只能验证数据，不能引入新的数据。因此，对于公钥/私钥的方案而言，JWS和JWE是互补的。
@@ -68,6 +72,7 @@ openssl pkcs12 -in simple.p12 -nodes -nocerts -out simple.priv
 ```
 
 ## 参考
+
 - https://github.com/chensoul/SpringBootOAuth2
 - https://github.com/spring-projects/spring-security-samples/tree/main/servlet/spring-boot/java/oauth2
 
@@ -89,10 +94,11 @@ openssl pkcs12 -in simple.p12 -nodes -nocerts -out simple.priv
 - https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer/
 - https://github.com/wdkeyser02/SpringMfaAuthorizationServer
 - https://github.com/wdkeyser02/SpringAuthorizationServerCustomPasswordGrantType
-- https://github.com/danvega/spring-boot-oauth-demo
+- https://github.com/danvega/spring-boot-oauth-demo JTE + TailwindCSS + GitHub + Google
 - https://github.com/rwinch/spring-enterprise-authorization-server
 - https://github.com/nguyenquangos0302git/learn-spring-security/
 - https://github.com/lorchr/light-docusaurus/tree/616a7e7e2098bd6ec8a6fd0f59ee7502ae5dd394/docs/zh-cn/spring-authorization-server
+- https://github.com/ProductDock/spring-authorization-server-showcase jdbc + spring cloud gateway
 
 ## 工具
 

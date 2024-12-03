@@ -26,9 +26,15 @@ spring:
           google:
             client-id: your-app-client-id
             client-secret: your-app-client-secret
+            scope:
+              - email
+              - profile
           github:
             client-id: Ov23likOi21AwqpT9WUP
             client-secret: 7a20e4bbec2dd26dff00172b6508e8abfc78e718
+            scope:
+              - user:email
+              - read:user
           facebook:
             client-id: your-app-client-id
             client-secret: your-app-client-secret

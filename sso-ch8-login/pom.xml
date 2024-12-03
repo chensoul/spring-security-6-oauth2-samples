@@ -13,5 +13,6 @@
         <module>sso-ch8-auth</module>
         <module>sso-ch8-client</module>
         <module>sso-ch8-client-userinfo</module>
+        <module>sso-ch8-client-jte</module>
     </modules>
 </project>

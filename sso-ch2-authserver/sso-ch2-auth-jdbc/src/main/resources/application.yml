@@ -15,6 +15,11 @@ spring:
     validate-on-migrate: true
     fail-on-missing-locations: true
 
+jwk:
+  persistence:
+    password: password
+    salt: 73616C74
+    
 logging:
   level:
     root: INFO
