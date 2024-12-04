@@ -2,6 +2,7 @@
 package com.chensoul.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.util.HtmlUtils;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,6 @@ public class ResourceController {
 
     @PostMapping("/message")
     public String createMessage(@RequestBody String message) {
-        return String.format("Message was created. Content: %s", message);
+        return String.format("Message was created. Content: %s", HtmlUtils.htmlEscape(message));
     }
 }
