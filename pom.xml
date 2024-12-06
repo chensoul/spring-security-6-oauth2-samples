@@ -16,5 +16,7 @@
         <module>sso-ch6-pkce</module>
         <module>sso-ch9-webclient</module>
         <module>sso-ch8-login</module>
+        <module>sso-ch12-custom-password</module>
+        <module>sso-ch13-multi-tenant</module>
     </modules>
 </project>

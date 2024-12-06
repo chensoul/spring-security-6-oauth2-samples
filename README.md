@@ -75,7 +75,10 @@ openssl pkcs12 -in simple.p12 -nodes -nocerts -out simple.priv
 
 - https://github.com/chensoul/SpringBootOAuth2
 - https://github.com/spring-projects/spring-security-samples/tree/main/servlet/spring-boot/java/oauth2
-
+- https://github.com/sjohnr/oauth2-workshop
+- https://github.com/jgrandja/multitenant-spring-auth-server
+- https://github.com/wdkeyser02/SpringAuthorizationServerCustomPasswordGrantType
+- 
 - https://www.youtube.com/watch?v=Yh8t04NG_K4
 - https://www.youtube.com/watch?v=p3aLjH2VPzU
 - https://www.youtube.com/watch?v=GVsKQ4dp_pQ
