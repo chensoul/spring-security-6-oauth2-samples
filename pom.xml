@@ -9,13 +9,13 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <modules>
-        <module>sso-ch1-hello</module>
-        <module>sso-ch2-authserver</module>
-        <module>sso-ch3-jwks-keypair</module>
-        <module>sso-ch4-jwe</module>
-        <module>sso-ch6-pkce</module>
-        <module>sso-ch9-webclient</module>
-        <module>sso-ch8-login</module>
+        <module>sso-ch01-hello</module>
+        <module>sso-ch02-authserver</module>
+        <module>sso-ch03-jwks-keypair</module>
+        <module>sso-ch04-jwe</module>
+        <module>sso-ch06-pkce</module>
+        <module>sso-ch09-webclient</module>
+        <module>sso-ch08-login</module>
         <module>sso-ch12-custom-password</module>
         <module>sso-ch13-multi-tenant</module>
     </modules>

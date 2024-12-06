@@ -42,35 +42,6 @@ JDK 版本 21+。
 2. JWE和JWS的公钥私钥方案不相同，JWS中，私钥持有者加密令牌，公钥持有者验证令牌。而JWE中，私钥一方应该是唯一可以解密令牌的一方。
 3. 在JWE中，公钥持有可以将新的数据放入JWT中，但是JWS中，公钥持有者只能验证数据，不能引入新的数据。因此，对于公钥/私钥的方案而言，JWS和JWE是互补的。
 
-### 生成 Jwt 证书
-
-JRE 提供了一个简单的证书管理工具——keytool。它位于您的JRE_HOME\bin目录下。以下代码中的命令生成一个自签名证书并将其放入
-PKCS12 KeyStore 中。除了 KeyStore 的类型之外，您还需要设置其有效期、别名以及文件名。在开始生成过程之前，keytool会要求您输入密码和一些其他信息，如下所示：
-
-```bash
-keytool -genkeypair -alias simple -keyalg RSA -keysize 2048 \
-    -storetype PKCS12 -keystore simple.p12 -storepass mypass \
-    -dname "CN=WebServer,OU=Unit,O=Organization,L=City,S=State,C=CN" -validity 3650
-```
-
-导出公钥文件：
-
-```bash
-keytool -list -rfc --keystore simple.p12 -storepass mypass | \
-    openssl x509 -inform pem -pubkey > simple.pub
-```
-
-导出私钥文件：
-
-```bash
-keytool -importkeystore -srckeystore simple.p12 -srcstorepass mypass \
-    -destkeystore simple.p12 -deststoretype PKCS12 \
-    -deststorepass mypass -destkeypass mypass
-
-#输入 storepass 密码 
-openssl pkcs12 -in simple.p12 -nodes -nocerts -out simple.priv
-```
-
 ## 参考
 
 - https://github.com/chensoul/SpringBootOAuth2
