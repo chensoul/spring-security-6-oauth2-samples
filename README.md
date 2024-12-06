@@ -17,7 +17,7 @@ Spring Security 6，使用 Maven 构建。
 
 ## 构建项目
 
-JDK 版本 21+。
+JDK 版本 17+。
 
 ```bash
 ./mvnw clean install -Dmaven.test.skip=true
