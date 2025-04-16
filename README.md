@@ -63,6 +63,7 @@ JDK 版本 17+。
 - https://github.com/spring-tips/spring-authorization-server-book/
 - https://github.com/joshlong/bootiful-spring-boot-2024
 - https://github.com/danvega/golf-scheduler RestClient + 客户端验证
+- https://github.com/wdkeyser02/SpringBootOAuth2
 - https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer
 - https://github.com/wdkeyser02/SpringSecurityCloudGatewayAngularCSRFTutorial
 - https://github.com/wdkeyser02/SpringBootSpringAuthorizationServer/
@@ -73,6 +74,9 @@ JDK 版本 17+。
 - https://github.com/nguyenquangos0302git/learn-spring-security/
 - https://github.com/lorchr/light-docusaurus/tree/616a7e7e2098bd6ec8a6fd0f59ee7502ae5dd394/docs/zh-cn/spring-authorization-server
 - https://github.com/ProductDock/spring-authorization-server-showcase jdbc + spring cloud gateway
+- https://github.com/andifalk/spring-security-bootcamp
+- https://github.com/andifalk/whats-new-in-spring-security
+
 
 ## 工具
 
