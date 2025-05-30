@@ -1,0 +1,28 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/security-oauth2?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: user
+    password: pass
+  flyway:
+    baseline-on-migrate: true
+    baseline-description: <<Flyway Baseline>>
+    enabled: true
+    locations: classpath:db/migration
+    validate-on-migrate: true
+    fail-on-missing-locations: true
+
+jwk:
+  persistence:
+    password: password
+    salt: 73616C74
+    
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.security.oauth2: INFO

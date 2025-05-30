@@ -20,7 +20,6 @@ Spring Security 6，使用 Maven 构建。
 - Spring 官方示例：https://github.com/spring-projects/spring-authorization-server/blob/main/samples
 - Spring Security and OAuth 2.0: Step-by-Step (Workshop)：https://github.com/chensoul/oauth2-workshop
 - 多租户：https://github.com/chensoul/multitenant-spring-auth-server
-- Hands-On Workshop for OAuth 2.0 and OpenID Connect 1.0 https://andifalk.gitbook.io/openid-connect-workshop
 
 ## 参考
 
