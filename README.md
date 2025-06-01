@@ -20,6 +20,8 @@ Spring Security 6，使用 Maven 构建。
 - Spring 官方示例：https://github.com/spring-projects/spring-authorization-server/blob/main/samples
 - Spring Security and OAuth 2.0: Step-by-Step (Workshop)：https://github.com/chensoul/oauth2-workshop
 - 多租户：https://github.com/chensoul/multitenant-spring-auth-server
+- https://github.com/kanezi/spring-social-2-cloud/
+- https://github.com/chensoul/SpringBootOAuth2/
 
 ## 参考
 
@@ -46,7 +48,9 @@ Spring Security 6，使用 Maven 构建。
 - https://github.com/lorchr/light-docusaurus/tree/616a7e7e2098bd6ec8a6fd0f59ee7502ae5dd394/docs/zh-cn/spring-authorization-server
 - https://github.com/ProductDock/spring-authorization-server-showcase jdbc + spring cloud gateway
 - https://github.com/andifalk/spring-security-bootcamp
+- https://github.com/andifalk/custom-spring-authorization-server/tree/master
 - https://github.com/andifalk/whats-new-in-spring-security
+- https://github.com/andifalk/federated-identity-demos
 
 
 ## 工具

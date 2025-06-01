@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.chensoul</groupId>
+    <artifactId>authserver-samples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>authserver</module>
+        <module>authserver-tokenlimit</module>
+        <module>authserver-jdbc</module>
+        <module>authserver-keypair</module>
+        <module>authserver-custom-grant</module>
+        <module>resource-jwks</module>
+        <module>resource-jwks-issuer-url</module>
+        <module>resource-opaque</module>
+        <module>resource-keypair</module>
+        <module>resource-jwe</module>
+        <module>oauth2-client</module>
+        <module>oauth2-client-webclient-pkce</module>
+        <module>oauth2-client-jte</module>
+        <module>oauth2-client-userinfo</module>
+        <module>oauth2-client-webclient</module>
+        <module>oauth2-client-webclient-httpexchange</module>
+        <module>oauth2-client-resttemplate</module>
+    </modules>
+</project>
