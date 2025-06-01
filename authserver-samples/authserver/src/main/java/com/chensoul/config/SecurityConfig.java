@@ -45,6 +45,8 @@ import java.time.Duration;
 import java.util.Set;
 import java.util.UUID;
 
+import static org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer.authorizationServer;
+
 /**
  * @see OAuth2AuthorizationServerAutoConfiguration
  * @see OAuth2AuthorizationServerJwtAutoConfiguration
@@ -55,14 +57,12 @@ public class SecurityConfig {
     @Bean
     @Order(1)
     SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
+        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = authorizationServer();
 
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                .tokenEndpoint(configurer -> configurer
-                        .accessTokenResponseHandler(new CustomAccessTokenResponseHandler())
-                ).oidc(Customizer.withDefaults());    // Enable OpenID Connect 1.0
-
-        http
+        http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+                .with(authorizationServerConfigurer, (authorizationServer) ->
+                        authorizationServer.oidc(Customizer.withDefaults())	// Enable OpenID Connect 1.0
+                )
                 // Redirect to the login page when not authenticated from the
                 // authorization endpoint
                 .exceptionHandling((exceptions) -> exceptions
