@@ -9,6 +9,7 @@ Spring Authorization Server Endpoint:
 - http://localhost:9000/oauth2/authorize
 - http://localhost:9000/oauth2/device_authorization
 - http://localhost:9000/oauth2/token
+- http://localhost:9000/oauth2/authorize
 
 ## 异常
 

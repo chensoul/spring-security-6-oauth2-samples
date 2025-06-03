@@ -91,19 +91,16 @@ public class SecurityConfig {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient clientCredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("clientCredClient")
-                .clientSecret("{noop}clientCredClient")
+        RegisteredClient credentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("credentialsClient")
+                .clientSecret("{noop}credentialsClient")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .scope("read")
                 .scope("write")
-                .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofDays(10))
-                        .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
-                        .build()
+                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
                 ).build();
 
         RegisteredClient introspectClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -115,10 +112,7 @@ public class SecurityConfig {
                 .scope(OidcScopes.PROFILE)
                 .scope("read")
                 .scope("write")
-                .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofDays(10))
-                        .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-                        .build()
+                .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).build()
                 ).build();
 
         RegisteredClient authCodeClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -137,8 +131,6 @@ public class SecurityConfig {
                 .scope("read")
                 .scope("write")
                 .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofDays(10))
-                        .refreshTokenTimeToLive(Duration.ofDays(20))
                         .reuseRefreshTokens(false)
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
                 ).build();
@@ -165,13 +157,11 @@ public class SecurityConfig {
                         .build()
                 )
                 .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofDays(10))
-                        .refreshTokenTimeToLive(Duration.ofDays(20))
                         .reuseRefreshTokens(false)
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
                 ).build();
 
-        return new InMemoryRegisteredClientRepository(clientCredClient, introspectClient, authCodeClient, pkceClient);
+        return new InMemoryRegisteredClientRepository(credentialsClient, introspectClient, authCodeClient, pkceClient);
     }
 
     @Bean
@@ -179,17 +169,6 @@ public class SecurityConfig {
         return AuthorizationServerSettings.builder().build();
     }
 
-    @Bean
-    JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-    }
-
-    @Bean
-    JWKSource<SecurityContext> jwkSource() {
-        RSAKey rsaKey = Jwks.generateRsa();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -204,6 +183,18 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+    }
+
+    @Bean
+    public JWKSource<SecurityContext> jwkSource() {
+        RSAKey rsaKey = Jwks.generateRsa();
+        JWKSet jwkSet = new JWKSet(rsaKey);
+        return new ImmutableJWKSet<>(jwkSet);
     }
 
     @Bean

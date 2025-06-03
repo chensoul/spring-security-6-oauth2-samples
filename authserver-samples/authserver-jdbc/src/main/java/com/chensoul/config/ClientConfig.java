@@ -27,9 +27,9 @@ public class ClientConfig {
     @Bean
     ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
         return args -> {
-            RegisteredClient clientCredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("clientCredClient")
-                    .clientSecret("{noop}clientCredClient")
+            RegisteredClient credentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("credentialsClient")
+                    .clientSecret("{noop}credentialsClient")
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
@@ -107,8 +107,8 @@ public class ClientConfig {
                             .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
                     ).build();
 
-            if (repository.findByClientId(clientCredClient.getClientId())==null) {
-                repository.save(clientCredClient);
+            if (repository.findByClientId(credentialsClient.getClientId())==null) {
+                repository.save(credentialsClient);
             }
             if (repository.findByClientId(introspectClient.getClientId())==null) {
                 repository.save(introspectClient);

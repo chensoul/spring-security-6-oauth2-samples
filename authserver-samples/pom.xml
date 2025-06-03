@@ -10,6 +10,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>authserver-01-yaml</module>
+        <module>authserver-02-bean</module>
+        <module>authserver-03-min</module>
         <module>authserver</module>
         <module>authserver-tokenlimit</module>
         <module>authserver-jdbc</module>

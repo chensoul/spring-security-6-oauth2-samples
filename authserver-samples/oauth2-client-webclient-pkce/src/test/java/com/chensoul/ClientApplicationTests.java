@@ -340,7 +340,7 @@ public class ClientApplicationTests {
         }
 
         private OAuth2AccessTokenResponseClient<OAuth2AuthorizationCodeGrantRequest> mockAccessTokenResponseClient() {
-            OAuth2AccessTokenResponse accessTokenResponse = OAuth2AccessTokenResponse.withToken("access-tokenlimit-1234")
+            OAuth2AccessTokenResponse accessTokenResponse = OAuth2AccessTokenResponse.withToken("access-token-1234")
                     .tokenType(OAuth2AccessToken.TokenType.BEARER)
                     .expiresIn(60 * 1000)
                     .build();

@@ -1,0 +1,90 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      authorizationserver:
+        client:
+          credentialsClient:
+            registration:
+              client-id: "credentialsClient"
+              client-secret: "{noop}credentialsClient"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "client_credentials"
+              scopes:
+                - "read"
+                - "write"
+
+          introspectClient:
+            registration:
+              client-id: "introspectClient"
+              client-secret: "{noop}introspectClient"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "client_credentials"
+              scopes:
+                - "read"
+                - "write"
+            token:
+              access-token-format: REFERENCE
+
+          authCodeClient:
+            registration:
+              client-id: "authCodeClient"
+              client-secret: "{noop}authCodeClient"
+              client-authentication-methods:
+                - "client_secret_basic"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "https://oidcdebugger.com/debug"
+                - "https://oauthdebugger.com/debug"
+                - "http://127.0.0.1:8080/login/oauth2/code/authCodeClient"
+                - "http://127.0.0.1:8080/authorized"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8080/"
+              scopes:
+                - "openid"
+                - "profile"
+            token:
+              access-token-format: SELF_CONTAINED
+              reuse-refresh-tokens: false
+            require-authorization-consent: true
+
+          pkceClient:
+            registration:
+              client-id: "pkceClient"
+              client-secret: "{noop}pkceClient"
+              client-authentication-methods:
+                - "client_secret_basic"
+                - "none"
+              authorization-grant-types:
+                - "authorization_code"
+                - "refresh_token"
+              redirect-uris:
+                - "https://oidcdebugger.com/debug"
+                - "https://oauthdebugger.com/debug"
+                - "http://127.0.0.1:8080/login/oauth2/code/pkceClient"
+                - "http://127.0.0.1:8080/authorized"
+              post-logout-redirect-uris:
+                - "http://127.0.0.1:8080/"
+              scopes:
+                - "openid"
+                - "profile"
+            token:
+              access-token-format: SELF_CONTAINED
+              reuse-refresh-tokens: false
+            require-authorization-consent: true
+            require-proof-key: true

@@ -94,9 +94,9 @@ public class SecurityConfig {
 
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
-        RegisteredClient clientCredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("clientCredClient")
-                .clientSecret("{noop}clientCredClient")
+        RegisteredClient credentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("credentialsClient")
+                .clientSecret("{noop}credentialsClient")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .scope(OidcScopes.OPENID)
@@ -174,7 +174,7 @@ public class SecurityConfig {
                         .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
                 ).build();
 
-        return new InMemoryRegisteredClientRepository(clientCredClient, introspectClient, authCodeClient, pkceClient);
+        return new InMemoryRegisteredClientRepository(credentialsClient, introspectClient, authCodeClient, pkceClient);
     }
 
     @Bean

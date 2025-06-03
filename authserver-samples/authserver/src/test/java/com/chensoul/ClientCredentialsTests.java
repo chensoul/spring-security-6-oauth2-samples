@@ -2,33 +2,39 @@ package com.chensoul;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.util.Map;
+
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class ClientCredentialsTests {
-    private static final String CLIENT_ID = "clientCredClient";
-    private static final String CLIENT_SECRET = "clientCredClient";
+    private static final String CLIENT_ID = "credentialsClient";
+    private static final String CLIENT_SECRET = "credentialsClient";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
     private MockMvc mockMvc;
 
+    @LocalServerPort
+    private long port;
+
     @Test
     void performTokenRequestWhenValidClientCredentialsThenOk() throws Exception {
         // @formatter:off
-		this.mockMvc.perform(post("/oauth2/tokenlimit")
+		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
@@ -43,7 +49,7 @@ public class ClientCredentialsTests {
     @Test
     void performTokenRequestWhenMissingScopeThenOk() throws Exception {
         // @formatter:off
-		this.mockMvc.perform(post("/oauth2/tokenlimit")
+		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
 				.andExpect(status().isOk())
@@ -56,7 +62,7 @@ public class ClientCredentialsTests {
     @Test
     void performTokenRequestWhenInvalidClientCredentialsThenUnauthorized() throws Exception {
         // @formatter:off
-		this.mockMvc.perform(post("/oauth2/tokenlimit")
+		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
 				.with(httpBasic("bad", "password")))
@@ -68,7 +74,7 @@ public class ClientCredentialsTests {
     @Test
     void performTokenRequestWhenMissingGrantTypeThenUnauthorized() throws Exception {
         // @formatter:off
-		this.mockMvc.perform(post("/oauth2/tokenlimit")
+		this.mockMvc.perform(post("/oauth2/token")
 				.with(httpBasic("bad", "password")))
 				.andExpect(status().isUnauthorized())
 				.andExpect(jsonPath("$.error").value("invalid_client"));
@@ -78,7 +84,7 @@ public class ClientCredentialsTests {
     @Test
     void performTokenRequestWhenGrantTypeNotRegisteredThenBadRequest() throws Exception {
         // @formatter:off
-		this.mockMvc.perform(post("/oauth2/tokenlimit")
+		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.with(httpBasic("authCodeClient", "authCodeClient")))
 				.andExpect(status().isBadRequest())
@@ -90,7 +96,7 @@ public class ClientCredentialsTests {
     void performIntrospectionRequestWhenValidTokenThenOk() throws Exception {
         // @formatter:off
 		this.mockMvc.perform(post("/oauth2/introspect")
-				.param("tokenlimit", getAccessToken())
+				.param("token", getAccessToken())
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.active").value("true"))
@@ -98,7 +104,7 @@ public class ClientCredentialsTests {
 				.andExpect(jsonPath("$.client_id").value(CLIENT_ID))
 				.andExpect(jsonPath("$.exp").isNumber())
 				.andExpect(jsonPath("$.iat").isNumber())
-				.andExpect(jsonPath("$.iss").value("http://localhost:9000"))
+				.andExpect(jsonPath("$.iss").value("http://localhost:"+port))
 				.andExpect(jsonPath("$.nbf").isNumber())
 				.andExpect(jsonPath("$.scope").value("read"))
 				.andExpect(jsonPath("$.sub").value(CLIENT_ID))
@@ -110,7 +116,7 @@ public class ClientCredentialsTests {
     void performIntrospectionRequestWhenInvalidCredentialsThenUnauthorized() throws Exception {
         // @formatter:off
 		this.mockMvc.perform(post("/oauth2/introspect")
-				.param("tokenlimit", getAccessToken())
+				.param("token", getAccessToken())
 				.with(httpBasic("bad", "password")))
 				.andExpect(status().isUnauthorized())
 				.andExpect(jsonPath("$.error").value("invalid_client"));
@@ -119,7 +125,7 @@ public class ClientCredentialsTests {
 
     private String getAccessToken() throws Exception {
         // @formatter:off
-		MvcResult mvcResult = this.mockMvc.perform(post("/oauth2/tokenlimit")
+		MvcResult mvcResult = this.mockMvc.perform(post("http://localhost:"+port+"/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
