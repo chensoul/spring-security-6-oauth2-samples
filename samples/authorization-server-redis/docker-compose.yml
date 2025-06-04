@@ -1,0 +1,13 @@
+services:
+  redis:
+    image: redis:7
+    environment:
+      ALLOW_EMPTY_PASSWORD: yes
+      REDIS_DISABLE_COMMANDS: FLUSHDB,FLUSHALL
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli","--raw", "incr","ping" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10

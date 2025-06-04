@@ -1,0 +1,135 @@
+package com.chensoul.config;
+
+import com.chensoul.domain.Authority;
+import com.chensoul.domain.AuthorityRepository;
+import com.chensoul.domain.User;
+import com.chensoul.domain.UserRepository;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.security.oauth2.server.servlet.OAuth2AuthorizationServerAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
+import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
+import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
+
+import java.time.Duration;
+import java.util.UUID;
+
+/**
+ * @see OAuth2AuthorizationServerAutoConfiguration
+ */
+@EnableWebSecurity
+@Configuration
+public class SecurityConfig {
+    @Bean
+    ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
+        return args -> {
+            RegisteredClient credentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("credentialsClient")
+                    .clientSecret("{noop}credentialsClient")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.PROFILE)
+                    .scope("read")
+                    .scope("write")
+                    .tokenSettings(TokenSettings.builder()
+                            .accessTokenTimeToLive(Duration.ofDays(10))
+                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
+                            .build()
+                    ).build();
+
+            RegisteredClient introspectClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("introspectClient")
+                    .clientSecret("{noop}introspectClient")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.PROFILE)
+                    .scope("read")
+                    .scope("write")
+                    .tokenSettings(TokenSettings.builder()
+                            .accessTokenTimeToLive(Duration.ofDays(10))
+                            .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
+                            .build()
+                    ).build();
+
+            RegisteredClient authCodeClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("authCodeClient")
+                    .clientSecret("{noop}authCodeClient")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                    .redirectUri("https://oidcdebugger.com/debug")
+                    .redirectUri("https://oauthdebugger.com/debug")
+                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/authCodeClient")
+                    .redirectUri("http://127.0.0.1:8080/authorized")
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.PROFILE)
+                    .scope("read")
+                    .scope("write")
+                    .tokenSettings(TokenSettings.builder()
+                            .accessTokenTimeToLive(Duration.ofDays(10))
+                            .refreshTokenTimeToLive(Duration.ofDays(20))
+                            .reuseRefreshTokens(false)
+                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
+                    ).build();
+
+            RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("pkceClient")
+                    .clientSecret("{noop}pkceClient")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                    .redirectUri("https://oidcdebugger.com/debug")
+                    .redirectUri("https://oauthdebugger.com/debug")
+                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/authCodeClient")
+                    .redirectUri("http://127.0.0.1:8080/authorized")
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.PROFILE)
+                    .scope("read")
+                    .scope("write")
+                    .clientSettings(ClientSettings.builder()
+                            .requireProofKey(true)
+                            .requireAuthorizationConsent(true)
+                            .build()
+                    )
+                    .tokenSettings(TokenSettings.builder()
+                            .accessTokenTimeToLive(Duration.ofDays(10))
+                            .refreshTokenTimeToLive(Duration.ofDays(20))
+                            .reuseRefreshTokens(false)
+                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
+                    ).build();
+
+            if (repository.findByClientId(credentialsClient.getClientId()) == null) {
+                repository.save(credentialsClient);
+            }
+            if (repository.findByClientId(introspectClient.getClientId()) == null) {
+                repository.save(introspectClient);
+            }
+            if (repository.findByClientId(authCodeClient.getClientId()) == null) {
+                repository.save(authCodeClient);
+            }
+            if (repository.findByClientId(pkceClient.getClientId()) == null) {
+                repository.save(pkceClient);
+            }
+        };
+    }
+
+    @Bean
+    ApplicationRunner usersRunner(UserRepository userRepository, AuthorityRepository authorityRepository) {
+        return args -> {
+            userRepository.save(new User("user", "{noop}password"));
+            authorityRepository.save(new Authority("user", "USER"));
+        };
+    }
+}

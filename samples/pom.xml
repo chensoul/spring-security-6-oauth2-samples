@@ -17,7 +17,9 @@
         <module>authorization-server-05-accessTokenResponseHandler</module>
         <module>authorization-server-06-OAuth2TokenCustomizer</module>
         <module>authorization-server-jdbc</module>
-        <module>authorization-server-custom-grant</module>
+        <module>authorization-server-jpa</module>
+        <module>authorization-server-redis</module>
+        <module>authorization-server-custom-password-grant</module>
         <module>resource-server-jwks</module>
         <module>resource-server-issuer-url</module>
         <module>resource-server-public-key</module>
