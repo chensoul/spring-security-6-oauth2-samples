@@ -5,24 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.chensoul</groupId>
-    <artifactId>authserver-samples</artifactId>
+    <artifactId>samples</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>authserver-01-yaml</module>
-        <module>authserver-02-bean</module>
-        <module>authserver-03-min</module>
-        <module>authserver</module>
-        <module>authserver-tokenlimit</module>
-        <module>authserver-jdbc</module>
-        <module>authserver-keypair</module>
-        <module>authserver-custom-grant</module>
-        <module>resource-jwks</module>
-        <module>resource-jwks-issuer-url</module>
-        <module>resource-opaque</module>
-        <module>resource-keypair</module>
-        <module>resource-jwe</module>
+        <module>authorization-server-01-yaml</module>
+        <module>authorization-server-02-bean</module>
+        <module>authorization-server-03-min</module>
+        <module>authorization-server</module>
+        <module>authorization-server-tokenlimit</module>
+        <module>authorization-server-jdbc</module>
+        <module>authorization-server-keypair</module>
+        <module>authorization-server-custom-grant</module>
+        <module>resource-server-jwks</module>
+        <module>resource-server-jwks-issuer-url</module>
+        <module>resource-server-opaque</module>
+        <module>resource-server-keypair</module>
+        <module>resource-server-jwe</module>
         <module>oauth2-client</module>
         <module>oauth2-client-webclient-pkce</module>
         <module>oauth2-client-jte</module>

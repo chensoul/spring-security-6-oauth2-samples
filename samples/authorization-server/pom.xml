@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.chensoul</groupId>
-    <artifactId>authserver-02-bean</artifactId>
+    <artifactId>authorization-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

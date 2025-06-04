@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.chensoul</groupId>
-    <artifactId>resource-keypair</artifactId>
+    <artifactId>resource-server-jwks-issuer-url</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>
