@@ -13,16 +13,16 @@
         <module>authorization-server-01-yaml</module>
         <module>authorization-server-02-bean</module>
         <module>authorization-server-03-min</module>
-        <module>authorization-server</module>
-        <module>authorization-server-tokenlimit</module>
+        <module>authorization-server-04-jwks-keypair</module>
+        <module>authorization-server-05-accessTokenResponseHandler</module>
+        <module>authorization-server-06-OAuth2TokenCustomizer</module>
         <module>authorization-server-jdbc</module>
-        <module>authorization-server-keypair</module>
         <module>authorization-server-custom-grant</module>
         <module>resource-server-jwks</module>
-        <module>resource-server-jwks-issuer-url</module>
+        <module>resource-server-issuer-url</module>
+        <module>resource-server-public-key</module>
+        <module>resource-server-jwks-private-key</module>
         <module>resource-server-opaque</module>
-        <module>resource-server-keypair</module>
-        <module>resource-server-jwe</module>
         <module>oauth2-client</module>
         <module>oauth2-client-webclient-pkce</module>
         <module>oauth2-client-jte</module>
