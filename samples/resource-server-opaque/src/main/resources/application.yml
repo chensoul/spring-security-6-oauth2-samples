@@ -6,8 +6,8 @@ spring:
       resourceserver:
         opaquetoken:
           introspection-uri: http://localhost:9000/oauth2/introspect
-          client-id: introspectClient
-          client-secret: introspectClient
+          client-id: opaque-client
+          client-secret: opaque-client
 
 logging:
   level:

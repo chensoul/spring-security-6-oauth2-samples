@@ -30,6 +30,7 @@
         <module>resource-server-public-key</module>
         <module>resource-server-jwks-private-key</module>
         <module>resource-server-opaque</module>
+        <module>resource-server-multitenancy</module>
         <module>oauth2-client</module>
         <module>oauth2-client-webclient-pkce</module>
         <module>oauth2-client-jte</module>
