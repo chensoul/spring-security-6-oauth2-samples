@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Steve Riesenberg
  */
 @ExtendWith(SpringTestContextExtension.class)
-public class pkceClientTests {
+public class PkceClientTests {
     public final SpringTestContext spring = new SpringTestContext(this);
 
     @Autowired
