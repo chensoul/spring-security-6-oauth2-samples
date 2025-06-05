@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Steve Riesenberg
  */
 @ExtendWith(SpringTestContextExtension.class)
-public class PublicClientTests {
+public class pkceClientTests {
     public final SpringTestContext spring = new SpringTestContext(this);
 
     @Autowired
@@ -36,10 +36,10 @@ public class PublicClientTests {
     private RegisteredClientRepository registeredClientRepository;
 
     @Test
-    public void oidcLoginWhenPublicClientThenSuccess() throws Exception {
+    public void oidcLoginWhenpkceClientThenSuccess() throws Exception {
         this.spring.register(AuthorizationServerConfig.class).autowire();
 
-        RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("public-client");
+        RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("pkce-client");
         assertThat(registeredClient).isNotNull();
 
         AuthorizationCodeGrantFlow authorizationCodeGrantFlow = new AuthorizationCodeGrantFlow(this.mockMvc);

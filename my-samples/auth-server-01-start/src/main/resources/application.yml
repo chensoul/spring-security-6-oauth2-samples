@@ -36,15 +36,19 @@ spring:
               - "read"
               - "write"
           require-authorization-consent: true
-      public-client:
+      pkce-client:
         registration:
-          client-id: "public-client"
+          client-id: "pkce-client"
           client-authentication-methods:
             - "none"
+            - "client_secret_basic"
+            - "client_secret_post"
           authorization-grant-types:
             - "authorization_code"
+            - "refresh_token"
           redirect-uris:
             - "http://127.0.0.1:4200"
+            - "http://127.0.0.1:8080/login/oauth2/code/pkce-client"
           scopes:
             - "openid"
             - "profile"

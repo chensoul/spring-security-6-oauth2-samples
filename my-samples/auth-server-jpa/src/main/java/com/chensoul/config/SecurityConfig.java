@@ -63,8 +63,8 @@ public class SecurityConfig {
                     .scope("write")
                     .build();
 
-            RegisteredClient publicClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("public-client")
+            RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("pkce-client")
                     .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .redirectUri("http://127.0.0.1:4200")
@@ -98,8 +98,8 @@ public class SecurityConfig {
             if (repository.findByClientId(opaqueClient.getClientId()) == null) {
                 repository.save(opaqueClient);
             }
-            if (repository.findByClientId(publicClient.getClientId()) == null) {
-                repository.save(publicClient);
+            if (repository.findByClientId(pkceClient.getClientId()) == null) {
+                repository.save(pkceClient);
             }
         };
     }

@@ -176,9 +176,9 @@ public class AuthorizationCodeGrantFlow {
             parameters.addAll(additionalParameters);
         }
 
-        boolean publicClient = (registeredClient.getClientSecret() == null);
+        boolean pkceClient = (registeredClient.getClientSecret() == null);
         HttpHeaders headers = new HttpHeaders();
-        if (!publicClient) {
+        if (!pkceClient) {
             headers.setBasicAuth(registeredClient.getClientId(),
                     registeredClient.getClientSecret().replace("{noop}", ""));
         }
@@ -192,7 +192,7 @@ public class AuthorizationCodeGrantFlow {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.access_token").isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.token_type").isNotEmpty())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.expires_in").isNotEmpty())
-				.andExpect(publicClient
+				.andExpect(pkceClient
 						? MockMvcResultMatchers.jsonPath("$.refresh_token").doesNotExist()
 						: MockMvcResultMatchers.jsonPath("$.refresh_token").isNotEmpty()
 				)

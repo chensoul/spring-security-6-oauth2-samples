@@ -104,11 +104,18 @@ public class SecurityConfig {
                 .scope("client.read")
                 .build();
 
-        RegisteredClient publicClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("public-client")
+        RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("pkce-client")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .redirectUri("http://127.0.0.1:4200")
+                .redirectUri("https://oidcdebugger.com/debug")
+                .redirectUri("https://oauthdebugger.com/debug")
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/pkce-client")
+                .postLogoutRedirectUri("http://127.0.0.1:8080/")
                 .scope(OidcScopes.OPENID)
                 .scope(OidcScopes.PROFILE)
                 .clientSettings(ClientSettings.builder()
@@ -129,7 +136,7 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, publicClient, opaqueClient);
+        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
     }
 
     @Bean
