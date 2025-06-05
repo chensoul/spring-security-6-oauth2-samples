@@ -15,8 +15,7 @@
         <module>auth-server-02-pkce</module>
         <module>auth-server-03-min</module>
         <module>auth-server-04-jwks-keypair</module>
-        <module>auth-server-05-accessTokenResponseHandler</module>
-        <module>auth-server-06-OAuth2TokenCustomizer</module>
+        <module>auth-server-05-oauth2-login</module>
         <module>auth-server-userinfo</module>
         <module>auth-server-jdbc</module>
         <module>auth-server-jpa</module>
