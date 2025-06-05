@@ -12,11 +12,20 @@
 
 运行此服务器至少需要 Java 17 运行时，因为本项目使用了 Spring Boot 3.x。
 
+关键技术:
+
+- Spring Boot 3.5.0
+- Spring Framework 6.2.7
+- Spring Security 6.5.0
+- Spring Security OAuth2 Authorization Server 1.5.0
+- Spring Security OAuth2 Resource Server 1.5.0
+
 ## 使用
 
 通过运行类 _com.chensoul.AuthServerApplication_ 启动授权服务器。
 
-从 [http://localhost:9000/.well-known/openid-configuration](http://localhost:9000/.well-known/openid-configuration) 查找 OAuth2/OIDC 配置，以配置您的客户端和资源服务器。
+从 [http://localhost:9000/.well-known/openid-configuration](http://localhost:9000/.well-known/openid-configuration) 查找
+OAuth2/OIDC 配置，以配置您的客户端和资源服务器。
 
 以下是最重要的配置设置：
 
@@ -28,7 +37,6 @@
 | jwks_uri                | http://localhost:9000/oauth2/jwks       |
 | userinfo_endpoint       | http://localhost:9000/userinfo          |
 | introspection_endpoint  | http://localhost:9000/oauth2/introspect |
-
 
 ## 使用 OpenSSL 生成非对称密钥
 
@@ -89,9 +97,8 @@
 - 多租户：https://github.com/chensoul/multitenant-spring-auth-server
 - https://github.com/kanezi/spring-social-2-cloud/
 - https://github.com/chensoul/SpringBootOAuth2/
-- 各种授权类型的测试，包括 TOKEN_EXCHANGE，提供了 postman、http
-  测试脚本：https://github.com/andifalk/custom-spring-authorization-server
-- 多租户、TOKEN_EXCHANGE类型：https://github.com/andifalk/whats-new-in-spring-security/blob/main/spring-authorization-server/
+- 各种授权类型的测试，包括 TOKEN_EXCHANGE：https://github.com/andifalk/custom-spring-authorization-server
+- 多租户、TOKEN_EXCHANGE：https://github.com/andifalk/whats-new-in-spring-security/blob/main/spring-authorization-server/
 - OAuth 2.0 Authorization Code Grant Flow：https://github.com/andifalk/federated-identity-demos
 - https://github.com/andifalk/spring-security-bootcamp
 - https://github.com/atquil/spring-security/tree/JWT-oauth2
