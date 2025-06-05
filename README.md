@@ -1,8 +1,4 @@
-![video_spider](https://socialify.git.ci/chensoul/spring-security6-oauth2-samples/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
-
-# <font size="6p">spring-security6-oauth2-samples</font> <font size="5p">  | [English Documentation](README.md)</font>
-
-<p align="left">
+<p align="center">
 	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/stargazers"><img src="https://img.shields.io/github/stars/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/network/members"><img src="https://img.shields.io/github/forks/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
 	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/watchers"><img src="https://img.shields.io/github/watchers/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
@@ -10,10 +6,33 @@
 	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/spring-security6-oauth2-samples.svg?style=flat-square"></a>
 </p>
 
-这个项目是一个 [Spring Authorization Server](https://spring.io/projects/spring-authorization-server) 示例教程的集合，基于
-Spring Security 6，使用 Maven 构建。
+# spring-security6-oauth2-samples
 
-> 💡注意：喜欢的话别忘了给项目一个star🌟哦！
+![video_spider](https://socialify.git.ci/chensoul/spring-security6-oauth2-samples/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
+
+基于 Spring Boot3 使用 Maven 构建的 Spring OAuth2 示例。
+
+## 要求
+
+运行此服务器至少需要 Java 17 运行时，因为本项目使用了 Spring Boot 3.x。
+
+## 使用
+
+通过运行类 _com.chensoul.AuthServerApplication_ 启动授权服务器。
+
+从 [http://localhost:9000/.well-known/openid-configuration](http://localhost:9000/.well-known/openid-configuration) 查找 OAuth2/OIDC 配置，以配置您的客户端和资源服务器。
+
+以下是最重要的配置设置：
+
+| Configuration Parameter | Value                                   | 
+|-------------------------|-----------------------------------------|
+| issuer                  | http://localhost:9000                   |
+| authorization_endpoint  | http://localhost:9000/oauth2/authorize  |
+| token_endpoint          | http://localhost:9000/oauth2/token      |
+| jwks_uri                | http://localhost:9000/oauth2/jwks       |
+| userinfo_endpoint       | http://localhost:9000/userinfo          |
+| introspection_endpoint  | http://localhost:9000/oauth2/introspect |
+
 
 ## 使用 OpenSSL 生成非对称密钥
 
@@ -76,8 +95,7 @@ Spring Security 6，使用 Maven 构建。
 - https://github.com/chensoul/SpringBootOAuth2/
 - 各种授权类型的测试，包括 TOKEN_EXCHANGE，提供了 postman、http
   测试脚本：https://github.com/andifalk/custom-spring-authorization-server
--
-多租户、TOKEN_EXCHANGE类型：https://github.com/andifalk/whats-new-in-spring-security/blob/main/spring-authorization-server/
+- 多租户、TOKEN_EXCHANGE类型：https://github.com/andifalk/whats-new-in-spring-security/blob/main/spring-authorization-server/
 - OAuth 2.0 Authorization Code Grant Flow：https://github.com/andifalk/federated-identity-demos
 - https://github.com/andifalk/spring-security-bootcamp
 - https://github.com/atquil/spring-security/tree/JWT-oauth2
