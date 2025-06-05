@@ -6,7 +6,7 @@
 
 ![video_spider](https://socialify.git.ci/chensoul/spring-security6-oauth2-samples/image?forks=1&issues=1&language=1&name=1&owner=1&stargazers=1&theme=Light)
 
-基于 Spring Boot3 使用 Maven 构建的 Spring OAuth2 示例。
+基于 Spring Boot 3 + Spring Authorization Server 1.5.0 使用 Maven 构建的 Spring OAuth2 授权和认证服务示例。
 
 ## 要求
 
