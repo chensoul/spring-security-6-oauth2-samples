@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.chensoul</groupId>
+    <artifactId>my-samples</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>common-test</module>
+        <module>auth-server-01-start</module>
+        <module>auth-server-02-pkce</module>
+        <module>auth-server-03-min</module>
+        <module>auth-server-04-jwks-keypair</module>
+        <module>auth-server-05-accessTokenResponseHandler</module>
+        <module>auth-server-06-OAuth2TokenCustomizer</module>
+        <module>auth-server-userinfo</module>
+        <module>auth-server-jdbc</module>
+        <module>auth-server-jpa</module>
+        <module>auth-server-redis</module>
+        <module>auth-server-custom-password</module>
+        <module>auth-server-custom-code</module>
+        <module>auth-server-multitenancy</module>
+        <module>auth-server-registration</module>
+        <module>resource-server-jwks</module>
+        <module>resource-server-issuer-url</module>
+        <module>resource-server-public-key</module>
+        <module>resource-server-jwks-private-key</module>
+        <module>resource-server-opaque</module>
+        <module>resource-server-multitenancy</module>
+        <module>oauth2-client</module>
+        <module>oauth2-client-webclient-pkce</module>
+        <module>oauth2-client-jte</module>
+        <module>oauth2-client-userinfo</module>
+        <module>oauth2-client-webclient</module>
+        <module>oauth2-client-webclient-httpexchange</module>
+        <module>oauth2-client-resttemplate</module>
+    </modules>
+</project>

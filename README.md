@@ -1,10 +1,6 @@
-<p align="center">
-	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/stargazers"><img src="https://img.shields.io/github/stars/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/network/members"><img src="https://img.shields.io/github/forks/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/watchers"><img src="https://img.shields.io/github/watchers/chensoul/spring-security6-oauth2-samples?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/issues"><img src="https://img.shields.io/github/issues/chensoul/spring-security6-oauth2-samples.svg?style=flat-square&logo=GitHub"></a>
-	<a href="https://github.com/chensoul/spring-security6-oauth2-samples/blob/main/LICENSE"><img src="https://img.shields.io/github/license/chensoul/spring-security6-oauth2-samples.svg?style=flat-square"></a>
-</p>
+![Build with Maven](https://github.com/chensoul/spring-security6-oauth2-samples/actions/workflows/build.yml/badge.svg)
+![Code QL](https://github.com/chensoul/spring-security6-oauth2-samples/actions/workflows/codeql.yml/badge.svg)
+[![License](https://img.shields.io/badge/License-Apache%20License%202.0-brightgreen.svg)][1]
 
 # spring-security6-oauth2-samples
 
@@ -119,3 +115,4 @@
 - https://oidcdebugger.com/debug
 - https://oauthdebugger.com/debug
 
+[1]:http://www.apache.org/licenses/LICENSE-2.0.txt
