@@ -117,9 +117,13 @@ OAuth2/OIDC 配置，以配置您的客户端和资源服务器。
 
 ## 工具
 
-- https://www.oauth.com/playground
 - https://jwt.io/
+- https://www.oauth.com/playground
 - https://oidcdebugger.com/debug
 - https://oauthdebugger.com/debug
+
+## License
+
+Apache 2.0 licensed
 
 [1]:http://www.apache.org/licenses/LICENSE-2.0.txt
