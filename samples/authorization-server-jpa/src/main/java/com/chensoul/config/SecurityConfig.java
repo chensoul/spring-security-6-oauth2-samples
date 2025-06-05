@@ -18,7 +18,6 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
 import org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 
-import java.time.Duration;
 import java.util.UUID;
 
 /**
@@ -30,97 +29,77 @@ public class SecurityConfig {
     @Bean
     ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
         return args -> {
+            // @formatter:off
+            RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("oidc-client")
+                    .clientSecret("{noop}oidc-client")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                    .redirectUri("https://oidcdebugger.com/debug")
+                    .redirectUri("https://oauthdebugger.com/debug")
+                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/oidc-client")
+                    .postLogoutRedirectUri("http://127.0.0.1:8080/")
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.ADDRESS)
+                    .scope(OidcScopes.EMAIL)
+                    .scope(OidcScopes.PHONE)
+                    .scope(OidcScopes.PROFILE)
+                    .scope("read")
+                    .scope("write")
+                    .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+                    .build();
+
             RegisteredClient credentialsClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("credentialsClient")
-                    .clientSecret("{noop}credentialsClient")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
+                    .clientId("credentials-client")
+                    .clientSecret("{noop}credentials-client")
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                     .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                     .scope(OidcScopes.OPENID)
                     .scope(OidcScopes.PROFILE)
                     .scope("read")
                     .scope("write")
-                    .tokenSettings(TokenSettings.builder()
-                            .accessTokenTimeToLive(Duration.ofDays(10))
-                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED)
-                            .build()
-                    ).build();
+                    .build();
 
-            RegisteredClient introspectClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("introspectClient")
-                    .clientSecret("{noop}introspectClient")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                    .scope(OidcScopes.OPENID)
-                    .scope(OidcScopes.PROFILE)
-                    .scope("read")
-                    .scope("write")
-                    .tokenSettings(TokenSettings.builder()
-                            .accessTokenTimeToLive(Duration.ofDays(10))
-                            .accessTokenFormat(OAuth2TokenFormat.REFERENCE)
-                            .build()
-                    ).build();
-
-            RegisteredClient authCodeClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("authCodeClient")
-                    .clientSecret("{noop}authCodeClient")
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                    .redirectUri("https://oidcdebugger.com/debug")
-                    .redirectUri("https://oauthdebugger.com/debug")
-                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/authCodeClient")
-                    .redirectUri("http://127.0.0.1:8080/authorized")
-                    .scope(OidcScopes.OPENID)
-                    .scope(OidcScopes.PROFILE)
-                    .scope("read")
-                    .scope("write")
-                    .tokenSettings(TokenSettings.builder()
-                            .accessTokenTimeToLive(Duration.ofDays(10))
-                            .refreshTokenTimeToLive(Duration.ofDays(20))
-                            .reuseRefreshTokens(false)
-                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
-                    ).build();
-
-            RegisteredClient pkceClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId("pkceClient")
-                    .clientSecret("{noop}pkceClient")
+            RegisteredClient publicClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("public-client")
                     .clientAuthenticationMethod(ClientAuthenticationMethod.NONE)
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                    .redirectUri("https://oidcdebugger.com/debug")
-                    .redirectUri("https://oauthdebugger.com/debug")
-                    .redirectUri("http://127.0.0.1:8080/login/oauth2/code/authCodeClient")
-                    .redirectUri("http://127.0.0.1:8080/authorized")
+                    .redirectUri("http://127.0.0.1:4200")
                     .scope(OidcScopes.OPENID)
                     .scope(OidcScopes.PROFILE)
-                    .scope("read")
-                    .scope("write")
                     .clientSettings(ClientSettings.builder()
-                            .requireProofKey(true)
                             .requireAuthorizationConsent(true)
+                            .requireProofKey(true)
                             .build()
                     )
-                    .tokenSettings(TokenSettings.builder()
-                            .accessTokenTimeToLive(Duration.ofDays(10))
-                            .refreshTokenTimeToLive(Duration.ofDays(20))
-                            .reuseRefreshTokens(false)
-                            .accessTokenFormat(OAuth2TokenFormat.SELF_CONTAINED).build()
+                    .build();
+
+            RegisteredClient opaqueClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                    .clientId("opaque-client")
+                    .clientSecret("{noop}opaque-client")
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                    .scope(OidcScopes.OPENID)
+                    .scope(OidcScopes.PROFILE)
+                    .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).build()
                     ).build();
 
+            // @formatter:on
+
+            if (repository.findByClientId(oidcClient.getClientId()) == null) {
+                repository.save(oidcClient);
+            }
             if (repository.findByClientId(credentialsClient.getClientId()) == null) {
                 repository.save(credentialsClient);
             }
-            if (repository.findByClientId(introspectClient.getClientId()) == null) {
-                repository.save(introspectClient);
+            if (repository.findByClientId(opaqueClient.getClientId()) == null) {
+                repository.save(opaqueClient);
             }
-            if (repository.findByClientId(authCodeClient.getClientId()) == null) {
-                repository.save(authCodeClient);
-            }
-            if (repository.findByClientId(pkceClient.getClientId()) == null) {
-                repository.save(pkceClient);
+            if (repository.findByClientId(publicClient.getClientId()) == null) {
+                repository.save(publicClient);
             }
         };
     }

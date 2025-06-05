@@ -1,0 +1,13 @@
+server:
+  port: 9000
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:oauth2
+    username: sa
+    password:
+      
+logging:
+  level:
+    org.springframework.security: trace

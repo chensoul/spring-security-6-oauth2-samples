@@ -10,16 +10,21 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>authorization-server-01-yaml</module>
-        <module>authorization-server-02-bean</module>
+        <module>common-test</module>
+        <module>authorization-server-01-start</module>
+        <module>authorization-server-02-pkce</module>
         <module>authorization-server-03-min</module>
         <module>authorization-server-04-jwks-keypair</module>
         <module>authorization-server-05-accessTokenResponseHandler</module>
         <module>authorization-server-06-OAuth2TokenCustomizer</module>
+        <module>authorization-server-userinfo</module>
         <module>authorization-server-jdbc</module>
         <module>authorization-server-jpa</module>
         <module>authorization-server-redis</module>
-        <module>authorization-server-custom-password-grant</module>
+        <module>authorization-server-custom-password</module>
+        <module>authorization-server-custom-code</module>
+        <module>authorization-server-multitenancy</module>
+        <module>authorization-server-registration</module>
         <module>resource-server-jwks</module>
         <module>resource-server-issuer-url</module>
         <module>resource-server-public-key</module>

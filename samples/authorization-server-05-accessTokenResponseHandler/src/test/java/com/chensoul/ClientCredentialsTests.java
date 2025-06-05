@@ -20,8 +20,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class ClientCredentialsTests {
-    private static final String CLIENT_ID = "credentialsClient";
-    private static final String CLIENT_SECRET = "credentialsClient";
+    private static final String CLIENT_ID = "credentials-client";
+    private static final String CLIENT_SECRET = "credentials-client";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -86,7 +86,7 @@ public class ClientCredentialsTests {
         // @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
-				.with(httpBasic("authCodeClient", "authCodeClient")))
+				.with(httpBasic("oidc-client", "oidc-client")))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.error").value("unauthorized_client"));
 		// @formatter:on
@@ -125,7 +125,7 @@ public class ClientCredentialsTests {
 
     private String getAccessToken() throws Exception {
         // @formatter:off
-		MvcResult mvcResult = this.mockMvc.perform(post("http://localhost:"+port+"/oauth2/token")
+		MvcResult mvcResult = this.mockMvc.perform(post("http://localhost:" + port + "/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
