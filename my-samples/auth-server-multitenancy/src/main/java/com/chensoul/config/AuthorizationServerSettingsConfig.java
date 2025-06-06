@@ -11,8 +11,8 @@ public class AuthorizationServerSettingsConfig {
 	@Bean
 	public AuthorizationServerSettings authorizationServerSettings() {
 		return AuthorizationServerSettings.builder()
-				.multipleIssuersAllowed(true)	// <1>
-				.build();
+			.multipleIssuersAllowed(true) // <1>
+			.build();
 	}
 
 }

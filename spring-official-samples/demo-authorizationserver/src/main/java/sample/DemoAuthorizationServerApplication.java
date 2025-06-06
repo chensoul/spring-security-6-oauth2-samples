@@ -42,14 +42,12 @@ public class DemoAuthorizationServerApplication {
 		@Override
 		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
 			// Thymeleaf
-			hints.reflection().registerTypes(
-					Arrays.asList(
-							TypeReference.of(AuthorizationConsentController.ScopeWithDescription.class),
-							TypeReference.of(Lists.class)
-					), builder ->
-							builder.withMembers(MemberCategory.DECLARED_FIELDS,
-									MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS)
-			);
+			hints.reflection()
+				.registerTypes(
+						Arrays.asList(TypeReference.of(AuthorizationConsentController.ScopeWithDescription.class),
+								TypeReference.of(Lists.class)),
+						builder -> builder.withMembers(MemberCategory.DECLARED_FIELDS,
+								MemberCategory.INVOKE_DECLARED_CONSTRUCTORS, MemberCategory.INVOKE_DECLARED_METHODS));
 		}
 
 	}

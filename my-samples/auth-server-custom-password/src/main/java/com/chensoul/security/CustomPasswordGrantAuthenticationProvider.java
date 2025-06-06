@@ -53,19 +53,28 @@ import org.springframework.util.CollectionUtils;
 public class CustomPasswordGrantAuthenticationProvider implements AuthenticationProvider {
 
 	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2";
+
 	private static final OAuth2TokenType ID_TOKEN_TOKEN_TYPE = new OAuth2TokenType(OidcParameterNames.ID_TOKEN);
+
 	private final OAuth2AuthorizationService authorizationService;
+
 	private final OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator;
+
 	private final UserDetailsService userDetailsService;
+
 	private final PasswordEncoder passwordEncoder;
+
 	private String username = new String();
+
 	private String password = new String();
+
 	private Set<String> authorizedScopes = new HashSet<>();
+
 	private SessionRegistry sessionRegistry;
 
 	public CustomPasswordGrantAuthenticationProvider(OAuth2AuthorizationService authorizationService,
-													 OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator, UserDetailsService userDetailsService,
-													 PasswordEncoder passwordEncoder) {
+			OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator, UserDetailsService userDetailsService,
+			PasswordEncoder passwordEncoder) {
 		Assert.notNull(authorizationService, "authorizationService cannot be null");
 		Assert.notNull(tokenGenerator, "tokenGenerator cannot be null");
 		this.authorizationService = authorizationService;
@@ -87,7 +96,8 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 		User user = null;
 		try {
 			user = (User) userDetailsService.loadUserByUsername(username);
-		} catch (UsernameNotFoundException e) {
+		}
+		catch (UsernameNotFoundException e) {
 			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.ACCESS_DENIED);
 		}
 		if (!passwordEncoder.matches(password, user.getPassword()) || !user.getUsername().equals(username)) {
@@ -105,12 +115,12 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 				user.getAuthorities());
 
 		DefaultOAuth2TokenContext.Builder tokenContextBuilder = DefaultOAuth2TokenContext.builder()
-				.registeredClient(registeredClient)
-				.principal(usernamePasswordAuthenticationToken)
-				.authorizationServerContext(AuthorizationServerContextHolder.getContext())
-				.authorizedScopes(authorizedScopes)
-				.authorizationGrantType(customCodeGrantAuthentication.getGrantType())
-				.authorizationGrant(customCodeGrantAuthentication);
+			.registeredClient(registeredClient)
+			.principal(usernamePasswordAuthenticationToken)
+			.authorizationServerContext(AuthorizationServerContextHolder.getContext())
+			.authorizedScopes(authorizedScopes)
+			.authorizationGrantType(customCodeGrantAuthentication.getGrantType())
+			.authorizationGrant(customCodeGrantAuthentication);
 
 		// ----- Access Token -----
 		OAuth2TokenContext tokenContext = tokenContextBuilder.tokenType(OAuth2TokenType.ACCESS_TOKEN).build();
@@ -125,13 +135,14 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 				generatedAccessToken.getExpiresAt(), null);
 
 		OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization.withRegisteredClient(registeredClient)
-				.principalName(clientPrincipal.getName())
-				.authorizationGrantType(customCodeGrantAuthentication.getGrantType());
+			.principalName(clientPrincipal.getName())
+			.authorizationGrantType(customCodeGrantAuthentication.getGrantType());
 		if (generatedAccessToken instanceof ClaimAccessor) {
 			authorizationBuilder.token(accessToken,
 					(metadata) -> metadata.put(OAuth2Authorization.Token.CLAIMS_METADATA_NAME,
 							((ClaimAccessor) generatedAccessToken).getClaims()));
-		} else {
+		}
+		else {
 			authorizationBuilder.accessToken(accessToken);
 		}
 
@@ -158,17 +169,17 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 				try {
 					sessionInformation = new SessionInformation(sessionInformation.getPrincipal(),
 							createHash(sessionInformation.getSessionId()), sessionInformation.getLastRequest());
-				} catch (NoSuchAlgorithmException ex) {
+				}
+				catch (NoSuchAlgorithmException ex) {
 					OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
 							"Failed to compute hash for Session ID.", ERROR_URI);
 					throw new OAuth2AuthenticationException(error);
 				}
 				tokenContextBuilder.put(SessionInformation.class, sessionInformation);
 			}
-			tokenContext = tokenContextBuilder
-					.tokenType(ID_TOKEN_TOKEN_TYPE)
-					.authorization(authorizationBuilder.build())
-					.build();
+			tokenContext = tokenContextBuilder.tokenType(ID_TOKEN_TOKEN_TYPE)
+				.authorization(authorizationBuilder.build())
+				.build();
 			OAuth2Token generatedIdToken = this.tokenGenerator.generate(tokenContext);
 			if (!(generatedIdToken instanceof Jwt)) {
 				OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.SERVER_ERROR,
@@ -179,7 +190,8 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 					generatedIdToken.getExpiresAt(), ((Jwt) generatedIdToken).getClaims());
 			authorizationBuilder.token(idToken,
 					(metadata) -> metadata.put(OAuth2Authorization.Token.CLAIMS_METADATA_NAME, idToken.getClaims()));
-		} else {
+		}
+		else {
 			idToken = null;
 		}
 
@@ -189,15 +201,15 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 			additionalParameters.put(OidcParameterNames.ID_TOKEN, idToken.getTokenValue());
 		}
 
-		OAuth2Authorization authorization = authorizationBuilder
-				.accessToken(accessToken)
-				.refreshToken(refreshToken)
-				.authorizedScopes(authorizedScopes)
-				.attribute(Principal.class.getName(), usernamePasswordAuthenticationToken)
-				.build();
+		OAuth2Authorization authorization = authorizationBuilder.accessToken(accessToken)
+			.refreshToken(refreshToken)
+			.authorizedScopes(authorizedScopes)
+			.attribute(Principal.class.getName(), usernamePasswordAuthenticationToken)
+			.build();
 		this.authorizationService.save(authorization);
 
-		return new OAuth2AccessTokenAuthenticationToken(registeredClient, usernamePasswordAuthenticationToken, accessToken, refreshToken, additionalParameters);
+		return new OAuth2AccessTokenAuthenticationToken(registeredClient, usernamePasswordAuthenticationToken,
+				accessToken, refreshToken, additionalParameters);
 	}
 
 	@Override
@@ -216,7 +228,7 @@ public class CustomPasswordGrantAuthenticationProvider implements Authentication
 		}
 		throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_CLIENT);
 	}
-	
+
 	public void setSessionRegistry(SessionRegistry sessionRegistry) {
 		Assert.notNull(sessionRegistry, "sessionRegistry cannot be null");
 		this.sessionRegistry = sessionRegistry;

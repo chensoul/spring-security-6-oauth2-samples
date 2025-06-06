@@ -1,6 +1,5 @@
 package com.chensoul.config;
 
-
 import static java.util.Objects.isNull;
 
 import java.io.IOException;
@@ -23,31 +22,33 @@ import org.springframework.stereotype.Component;
 public class OAuth2ClientInterceptor implements ClientHttpRequestInterceptor {
 
 	private final OAuth2AuthorizedClientManager manager;
-    private final ClientRegistration clientRegistration;
 
-    public OAuth2ClientInterceptor(OAuth2AuthorizedClientManager manager,  ClientRegistrationRepository clientRegistrationRepository) {
-        this.manager = manager;
-        this.clientRegistration = clientRegistrationRepository.findByRegistrationId("myoauth2");
-    }
+	private final ClientRegistration clientRegistration;
 
-    @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        
-    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    	OAuth2AuthorizeRequest oAuth2AuthorizeRequest = OAuth2AuthorizeRequest
-                .withClientRegistrationId(clientRegistration.getRegistrationId())
-                .principal(authentication)
-                .build();
+	public OAuth2ClientInterceptor(OAuth2AuthorizedClientManager manager,
+			ClientRegistrationRepository clientRegistrationRepository) {
+		this.manager = manager;
+		this.clientRegistration = clientRegistrationRepository.findByRegistrationId("myoauth2");
+	}
 
-        OAuth2AuthorizedClient client = manager.authorize(oAuth2AuthorizeRequest);
-        if (isNull(client)) {
-            throw new IllegalStateException("Missing credentials");
-        }
-       
-        request.getHeaders().add(HttpHeaders.AUTHORIZATION,
-                "Bearer " + client.getAccessToken().getTokenValue());
+	@Override
+	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+			throws IOException {
 
-        return execution.execute(request, body);
-    }
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		OAuth2AuthorizeRequest oAuth2AuthorizeRequest = OAuth2AuthorizeRequest
+			.withClientRegistrationId(clientRegistration.getRegistrationId())
+			.principal(authentication)
+			.build();
+
+		OAuth2AuthorizedClient client = manager.authorize(oAuth2AuthorizeRequest);
+		if (isNull(client)) {
+			throw new IllegalStateException("Missing credentials");
+		}
+
+		request.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken().getTokenValue());
+
+		return execution.execute(request, body);
+	}
 
 }

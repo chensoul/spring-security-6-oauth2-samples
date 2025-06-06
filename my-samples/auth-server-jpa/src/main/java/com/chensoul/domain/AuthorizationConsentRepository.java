@@ -6,8 +6,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface AuthorizationConsentRepository extends JpaRepository<AuthorizationConsent, AuthorizationConsent.AuthorizationConsentId> {
-    Optional<AuthorizationConsent> findByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
+public interface AuthorizationConsentRepository
+		extends JpaRepository<AuthorizationConsent, AuthorizationConsent.AuthorizationConsentId> {
 
-    void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
+	Optional<AuthorizationConsent> findByRegisteredClientIdAndPrincipalName(String registeredClientId,
+			String principalName);
+
+	void deleteByRegisteredClientIdAndPrincipalName(String registeredClientId, String principalName);
+
 }

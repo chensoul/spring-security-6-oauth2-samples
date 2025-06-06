@@ -11,45 +11,47 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "`authority`")
 public class Authority {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
 
-    @Column(length = 200)
-    private String username;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    @Column(length = 50)
-    private String authority;
+	@Column(length = 200)
+	private String username;
 
-    public Authority() {
-    }
+	@Column(length = 50)
+	private String authority;
 
-    public Authority(String username, String authority) {
-        this.username = username;
-        this.authority = authority;
-    }
+	public Authority() {
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Authority(String username, String authority) {
+		this.username = username;
+		this.authority = authority;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getAuthority() {
-        return authority;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
-    }
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
 }

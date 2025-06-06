@@ -7,13 +7,14 @@ import org.springframework.security.crypto.encrypt.TextEncryptor;
 @Configuration
 class Converters {
 
-    @Bean
-    RsaPublicKeyConverter rsaPublicKeyConverter(TextEncryptor textEncryptor) {
-        return new RsaPublicKeyConverter(textEncryptor);
-    }
+	@Bean
+	RsaPublicKeyConverter rsaPublicKeyConverter(TextEncryptor textEncryptor) {
+		return new RsaPublicKeyConverter(textEncryptor);
+	}
 
-    @Bean
-    RsaPrivateKeyConverter rsaPrivateKeyConverter(TextEncryptor textEncryptor) {
-        return new RsaPrivateKeyConverter(textEncryptor);
-    }
+	@Bean
+	RsaPrivateKeyConverter rsaPrivateKeyConverter(TextEncryptor textEncryptor) {
+		return new RsaPrivateKeyConverter(textEncryptor);
+	}
+
 }

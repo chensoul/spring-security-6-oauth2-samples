@@ -58,38 +58,36 @@ import java.util.stream.Collectors;
 @EnableWebSecurity(debug = true)
 @Configuration
 public class SecurityConfig {
-    @Bean
-    @Order(1)
-    SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http, OAuth2AuthorizationService auth2AuthorizationService) throws Exception {
-        http.with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
 
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                .oidc(Customizer.withDefaults()).tokenEndpoint(tokenEndpoint -> tokenEndpoint
-                        .accessTokenRequestConverter(new CustomPasswordGrantAuthenticationConverter())
-                        .authenticationProvider(new CustomPasswordGrantAuthenticationProvider(
-                                auth2AuthorizationService,
-                                tokenGenerator(),
-                                userDetailsService(),
-                                passwordEncoder())));    // Enable OpenID Connect 1.0
-        http
-                // Redirect to the login page when not authenticated from the
-                // authorization endpoint
-                .exceptionHandling((exceptions) -> exceptions
-                        .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                        )
-                )
-                // Accept access tokens for User Info and/or Client Registration
-                .oauth2ResourceServer((resourceServer) -> resourceServer
-                        .jwt(Customizer.withDefaults()));
+	@Bean
+	@Order(1)
+	SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
+			OAuth2AuthorizationService auth2AuthorizationService) throws Exception {
+		http.with(OAuth2AuthorizationServerConfigurer.authorizationServer(), Customizer.withDefaults());
 
-        return http.build();
-    }
+		http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+			.oidc(Customizer.withDefaults())
+			.tokenEndpoint(tokenEndpoint -> tokenEndpoint
+				.accessTokenRequestConverter(new CustomPasswordGrantAuthenticationConverter())
+				.authenticationProvider(new CustomPasswordGrantAuthenticationProvider(auth2AuthorizationService,
+						tokenGenerator(), userDetailsService(), passwordEncoder()))); // Enable
+																						// OpenID
+																						// Connect
+																						// 1.0
+		http
+			// Redirect to the login page when not authenticated from the
+			// authorization endpoint
+			.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(
+					new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)))
+			// Accept access tokens for User Info and/or Client Registration
+			.oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        // @formatter:off
+		return http.build();
+	}
+
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		// @formatter:off
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}oidc-client")
@@ -158,82 +156,79 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        var user1 = User.withUsername("user")
-                .password("{noop}password")
-                .authorities("read,write")
-                .build();
-        return new InMemoryUserDetailsManager(user1);
-    }
+	@Bean
+	public UserDetailsService userDetailsService() {
+		var user1 = User.withUsername("user").password("{noop}password").authorities("read,write").build();
+		return new InMemoryUserDetailsManager(user1);
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+	}
 
+	@Bean
+	JWKSource<SecurityContext> jwkSource() {
+		KeyPair keyPair = generateRsaKey();
+		RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
+		RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
+		RSAKey rsaKey = new RSAKey.Builder(publicKey).privateKey(privateKey)
+			.keyID(UUID.randomUUID().toString())
+			.build();
+		JWKSet jwkSet = new JWKSet(rsaKey);
+		return new ImmutableJWKSet<>(jwkSet);
+	}
 
-    @Bean
-    JWKSource<SecurityContext> jwkSource() {
-        KeyPair keyPair = generateRsaKey();
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        RSAKey rsaKey = new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }
+	private KeyPair generateRsaKey() {
+		KeyPair keyPair;
+		try {
+			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
+			keyPairGenerator.initialize(2048);
+			keyPair = keyPairGenerator.generateKeyPair();
+		}
+		catch (Exception ex) {
+			throw new IllegalStateException(ex);
+		}
+		return keyPair;
+	}
 
-    private KeyPair generateRsaKey() {
-        KeyPair keyPair;
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(2048);
-            keyPair = keyPairGenerator.generateKeyPair();
-        } catch (Exception ex) {
-            throw new IllegalStateException(ex);
-        }
-        return keyPair;
-    }
+	@Bean
+	OAuth2AuthorizationService oAuth2AuthorizationService() {
+		return new InMemoryOAuth2AuthorizationService();
+	}
 
-    @Bean
-    OAuth2AuthorizationService oAuth2AuthorizationService() {
-        return new InMemoryOAuth2AuthorizationService();
-    }
+	@Bean
+	OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator() {
+		NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource());
+		JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
+		jwtGenerator.setJwtCustomizer(tokenCustomizer());
+		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+		return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
+	}
 
-    @Bean
-    OAuth2TokenGenerator<? extends OAuth2Token> tokenGenerator() {
-        NimbusJwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSource());
-        JwtGenerator jwtGenerator = new JwtGenerator(jwtEncoder);
-        jwtGenerator.setJwtCustomizer(tokenCustomizer());
-        OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-        return new DelegatingOAuth2TokenGenerator(
-                jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
-    }
+	@Bean
+	public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
+		return (context) -> {
+			if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
+				context.getClaims().claims((claims) -> {
+					if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
+						Set<String> roles = context.getClaims().build().getClaim("scope");
+						claims.put("roles", roles);
+					}
+					else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE)) {
+						Set<String> roles = AuthorityUtils.authorityListToSet(context.getPrincipal().getAuthorities())
+							.stream()
+							.map(c -> c.replaceFirst("^ROLE_", ""))
+							.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
+						claims.put("roles", roles);
+					}
+				});
+			}
+		};
+	}
 
-    @Bean
-    public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
-        return (context) -> {
-            if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
-                context.getClaims().claims((claims) -> {
-                    if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.CLIENT_CREDENTIALS)) {
-                        Set<String> roles = context.getClaims().build().getClaim("scope");
-                        claims.put("roles", roles);
-                    } else if (context.getAuthorizationGrantType().equals(AuthorizationGrantType.AUTHORIZATION_CODE)) {
-                        Set<String> roles = AuthorityUtils.authorityListToSet(context.getPrincipal().getAuthorities())
-                                .stream()
-                                .map(c -> c.replaceFirst("^ROLE_", ""))
-                                .collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet));
-                        claims.put("roles", roles);
-                    }
-                });
-            }
-        };
-    }
 }

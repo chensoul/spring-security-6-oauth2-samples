@@ -34,16 +34,15 @@ public class TenantService {
 		EmbeddedDatabase dataSource = createDataSource(tenantId);
 		JdbcTemplate jdbcOperations = new JdbcTemplate(dataSource);
 
-		RegisteredClientRepository registeredClientRepository =
-				new JdbcRegisteredClientRepository(jdbcOperations);
+		RegisteredClientRepository registeredClientRepository = new JdbcRegisteredClientRepository(jdbcOperations);
 		this.componentRegistry.register(tenantId, RegisteredClientRepository.class, registeredClientRepository);
 
-		OAuth2AuthorizationService authorizationService =
-				new JdbcOAuth2AuthorizationService(jdbcOperations, registeredClientRepository);
+		OAuth2AuthorizationService authorizationService = new JdbcOAuth2AuthorizationService(jdbcOperations,
+				registeredClientRepository);
 		this.componentRegistry.register(tenantId, OAuth2AuthorizationService.class, authorizationService);
 
-		OAuth2AuthorizationConsentService authorizationConsentService =
-				new JdbcOAuth2AuthorizationConsentService(jdbcOperations, registeredClientRepository);
+		OAuth2AuthorizationConsentService authorizationConsentService = new JdbcOAuth2AuthorizationConsentService(
+				jdbcOperations, registeredClientRepository);
 		this.componentRegistry.register(tenantId, OAuth2AuthorizationConsentService.class, authorizationConsentService);
 
 		JWKSet jwkSet = new JWKSet(generateRSAJwk());
@@ -70,7 +69,8 @@ public class TenantService {
 			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 			keyPairGenerator.initialize(2048);
 			keyPair = keyPairGenerator.generateKeyPair();
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 

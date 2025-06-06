@@ -61,11 +61,11 @@ public class TenantServiceTests {
 		for (String issuer : List.of(ISSUER1, ISSUER2)) {
 			when(this.authorizationServerContext.getIssuer()).thenReturn(issuer);
 			assertThat(this.componentRegistry.get(RegisteredClientRepository.class))
-					.isInstanceOf(JdbcRegisteredClientRepository.class);
+				.isInstanceOf(JdbcRegisteredClientRepository.class);
 			assertThat(this.componentRegistry.get(OAuth2AuthorizationService.class))
-					.isInstanceOf(JdbcOAuth2AuthorizationService.class);
+				.isInstanceOf(JdbcOAuth2AuthorizationService.class);
 			assertThat(this.componentRegistry.get(OAuth2AuthorizationConsentService.class))
-					.isInstanceOf(JdbcOAuth2AuthorizationConsentService.class);
+				.isInstanceOf(JdbcOAuth2AuthorizationConsentService.class);
 			assertThat(this.componentRegistry.get(JWKSet.class)).isNotNull();
 		}
 	}

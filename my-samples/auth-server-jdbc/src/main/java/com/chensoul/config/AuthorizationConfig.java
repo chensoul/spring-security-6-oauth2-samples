@@ -10,16 +10,16 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 @Configuration
 public class AuthorizationConfig {
 
-    @Bean
-    public JdbcOAuth2AuthorizationConsentService jdbcOAuth2AuthorizationConsentService(
-            JdbcOperations jdbcOperations, RegisteredClientRepository registeredClientRepository) {
-        return new JdbcOAuth2AuthorizationConsentService(jdbcOperations, registeredClientRepository);
-    }
+	@Bean
+	public JdbcOAuth2AuthorizationConsentService jdbcOAuth2AuthorizationConsentService(JdbcOperations jdbcOperations,
+			RegisteredClientRepository registeredClientRepository) {
+		return new JdbcOAuth2AuthorizationConsentService(jdbcOperations, registeredClientRepository);
+	}
 
-    @Bean
-    public JdbcOAuth2AuthorizationService jdbcOAuth2AuthorizationService(
-            JdbcOperations jdbcOperations,
-            RegisteredClientRepository registeredClientRepository) {
-        return new JdbcOAuth2AuthorizationService(jdbcOperations, registeredClientRepository);
-    }
+	@Bean
+	public JdbcOAuth2AuthorizationService jdbcOAuth2AuthorizationService(JdbcOperations jdbcOperations,
+			RegisteredClientRepository registeredClientRepository) {
+		return new JdbcOAuth2AuthorizationService(jdbcOperations, registeredClientRepository);
+	}
+
 }

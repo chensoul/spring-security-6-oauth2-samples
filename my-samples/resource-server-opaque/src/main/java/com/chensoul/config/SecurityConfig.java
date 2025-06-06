@@ -31,48 +31,52 @@ import org.springframework.web.client.RestOperations;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-    private final OAuth2ResourceServerProperties properties;
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.GET, "/message/**").hasAuthority("SCOPE_read")
-                        .requestMatchers(HttpMethod.POST, "/message/**").hasAuthority("SCOPE_write")
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(rsc ->
-                        rsc.opaqueToken(otc -> otc
-                                .introspectionUri(properties.getOpaquetoken().getIntrospectionUri())
-                                .introspectionClientCredentials(properties.getOpaquetoken().getClientId(), properties.getOpaquetoken().getClientSecret())
-                        ));
+	private final OAuth2ResourceServerProperties properties;
 
-        return http.build();
-    }
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests((authorize) -> authorize.requestMatchers(HttpMethod.GET, "/message/**")
+			.hasAuthority("SCOPE_read")
+			.requestMatchers(HttpMethod.POST, "/message/**")
+			.hasAuthority("SCOPE_write")
+			.anyRequest()
+			.authenticated())
+			.oauth2ResourceServer(rsc -> rsc
+				.opaqueToken(otc -> otc.introspectionUri(properties.getOpaquetoken().getIntrospectionUri())
+					.introspectionClientCredentials(properties.getOpaquetoken().getClientId(),
+							properties.getOpaquetoken().getClientSecret())));
 
-    @Bean
-    public OpaqueTokenIntrospector introspector(RestTemplateBuilder builder, OAuth2ResourceServerProperties properties) {
-        RestOperations rest = builder
-                .basicAuthentication(properties.getOpaquetoken().getClientId(), properties.getOpaquetoken().getClientSecret())
-                .connectTimeout(Duration.ofSeconds(60))
-                .readTimeout(Duration.ofSeconds(60))
-                .build();
+		return http.build();
+	}
 
-        return new SpringOpaqueTokenIntrospector(properties.getOpaquetoken().getIntrospectionUri(), rest);
-    }
+	@Bean
+	public OpaqueTokenIntrospector introspector(RestTemplateBuilder builder,
+			OAuth2ResourceServerProperties properties) {
+		RestOperations rest = builder
+			.basicAuthentication(properties.getOpaquetoken().getClientId(),
+					properties.getOpaquetoken().getClientSecret())
+			.connectTimeout(Duration.ofSeconds(60))
+			.readTimeout(Duration.ofSeconds(60))
+			.build();
 
-    public class CustomOpaqueRoleConverter implements OpaqueTokenAuthenticationConverter {
-        @Override
-        public Authentication convert(String introspectedToken, OAuth2AuthenticatedPrincipal authenticatedPrincipal) {
-            ArrayList<String> scopes = authenticatedPrincipal.getAttribute("scope");
+		return new SpringOpaqueTokenIntrospector(properties.getOpaquetoken().getIntrospectionUri(), rest);
+	}
 
-            // 和 JwtGrantedAuthoritiesConverter 逻辑保持一致
-            Collection<GrantedAuthority> grantedAuthorities = scopes
-                    .stream().map(roleName -> "SCOPE_" + roleName)
-                    .map(SimpleGrantedAuthority::new)
-                    .collect(Collectors.toList());
-            return new UsernamePasswordAuthenticationToken(authenticatedPrincipal.getName(), null,
-                    grantedAuthorities);
-        }
-    }
+	public class CustomOpaqueRoleConverter implements OpaqueTokenAuthenticationConverter {
+
+		@Override
+		public Authentication convert(String introspectedToken, OAuth2AuthenticatedPrincipal authenticatedPrincipal) {
+			ArrayList<String> scopes = authenticatedPrincipal.getAttribute("scope");
+
+			// 和 JwtGrantedAuthoritiesConverter 逻辑保持一致
+			Collection<GrantedAuthority> grantedAuthorities = scopes.stream()
+				.map(roleName -> "SCOPE_" + roleName)
+				.map(SimpleGrantedAuthority::new)
+				.collect(Collectors.toList());
+			return new UsernamePasswordAuthenticationToken(authenticatedPrincipal.getName(), null, grantedAuthorities);
+		}
+
+	}
+
 }

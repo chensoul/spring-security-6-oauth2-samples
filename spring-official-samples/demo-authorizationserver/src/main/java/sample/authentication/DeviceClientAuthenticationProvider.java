@@ -41,8 +41,11 @@ import org.springframework.util.Assert;
  * @see OAuth2ClientAuthenticationFilter
  */
 public final class DeviceClientAuthenticationProvider implements AuthenticationProvider {
+
 	private static final String ERROR_URI = "https://datatracker.ietf.org/doc/html/rfc6749#section-3.2.1";
+
 	private final Log logger = LogFactory.getLog(getClass());
+
 	private final RegisteredClientRepository registeredClientRepository;
 
 	public DeviceClientAuthenticationProvider(RegisteredClientRepository registeredClientRepository) {
@@ -52,8 +55,7 @@ public final class DeviceClientAuthenticationProvider implements AuthenticationP
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		DeviceClientAuthenticationToken deviceClientAuthentication =
-				(DeviceClientAuthenticationToken) authentication;
+		DeviceClientAuthenticationToken deviceClientAuthentication = (DeviceClientAuthenticationToken) authentication;
 
 		if (!ClientAuthenticationMethod.NONE.equals(deviceClientAuthentication.getClientAuthenticationMethod())) {
 			return null;
@@ -69,8 +71,8 @@ public final class DeviceClientAuthenticationProvider implements AuthenticationP
 			this.logger.trace("Retrieved registered client");
 		}
 
-		if (!registeredClient.getClientAuthenticationMethods().contains(
-				deviceClientAuthentication.getClientAuthenticationMethod())) {
+		if (!registeredClient.getClientAuthenticationMethods()
+			.contains(deviceClientAuthentication.getClientAuthenticationMethod())) {
 			throwInvalidClient("authentication_method");
 		}
 
@@ -92,11 +94,8 @@ public final class DeviceClientAuthenticationProvider implements AuthenticationP
 	}
 
 	private static void throwInvalidClient(String parameterName) {
-		OAuth2Error error = new OAuth2Error(
-				OAuth2ErrorCodes.INVALID_CLIENT,
-				"Device client authentication failed: " + parameterName,
-				ERROR_URI
-		);
+		OAuth2Error error = new OAuth2Error(OAuth2ErrorCodes.INVALID_CLIENT,
+				"Device client authentication failed: " + parameterName, ERROR_URI);
 		throw new OAuth2AuthenticationException(error);
 	}
 

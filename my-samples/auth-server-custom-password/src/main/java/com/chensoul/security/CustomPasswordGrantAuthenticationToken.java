@@ -14,13 +14,14 @@ import org.springframework.util.StringUtils;
 public class CustomPasswordGrantAuthenticationToken extends OAuth2AuthorizationGrantAuthenticationToken {
 
 	private static final long serialVersionUID = 1L;
+
 	private final String username;
+
 	private final String password;
+
 	private final String scope;
 
-	protected CustomPasswordGrantAuthenticationToken(
-			String granttype,
-			Authentication clientPrincipal, 
+	protected CustomPasswordGrantAuthenticationToken(String granttype, Authentication clientPrincipal,
 			Map<String, Object> additionalParameters) {
 		super(new AuthorizationGrantType(granttype), clientPrincipal, additionalParameters);
 		this.username = (String) additionalParameters.get(OAuth2ParameterNames.USERNAME);
@@ -38,7 +39,7 @@ public class CustomPasswordGrantAuthenticationToken extends OAuth2AuthorizationG
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	public Set<String> getScope() {
 		return StringUtils.commaDelimitedListToSet(scope.replace(" ", ""));
 	}

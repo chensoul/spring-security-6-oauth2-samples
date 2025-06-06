@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class WelcomeController {
 
-    private final WelcomeClient welcomeClient;
+	private final WelcomeClient welcomeClient;
 
-    @GetMapping("/")
-    public String welcome() {
+	@GetMapping("/")
+	public String welcome() {
 
-        String welcome = welcomeClient.getWelcome();
-        return "<h1>" + welcome + "</h1>";
-    }
+		String welcome = welcomeClient.getWelcome();
+		return "<h1>" + welcome + "</h1>";
+	}
 
 }

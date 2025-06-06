@@ -23,9 +23,11 @@ import org.springframework.stereotype.Service;
 @Service(value = "githubOAuth2ClientMapper")
 @Slf4j
 public class GithubOAuth2ClientMapper extends AbstractOAuth2ClientMapper implements OAuth2ClientMapper {
-    @Override
-    public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token, String providerAccessToken, OAuth2Client oAuth2Client) {
-        return null;
-    }
+
+	@Override
+	public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token,
+			String providerAccessToken, OAuth2Client oAuth2Client) {
+		return null;
+	}
 
 }

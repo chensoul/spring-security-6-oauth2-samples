@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.server.authorization.settings.ClientS
  * @author Steve Riesenberg
  */
 public class RegisteredClients {
+
 	// @formatter:off
 	public static RegisteredClient messagingClient() {
 		return RegisteredClient.withId(UUID.randomUUID().toString())
@@ -31,4 +32,5 @@ public class RegisteredClients {
 				.build();
 	}
 	// @formatter:on
+
 }

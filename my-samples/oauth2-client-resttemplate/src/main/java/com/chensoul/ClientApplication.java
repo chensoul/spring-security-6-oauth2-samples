@@ -8,7 +8,8 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.reactive.Re
 @SpringBootApplication(exclude = ReactiveOAuth2ClientAutoConfiguration.class)
 public class ClientApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ClientApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(ClientApplication.class, args);
+	}
+
 }

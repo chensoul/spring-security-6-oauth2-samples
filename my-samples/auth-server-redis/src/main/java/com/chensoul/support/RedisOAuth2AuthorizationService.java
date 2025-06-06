@@ -1,6 +1,5 @@
 package com.chensoul.support;
 
-
 import org.springframework.lang.Nullable;
 import org.springframework.security.oauth2.core.endpoint.OAuth2ParameterNames;
 import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
@@ -59,15 +58,15 @@ public class RedisOAuth2AuthorizationService implements OAuth2AuthorizationServi
 				.findByStateOrAuthorizationCode_TokenValue(token, token);
 			if (authorizationGrantAuthorization == null) {
 				authorizationGrantAuthorization = this.authorizationGrantAuthorizationRepository
-						.findByAccessToken_TokenValueOrRefreshToken_TokenValue(token, token);
+					.findByAccessToken_TokenValueOrRefreshToken_TokenValue(token, token);
 			}
 			if (authorizationGrantAuthorization == null) {
 				authorizationGrantAuthorization = this.authorizationGrantAuthorizationRepository
-						.findByIdToken_TokenValue(token);
+					.findByIdToken_TokenValue(token);
 			}
 			if (authorizationGrantAuthorization == null) {
 				authorizationGrantAuthorization = this.authorizationGrantAuthorizationRepository
-						.findByDeviceStateOrDeviceCode_TokenValueOrUserCode_TokenValue(token, token, token);
+					.findByDeviceStateOrDeviceCode_TokenValueOrUserCode_TokenValue(token, token, token);
 			}
 		}
 		else if (OAuth2ParameterNames.STATE.equals(tokenType.getValue())) {

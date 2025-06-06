@@ -11,18 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ResourceController {
 
-    @GetMapping("/")
-    public String index(@AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
-        return String.format("Hello, %s!", (String) principal.getAttribute("sub"));
-    }
+	@GetMapping("/")
+	public String index(@AuthenticationPrincipal OAuth2AuthenticatedPrincipal principal) {
+		return String.format("Hello, %s!", (String) principal.getAttribute("sub"));
+	}
 
-    @GetMapping("/message")
-    public String message() {
-        return "secret message";
-    }
+	@GetMapping("/message")
+	public String message() {
+		return "secret message";
+	}
 
-    @PostMapping("/message")
-    public String createMessage(@RequestBody String message) {
-        return String.format("Message was created. Content: %s", message);
-    }
+	@PostMapping("/message")
+	public String createMessage(@RequestBody String message) {
+		return String.format("Message was created. Content: %s", message);
+	}
+
 }

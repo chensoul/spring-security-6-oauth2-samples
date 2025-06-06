@@ -30,12 +30,12 @@ import static com.chensoul.config.CustomClientMetadataConfig.configureCustomClie
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
-                OAuth2AuthorizationServerConfigurer.authorizationServer();
+	@Bean
+	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+			.authorizationServer();
 
-        // @formatter:off
+		// @formatter:off
         http
                 .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
                 .with(authorizationServerConfigurer, (authorizationServer) ->
@@ -53,12 +53,12 @@ public class SecurityConfig {
                 );
         // @formatter:on
 
-        return http.build();
-    }
+		return http.build();
+	}
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        // @formatter:off
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		// @formatter:off
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}oidc-client")
@@ -126,6 +126,7 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
+
 }

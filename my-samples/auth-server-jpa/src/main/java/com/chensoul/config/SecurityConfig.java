@@ -26,10 +26,11 @@ import java.util.UUID;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-    @Bean
-    ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
-        return args -> {
-            // @formatter:off
+
+	@Bean
+	ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
+		return args -> {
+			// @formatter:off
             RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                     .clientId("oidc-client")
                     .clientSecret("{noop}oidc-client")
@@ -89,26 +90,27 @@ public class SecurityConfig {
 
             // @formatter:on
 
-            if (repository.findByClientId(oidcClient.getClientId()) == null) {
-                repository.save(oidcClient);
-            }
-            if (repository.findByClientId(credentialsClient.getClientId()) == null) {
-                repository.save(credentialsClient);
-            }
-            if (repository.findByClientId(opaqueClient.getClientId()) == null) {
-                repository.save(opaqueClient);
-            }
-            if (repository.findByClientId(pkceClient.getClientId()) == null) {
-                repository.save(pkceClient);
-            }
-        };
-    }
+			if (repository.findByClientId(oidcClient.getClientId()) == null) {
+				repository.save(oidcClient);
+			}
+			if (repository.findByClientId(credentialsClient.getClientId()) == null) {
+				repository.save(credentialsClient);
+			}
+			if (repository.findByClientId(opaqueClient.getClientId()) == null) {
+				repository.save(opaqueClient);
+			}
+			if (repository.findByClientId(pkceClient.getClientId()) == null) {
+				repository.save(pkceClient);
+			}
+		};
+	}
 
-    @Bean
-    ApplicationRunner usersRunner(UserRepository userRepository, AuthorityRepository authorityRepository) {
-        return args -> {
-            userRepository.save(new User("user", "{noop}password"));
-            authorityRepository.save(new Authority("user", "USER"));
-        };
-    }
+	@Bean
+	ApplicationRunner usersRunner(UserRepository userRepository, AuthorityRepository authorityRepository) {
+		return args -> {
+			userRepository.save(new User("user", "{noop}password"));
+			authorityRepository.save(new Authority("user", "USER"));
+		};
+	}
+
 }

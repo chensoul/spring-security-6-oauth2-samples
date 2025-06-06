@@ -43,14 +43,14 @@ import org.springframework.util.Assert;
  */
 public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2AuthorizedClientProvider {
 
-	private OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> accessTokenResponseClient =
-			new OAuth2DeviceAccessTokenResponseClient();
+	private OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> accessTokenResponseClient = new OAuth2DeviceAccessTokenResponseClient();
 
 	private Duration clockSkew = Duration.ofSeconds(60);
 
 	private Clock clock = Clock.systemUTC();
 
-	public void setAccessTokenResponseClient(OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> accessTokenResponseClient) {
+	public void setAccessTokenResponseClient(
+			OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> accessTokenResponseClient) {
 		this.accessTokenResponseClient = accessTokenResponseClient;
 	}
 
@@ -81,10 +81,12 @@ public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2Aut
 			return null;
 		}
 		// *****************************************************************
-		// Get device_code set via DefaultOAuth2AuthorizedClientManager#setContextAttributesMapper()
+		// Get device_code set via
+		// DefaultOAuth2AuthorizedClientManager#setContextAttributesMapper()
 		// *****************************************************************
 		String deviceCode = context.getAttribute(OAuth2ParameterNames.DEVICE_CODE);
-		// Attempt to authorize the client, which will repeatedly fail until the user grants authorization
+		// Attempt to authorize the client, which will repeatedly fail until the user
+		// grants authorization
 		OAuth2DeviceGrantRequest deviceGrantRequest = new OAuth2DeviceGrantRequest(clientRegistration, deviceCode);
 		OAuth2AccessTokenResponse tokenResponse = getTokenResponse(clientRegistration, deviceGrantRequest);
 		return new OAuth2AuthorizedClient(clientRegistration, context.getPrincipal().getName(),
@@ -95,7 +97,8 @@ public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2Aut
 			OAuth2DeviceGrantRequest deviceGrantRequest) {
 		try {
 			return this.accessTokenResponseClient.getTokenResponse(deviceGrantRequest);
-		} catch (OAuth2AuthorizationException ex) {
+		}
+		catch (OAuth2AuthorizationException ex) {
 			throw new ClientAuthorizationException(ex.getError(), clientRegistration.getRegistrationId(), ex);
 		}
 	}
@@ -111,8 +114,8 @@ public final class DeviceCodeOAuth2AuthorizedClientProvider implements OAuth2Aut
 
 			// Obtain device code from request
 			String deviceCode = request.getParameter(OAuth2ParameterNames.DEVICE_CODE);
-			return (deviceCode != null) ? Collections.singletonMap(OAuth2ParameterNames.DEVICE_CODE, deviceCode) :
-					Collections.emptyMap();
+			return (deviceCode != null) ? Collections.singletonMap(OAuth2ParameterNames.DEVICE_CODE, deviceCode)
+					: Collections.emptyMap();
 		};
 	}
 

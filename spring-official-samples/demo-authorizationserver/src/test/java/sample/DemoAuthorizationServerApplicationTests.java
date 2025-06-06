@@ -43,19 +43,20 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Daniel Garnier-Moiroux
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {"spring.profiles.include=test"})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		properties = { "spring.profiles.include=test" })
 @AutoConfigureMockMvc
 public class DemoAuthorizationServerApplicationTests {
+
 	private static final String REDIRECT_URI = "http://127.0.0.1:8080/login/oauth2/code/messaging-client-oidc";
 
-	private static final String AUTHORIZATION_REQUEST = UriComponentsBuilder
-			.fromPath("/oauth2/authorize")
-			.queryParam("response_type", "code")
-			.queryParam("client_id", "messaging-client")
-			.queryParam("scope", "openid")
-			.queryParam("state", "some-state")
-			.queryParam("redirect_uri", REDIRECT_URI)
-			.toUriString();
+	private static final String AUTHORIZATION_REQUEST = UriComponentsBuilder.fromPath("/oauth2/authorize")
+		.queryParam("response_type", "code")
+		.queryParam("client_id", "messaging-client")
+		.queryParam("scope", "openid")
+		.queryParam("state", "some-state")
+		.queryParam("redirect_uri", REDIRECT_URI)
+		.toUriString();
 
 	@Autowired
 	private WebClient webClient;
@@ -64,7 +65,7 @@ public class DemoAuthorizationServerApplicationTests {
 	public void setUp() {
 		this.webClient.getOptions().setThrowExceptionOnFailingStatusCode(true);
 		this.webClient.getOptions().setRedirectEnabled(true);
-		this.webClient.getCookieManager().clearCookies();	// log out
+		this.webClient.getCookieManager().clearCookies(); // log out
 	}
 
 	@Test
@@ -76,7 +77,12 @@ public class DemoAuthorizationServerApplicationTests {
 		this.webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
 		WebResponse signInResponse = signIn(page, "user1", "password").getWebResponse();
 
-		assertThat(signInResponse.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value());	// there is no "default" index page
+		assertThat(signInResponse.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST.value()); // there
+																								// is
+																								// no
+																								// "default"
+																								// index
+																								// page
 	}
 
 	@Test

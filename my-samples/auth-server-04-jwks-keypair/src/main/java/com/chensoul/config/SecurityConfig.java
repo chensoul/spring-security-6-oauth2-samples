@@ -34,15 +34,16 @@ import java.util.UUID;
 @EnableWebSecurity(debug = true)
 @Configuration
 public class SecurityConfig {
-    @Value("${sample.public-key-location}")
-    RSAPublicKey publicKey;
 
-    @Value("${sample.private-key-location}")
-    RSAPrivateKey privateKey;
+	@Value("${sample.public-key-location}")
+	RSAPublicKey publicKey;
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        // @formatter:off
+	@Value("${sample.private-key-location}")
+	RSAPrivateKey privateKey;
+
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		// @formatter:off
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}oidc-client")
@@ -110,13 +111,14 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
 
-    @Bean
-    JWKSource<SecurityContext> jwkSource() {
-        RSAKey rsaKey = Jwks.generateRsa(publicKey, privateKey);
-        JWKSet jwkSet = new JWKSet(rsaKey);
-        return new ImmutableJWKSet<>(jwkSet);
-    }
+	@Bean
+	JWKSource<SecurityContext> jwkSource() {
+		RSAKey rsaKey = Jwks.generateRsa(publicKey, privateKey);
+		JWKSet jwkSet = new JWKSet(rsaKey);
+		return new ImmutableJWKSet<>(jwkSet);
+	}
+
 }

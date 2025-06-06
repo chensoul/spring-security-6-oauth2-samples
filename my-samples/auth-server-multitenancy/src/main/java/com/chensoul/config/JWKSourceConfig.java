@@ -24,8 +24,8 @@ public class JWKSourceConfig {
 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource(TenantPerIssuerComponentRegistry componentRegistry) {
-		componentRegistry.register("issuer1", JWKSet.class, new JWKSet(generateRSAJwk()));	// <1>
-		componentRegistry.register("issuer2", JWKSet.class, new JWKSet(generateRSAJwk()));	// <2>
+		componentRegistry.register("issuer1", JWKSet.class, new JWKSet(generateRSAJwk())); // <1>
+		componentRegistry.register("issuer2", JWKSet.class, new JWKSet(generateRSAJwk())); // <2>
 
 		return new DelegatingJWKSource(componentRegistry);
 	}
@@ -37,7 +37,8 @@ public class JWKSourceConfig {
 			KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 			keyPairGenerator.initialize(2048);
 			keyPair = keyPairGenerator.generateKeyPair();
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new IllegalStateException(ex);
 		}
 
@@ -52,7 +53,9 @@ public class JWKSourceConfig {
 	}
 	// @fold:off
 
-	private static class DelegatingJWKSource implements JWKSource<SecurityContext> {	// <3>
+	private static class DelegatingJWKSource implements JWKSource<SecurityContext> {
+
+	// <3>
 
 		private final TenantPerIssuerComponentRegistry componentRegistry;
 
@@ -66,8 +69,8 @@ public class JWKSourceConfig {
 		}
 
 		private JWKSet getJwkSet() {
-			JWKSet jwkSet = this.componentRegistry.get(JWKSet.class);	// <4>
-			Assert.state(jwkSet != null, "JWKSet not found for \"requested\" issuer identifier.");	// <5>
+			JWKSet jwkSet = this.componentRegistry.get(JWKSet.class); // <4>
+			Assert.state(jwkSet != null, "JWKSet not found for \"requested\" issuer identifier."); // <5>
 			return jwkSet;
 		}
 

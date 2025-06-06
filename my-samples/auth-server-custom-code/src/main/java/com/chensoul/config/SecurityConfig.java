@@ -35,38 +35,29 @@ import java.util.UUID;
 @EnableWebSecurity(debug = true)
 @Configuration
 public class SecurityConfig {
-    @Bean
-    SecurityFilterChain authorizationServerSecurityFilterChain(
-            HttpSecurity http,
-            OAuth2AuthorizationService authorizationService,
-            OAuth2TokenGenerator<?> tokenGenerator) throws Exception {
 
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
-                OAuth2AuthorizationServerConfigurer.authorizationServer();
+	@Bean
+	SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
+			OAuth2AuthorizationService authorizationService, OAuth2TokenGenerator<?> tokenGenerator) throws Exception {
 
-        http
-                .securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-                .with(authorizationServerConfigurer, (authorizationServer) ->
-                        authorizationServer
-                                .tokenEndpoint(tokenEndpoint ->
-                                        tokenEndpoint
-                                                .accessTokenRequestConverter(    // <1>
-                                                        new CustomCodeGrantAuthenticationConverter())
-                                                .authenticationProvider(    // <2>
-                                                        new CustomCodeGrantAuthenticationProvider(
-                                                                authorizationService, tokenGenerator)))
-                )
-                .authorizeHttpRequests(authorize ->
-                        authorize
-                                .anyRequest().authenticated()
-                );
+		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+			.authorizationServer();
 
-        return http.build();
-    }
+		http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+			.with(authorizationServerConfigurer,
+					(authorizationServer) -> authorizationServer.tokenEndpoint(tokenEndpoint -> tokenEndpoint
+						.accessTokenRequestConverter( // <1>
+								new CustomCodeGrantAuthenticationConverter())
+						.authenticationProvider( // <2>
+								new CustomCodeGrantAuthenticationProvider(authorizationService, tokenGenerator))))
+			.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        // @formatter:off
+		return http.build();
+	}
+
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		// @formatter:off
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}oidc-client")
@@ -134,20 +125,20 @@ public class SecurityConfig {
                 .tokenSettings(TokenSettings.builder().accessTokenFormat(OAuth2TokenFormat.REFERENCE).build()
                 ).build();
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
 
-    @Bean
-    OAuth2AuthorizationService authorizationService() {
-        return new InMemoryOAuth2AuthorizationService();
-    }
+	@Bean
+	OAuth2AuthorizationService authorizationService() {
+		return new InMemoryOAuth2AuthorizationService();
+	}
 
-    @Bean
-    OAuth2TokenGenerator<?> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
-        JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
-        OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
-        OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
-        return new DelegatingOAuth2TokenGenerator(
-                jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
-    }
+	@Bean
+	OAuth2TokenGenerator<?> tokenGenerator(JWKSource<SecurityContext> jwkSource) {
+		JwtGenerator jwtGenerator = new JwtGenerator(new NimbusJwtEncoder(jwkSource));
+		OAuth2AccessTokenGenerator accessTokenGenerator = new OAuth2AccessTokenGenerator();
+		OAuth2RefreshTokenGenerator refreshTokenGenerator = new OAuth2RefreshTokenGenerator();
+		return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
+	}
+
 }

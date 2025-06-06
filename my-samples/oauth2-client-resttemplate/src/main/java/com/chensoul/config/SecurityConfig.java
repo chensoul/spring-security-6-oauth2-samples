@@ -19,9 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // @formatter:off
+	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/", "/public/**").permitAll()
@@ -31,18 +31,19 @@ public class SecurityConfig {
                 .oauth2Login(withDefaults())
                 .oauth2Client(withDefaults());
         // @formatter:on
-        return http.build();
-    }
+		return http.build();
+	}
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        // @formatter:off
+	@Bean
+	public UserDetailsService userDetailsService() {
+		// @formatter:off
         UserDetails userDetails = User.withDefaultPasswordEncoder()
                 .username("user")
                 .password("password")
                 .roles("USER")
                 .build();
         // @formatter:on
-        return new InMemoryUserDetailsManager(userDetails);
-    }
+		return new InMemoryUserDetailsManager(userDetails);
+	}
+
 }

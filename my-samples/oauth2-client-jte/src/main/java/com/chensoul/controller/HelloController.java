@@ -8,18 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class HelloController {
 
-    @RequestMapping("/")
-    public String index() {
-        return "pages/home";
-    }
+	@RequestMapping("/")
+	public String index() {
+		return "pages/home";
+	}
 
-    @RequestMapping("/login")
-    public String login(Model model, String error) {
-        if (error!=null) {
-            model.addAttribute("error", true);
-            model.addAttribute("errorMessage", "Invalid username or password");
-        }
+	@RequestMapping("/login")
+	public String login(Model model, String error) {
+		if (error != null) {
+			model.addAttribute("error", true);
+			model.addAttribute("errorMessage", "Invalid username or password");
+		}
 
-        return "pages/login";
-    }
+		return "pages/login";
+	}
+
 }

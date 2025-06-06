@@ -16,23 +16,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class DashboardController {
 
-    @GetMapping("/dashboard")
-    public String index(Authentication authentication, HttpServletRequest request, Model model, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient) {
-        if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-            model.addAttribute("userName", userDetails.getUsername());
-            model.addAttribute("clientName", "N/A");
-        } else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
-            model.addAttribute("userName", oauth2User.getName());
-            model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
-            model.addAttribute("userAttributes", oauth2User.getAttributes());
-        }
+	@GetMapping("/dashboard")
+	public String index(Authentication authentication, HttpServletRequest request, Model model,
+			@RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient) {
+		if (authentication.getPrincipal() instanceof UserDetails userDetails) {
+			model.addAttribute("userName", userDetails.getUsername());
+			model.addAttribute("clientName", "N/A");
+		}
+		else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
+			model.addAttribute("userName", oauth2User.getName());
+			model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
+			model.addAttribute("userAttributes", oauth2User.getAttributes());
+		}
 
-        // Add CSRF token
-        CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
-        if (csrf!=null) {
-            model.addAttribute("csrf", csrf);
-        }
+		// Add CSRF token
+		CsrfToken csrf = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+		if (csrf != null) {
+			model.addAttribute("csrf", csrf);
+		}
 
-        return "pages/dashboard";
-    }
+		return "pages/dashboard";
+	}
+
 }

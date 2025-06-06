@@ -12,9 +12,10 @@ import org.springframework.util.Assert;
 
 @Component
 public class TenantPerIssuerComponentRegistry {
+
 	private final ConcurrentMap<String, Map<Class<?>, Object>> registry = new ConcurrentHashMap<>();
 
-	public <T> void register(String tenantId, Class<T> componentClass, T component) {	// <1>
+	public <T> void register(String tenantId, Class<T> componentClass, T component) { // <1>
 		Assert.hasText(tenantId, "tenantId cannot be empty");
 		Assert.notNull(componentClass, "componentClass cannot be null");
 		Assert.notNull(component, "component cannot be null");
@@ -35,4 +36,5 @@ public class TenantPerIssuerComponentRegistry {
 		}
 		return null;
 	}
+
 }

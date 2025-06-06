@@ -12,7 +12,7 @@ import java.util.Set;
 @Configuration
 public class JwtTokenCustomizerConfig {
 
-    // @formatter:off
+	// @formatter:off
 	@Bean
 	public OAuth2TokenCustomizer<JwtEncodingContext> tokenCustomizer() {
 		return (context) -> {
@@ -23,4 +23,5 @@ public class JwtTokenCustomizerConfig {
 		};
 	}
 	// @formatter:on
+
 }

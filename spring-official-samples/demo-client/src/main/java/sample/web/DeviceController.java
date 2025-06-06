@@ -57,15 +57,11 @@ import static org.springframework.security.oauth2.client.web.reactive.function.c
 @Controller
 public class DeviceController {
 
-	private static final Set<String> DEVICE_GRANT_ERRORS = new HashSet<>(Arrays.asList(
-			"authorization_pending",
-			"slow_down",
-			"access_denied",
-			"expired_token"
-	));
+	private static final Set<String> DEVICE_GRANT_ERRORS = new HashSet<>(
+			Arrays.asList("authorization_pending", "slow_down", "access_denied", "expired_token"));
 
-	private static final ParameterizedTypeReference<Map<String, Object>> TYPE_REFERENCE =
-			new ParameterizedTypeReference<>() {};
+	private static final ParameterizedTypeReference<Map<String, Object>> TYPE_REFERENCE = new ParameterizedTypeReference<>() {
+	};
 
 	private final ClientRegistrationRepository clientRegistrationRepository;
 
@@ -73,8 +69,7 @@ public class DeviceController {
 
 	private final String messagesBaseUri;
 
-	public DeviceController(
-			ClientRegistrationRepository clientRegistrationRepository,
+	public DeviceController(ClientRegistrationRepository clientRegistrationRepository,
 			@Qualifier("default-client-web-client") WebClient webClient,
 			@Value("${messages.base-uri}") String messagesBaseUri) {
 
@@ -93,10 +88,12 @@ public class DeviceController {
 
 		MultiValueMap<String, String> requestParameters = new LinkedMultiValueMap<>();
 		requestParameters.add(OAuth2ParameterNames.CLIENT_ID, clientRegistration.getClientId());
-		requestParameters.add(OAuth2ParameterNames.SCOPE, StringUtils.collectionToDelimitedString(
-				clientRegistration.getScopes(), " "));
+		requestParameters.add(OAuth2ParameterNames.SCOPE,
+				StringUtils.collectionToDelimitedString(clientRegistration.getScopes(), " "));
 
-		String deviceAuthorizationUri = (String) clientRegistration.getProviderDetails().getConfigurationMetadata().get("device_authorization_endpoint");
+		String deviceAuthorizationUri = (String) clientRegistration.getProviderDetails()
+			.getConfigurationMetadata()
+			.get("device_authorization_endpoint");
 
 		// @formatter:off
 		Map<String, Object> responseParameters =
@@ -135,8 +132,8 @@ public class DeviceController {
 		model.addAttribute("userCode", responseParameters.get(OAuth2ParameterNames.USER_CODE));
 		model.addAttribute("verificationUri", responseParameters.get(OAuth2ParameterNames.VERIFICATION_URI));
 		// Note: You could use a QR-code to display this URL
-		model.addAttribute("verificationUriComplete", responseParameters.get(
-				OAuth2ParameterNames.VERIFICATION_URI_COMPLETE));
+		model.addAttribute("verificationUriComplete",
+				responseParameters.get(OAuth2ParameterNames.VERIFICATION_URI_COMPLETE));
 
 		return "device-authorize";
 	}
@@ -146,21 +143,19 @@ public class DeviceController {
 	 */
 	@PostMapping("/device_authorize")
 	public ResponseEntity<Void> poll(@RequestParam(OAuth2ParameterNames.DEVICE_CODE) String deviceCode,
-			@RegisteredOAuth2AuthorizedClient("messaging-client-device-code")
-					OAuth2AuthorizedClient authorizedClient) {
+			@RegisteredOAuth2AuthorizedClient("messaging-client-device-code") OAuth2AuthorizedClient authorizedClient) {
 
 		/*
 		 * The client will repeatedly poll until authorization is granted.
 		 *
-		 * The OAuth2AuthorizedClientManager uses the device_code parameter
-		 * to make a token request, which returns authorization_pending until
-		 * the user has granted authorization.
+		 * The OAuth2AuthorizedClientManager uses the device_code parameter to make a
+		 * token request, which returns authorization_pending until the user has granted
+		 * authorization.
 		 *
-		 * If the user has denied authorization, access_denied is returned and
-		 * polling should stop.
-		 *
-		 * If the device code expires, expired_token is returned and polling
+		 * If the user has denied authorization, access_denied is returned and polling
 		 * should stop.
+		 *
+		 * If the device code expires, expired_token is returned and polling should stop.
 		 *
 		 * This endpoint simply returns 200 OK when the client is authorized.
 		 */
@@ -178,15 +173,14 @@ public class DeviceController {
 
 	@GetMapping("/device_authorized")
 	public String authorized(Model model,
-			@RegisteredOAuth2AuthorizedClient("messaging-client-device-code")
-					OAuth2AuthorizedClient authorizedClient) {
+			@RegisteredOAuth2AuthorizedClient("messaging-client-device-code") OAuth2AuthorizedClient authorizedClient) {
 
 		String[] messages = this.webClient.get()
-				.uri(this.messagesBaseUri)
-				.attributes(oauth2AuthorizedClient(authorizedClient))
-				.retrieve()
-				.bodyToMono(String[].class)
-				.block();
+			.uri(this.messagesBaseUri)
+			.attributes(oauth2AuthorizedClient(authorizedClient))
+			.retrieve()
+			.bodyToMono(String[].class)
+			.block();
 		model.addAttribute("messages", messages);
 
 		return "index";

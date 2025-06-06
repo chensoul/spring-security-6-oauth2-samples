@@ -17,12 +17,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
-    @Value("${spring.security.oauth2.resourceserver.jwt.public-key-location}")
-    RSAPublicKey key;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // @formatter:off
+	@Value("${spring.security.oauth2.resourceserver.jwt.public-key-location}")
+	RSAPublicKey key;
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/message/**").hasAuthority("SCOPE_read")
@@ -32,11 +33,12 @@ public class SecurityConfig {
                         .jwt((jwt) -> jwt.decoder(jwtDecoder()))
                 );
         // @formatter:on
-        return http.build();
-    }
+		return http.build();
+	}
 
-    @Bean
-    JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withPublicKey(this.key).build();
-    }
+	@Bean
+	JwtDecoder jwtDecoder() {
+		return NimbusJwtDecoder.withPublicKey(this.key).build();
+	}
+
 }

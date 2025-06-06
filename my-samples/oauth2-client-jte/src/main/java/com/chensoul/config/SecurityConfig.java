@@ -16,43 +16,33 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/", "/login", "/error").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .cors(cors -> cors.disable())
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true)
-                        .permitAll()
-                )
-                .oauth2Login(oauth2 -> oauth2
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/dashboard", true)
-                )
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/")
-                        .permitAll()
-                );
-        return http.build();
-    }
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests(authorize -> authorize.requestMatchers("/", "/login", "/error")
+			.permitAll()
+			.anyRequest()
+			.authenticated())
+			.cors(cors -> cors.disable())
+			.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/dashboard", true).permitAll())
+			.oauth2Login(oauth2 -> oauth2.loginPage("/login").defaultSuccessUrl("/dashboard", true))
+			.logout(logout -> logout.logoutSuccessUrl("/").permitAll());
+		return http.build();
+	}
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails defaultUser = User.builder()
-                .username("user")
-                .password(passwordEncoder().encode("password"))
-                .roles("ADMIN")
-                .build();
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails defaultUser = User.builder()
+			.username("user")
+			.password(passwordEncoder().encode("password"))
+			.roles("ADMIN")
+			.build();
 
-        return new InMemoryUserDetailsManager(defaultUser);
-    }
+		return new InMemoryUserDetailsManager(defaultUser);
+	}
+
 }

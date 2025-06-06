@@ -27,7 +27,8 @@ import org.springframework.context.annotation.Profile;
  * @author Joe Grandja
  * @since 1.3
  */
-@Profile("!test")	// Exclude this from DemoAuthorizationServerApplicationTests and DemoAuthorizationServerConsentTests
+@Profile("!test") // Exclude this from DemoAuthorizationServerApplicationTests and
+					// DemoAuthorizationServerConsentTests
 @Configuration(proxyBeanMethods = false)
 public class TomcatServerConfig {
 

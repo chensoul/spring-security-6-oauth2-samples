@@ -28,7 +28,8 @@ import org.springframework.web.servlet.function.ServerResponse;
 import static org.springframework.cloud.gateway.server.mvc.common.MvcUtils.getApplicationContext;
 
 /**
- * Custom {@code HandlerFilterFunction}'s registered in META-INF/spring.factories and used in application.yml.
+ * Custom {@code HandlerFilterFunction}'s registered in META-INF/spring.factories and used
+ * in application.yml.
  *
  * @author Joe Grandja
  * @since 1.4
@@ -40,13 +41,14 @@ public interface GatewayFilterFunctions {
 		return (request, next) -> {
 			Authentication principal = (Authentication) request.servletRequest().getUserPrincipal();
 			OAuth2AuthorizedClientRepository authorizedClientRepository = getApplicationContext(request)
-					.getBean(OAuth2AuthorizedClientRepository.class);
-			OAuth2AuthorizedClient authorizedClient = authorizedClientRepository.loadAuthorizedClient(
-					clientRegistrationId, principal, request.servletRequest());
+				.getBean(OAuth2AuthorizedClientRepository.class);
+			OAuth2AuthorizedClient authorizedClient = authorizedClientRepository
+				.loadAuthorizedClient(clientRegistrationId, principal, request.servletRequest());
 			if (authorizedClient != null) {
 				OAuth2AccessToken accessToken = authorizedClient.getAccessToken();
 				ServerRequest bearerRequest = ServerRequest.from(request)
-						.headers(httpHeaders -> httpHeaders.setBearerAuth(accessToken.getTokenValue())).build();
+					.headers(httpHeaders -> httpHeaders.setBearerAuth(accessToken.getTokenValue()))
+					.build();
 				return next.handle(bearerRequest);
 			}
 			return next.handle(request);

@@ -58,10 +58,12 @@ public class SecurityConfig {
 		CookieCsrfTokenRepository cookieCsrfTokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
 		CsrfTokenRequestAttributeHandler csrfTokenRequestAttributeHandler = new CsrfTokenRequestAttributeHandler();
 		/*
-		IMPORTANT:
-		Set the csrfRequestAttributeName to null, to opt-out of deferred tokens, resulting in the CsrfToken to be loaded on every request.
-		If it does not exist, the CookieCsrfTokenRepository will automatically generate a new one and add the Cookie to the response.
-		See the reference: https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html#deferred-csrf-token
+		 * IMPORTANT: Set the csrfRequestAttributeName to null, to opt-out of deferred
+		 * tokens, resulting in the CsrfToken to be loaded on every request. If it does
+		 * not exist, the CookieCsrfTokenRepository will automatically generate a new one
+		 * and add the Cookie to the response. See the reference:
+		 * https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html#
+		 * deferred-csrf-token
 		 */
 		csrfTokenRequestAttributeHandler.setCsrfRequestAttributeName(null);
 
@@ -95,23 +97,22 @@ public class SecurityConfig {
 	}
 
 	private AuthenticationEntryPoint authenticationEntryPoint() {
-		AuthenticationEntryPoint authenticationEntryPoint =
-				new LoginUrlAuthenticationEntryPoint("/oauth2/authorization/messaging-client-oidc");
-		MediaTypeRequestMatcher textHtmlMatcher =
-				new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
+		AuthenticationEntryPoint authenticationEntryPoint = new LoginUrlAuthenticationEntryPoint(
+				"/oauth2/authorization/messaging-client-oidc");
+		MediaTypeRequestMatcher textHtmlMatcher = new MediaTypeRequestMatcher(MediaType.TEXT_HTML);
 		textHtmlMatcher.setUseEquals(true);
 
 		LinkedHashMap<RequestMatcher, AuthenticationEntryPoint> entryPoints = new LinkedHashMap<>();
 		entryPoints.put(textHtmlMatcher, authenticationEntryPoint);
 
-		DelegatingAuthenticationEntryPoint delegatingAuthenticationEntryPoint = new DelegatingAuthenticationEntryPoint(entryPoints);
+		DelegatingAuthenticationEntryPoint delegatingAuthenticationEntryPoint = new DelegatingAuthenticationEntryPoint(
+				entryPoints);
 		delegatingAuthenticationEntryPoint.setDefaultEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
 		return delegatingAuthenticationEntryPoint;
 	}
 
 	private LogoutHandler logoutHandler(CsrfTokenRepository csrfTokenRepository) {
-		return new CompositeLogoutHandler(
-				new SecurityContextLogoutHandler(),
+		return new CompositeLogoutHandler(new SecurityContextLogoutHandler(),
 				new CsrfLogoutHandler(csrfTokenRepository));
 	}
 

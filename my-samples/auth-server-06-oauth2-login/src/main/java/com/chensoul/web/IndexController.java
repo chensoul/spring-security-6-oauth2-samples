@@ -31,28 +31,32 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class IndexController {
-//    @GetMapping("/")
-//    public String index(Model model, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient,
-//                        @AuthenticationPrincipal OAuth2User oauth2User) {
-//        model.addAttribute("userName", oauth2User.getName());
-//        model.addAttribute("userAttributes", oauth2User.getAttributes());
-//
-//        model.addAttribute("clientName", authorizedClient.getClientRegistration().getClientName());
-//        return "index";
-//    }
 
-    @GetMapping("/")
-    public String index(Model model, Authentication authentication) {
-        model.addAttribute("userName", authentication.getName());
+	// @GetMapping("/")
+	// public String index(Model model, @RegisteredOAuth2AuthorizedClient
+	// OAuth2AuthorizedClient authorizedClient,
+	// @AuthenticationPrincipal OAuth2User oauth2User) {
+	// model.addAttribute("userName", oauth2User.getName());
+	// model.addAttribute("userAttributes", oauth2User.getAttributes());
+	//
+	// model.addAttribute("clientName",
+	// authorizedClient.getClientRegistration().getClientName());
+	// return "index";
+	// }
 
-        if (authentication instanceof OAuth2AuthenticationToken) {
-            OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
-            model.addAttribute("clientName", oAuth2AuthenticationToken.getAuthorizedClientRegistrationId());
-        }
-        if (authentication.getPrincipal() instanceof OAuth2User) {
-            OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
-            model.addAttribute("userAttributes", oauth2User.getAttributes());
-        }
-        return "index";
-    }
+	@GetMapping("/")
+	public String index(Model model, Authentication authentication) {
+		model.addAttribute("userName", authentication.getName());
+
+		if (authentication instanceof OAuth2AuthenticationToken) {
+			OAuth2AuthenticationToken oAuth2AuthenticationToken = (OAuth2AuthenticationToken) authentication;
+			model.addAttribute("clientName", oAuth2AuthenticationToken.getAuthorizedClientRegistrationId());
+		}
+		if (authentication.getPrincipal() instanceof OAuth2User) {
+			OAuth2User oauth2User = (OAuth2User) authentication.getPrincipal();
+			model.addAttribute("userAttributes", oauth2User.getAttributes());
+		}
+		return "index";
+	}
+
 }

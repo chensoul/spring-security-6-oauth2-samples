@@ -12,22 +12,22 @@ import org.springframework.security.provisioning.UserDetailsManager;
 @Configuration
 public class UserConfig {
 
-    @Bean
-    public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
-        return new JdbcUserDetailsManager(dataSource);
-    }
+	@Bean
+	public JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
+		return new JdbcUserDetailsManager(dataSource);
+	}
 
-    @Bean
-    ApplicationRunner usersRunner(UserDetailsManager userDetailsManager) {
-        return args -> {
-            var users = Map.of(
-                    "user", User.builder().username("user").password("{noop}password").roles("USER").build(),
-                    "admin", User.builder().username("admin").password("{noop}password").roles("ADMIN").build());
-            users.forEach((username, user) -> {
-                if (!userDetailsManager.userExists(username)) {
-                    userDetailsManager.createUser(user);
-                }
-            });
-        };
-    }
+	@Bean
+	ApplicationRunner usersRunner(UserDetailsManager userDetailsManager) {
+		return args -> {
+			var users = Map.of("user", User.builder().username("user").password("{noop}password").roles("USER").build(),
+					"admin", User.builder().username("admin").password("{noop}password").roles("ADMIN").build());
+			users.forEach((username, user) -> {
+				if (!userDetailsManager.userExists(username)) {
+					userDetailsManager.createUser(user);
+				}
+			});
+		};
+	}
+
 }

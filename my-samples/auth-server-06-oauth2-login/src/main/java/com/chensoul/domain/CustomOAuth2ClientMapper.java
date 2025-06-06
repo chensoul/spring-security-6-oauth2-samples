@@ -25,36 +25,46 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CustomOAuth2ClientMapper extends AbstractOAuth2ClientMapper implements OAuth2ClientMapper {
 
-    @Override
-    public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token, String providerAccessToken, OAuth2Client auth2Client) {
-        OAuth2MapperConfig config = auth2Client.getMapperConfig();
-        OAuth2User oauth2User = getOAuth2User(token, providerAccessToken, config.getCustom());
-        return getOrCreateSecurityUserFromOAuth2User(oauth2User, auth2Client);
-    }
+	@Override
+	public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token,
+			String providerAccessToken, OAuth2Client auth2Client) {
+		OAuth2MapperConfig config = auth2Client.getMapperConfig();
+		OAuth2User oauth2User = getOAuth2User(token, providerAccessToken, config.getCustom());
+		return getOrCreateSecurityUserFromOAuth2User(oauth2User, auth2Client);
+	}
 
-    private synchronized OAuth2User getOAuth2User(OAuth2AuthenticationToken token, String providerAccessToken, OAuth2CustomMapperConfig custom) {
-//        if (!StringUtils.isEmpty(custom.getUsername()) && !StringUtils.isEmpty(custom.getPassword())) {
-//            restTemplateBuilder = restTemplateBuilder.basicAuthentication(custom.getUsername(), custom.getPassword());
-//        }
-//        if (custom.isSendToken() && !StringUtils.isEmpty(providerAccessToken)) {
-//            restTemplateBuilder = restTemplateBuilder.defaultHeader(PROVIDER_ACCESS_TOKEN, providerAccessToken);
-//        }
-//
-//        RestTemplate restTemplate = restTemplateBuilder.build();
-//        String request;
-//        try {
-//            request = JacksonUtil.getObjectMapperWithJavaTimeModule().writeValueAsString(token.getPrincipal());
-//        } catch (JsonProcessingException e) {
-//            log.error("Can't convert principal to JSON string", e);
-//            throw new RuntimeException("Can't convert principal to JSON string", e);
-//        }
-//        try {
-//            return restTemplate.postForEntity(custom.getUrl(), request, OAuth2User.class).getBody();
-//        } catch (Exception e) {
-//            log.error("There was an error during connection to custom mapper endpoint", e);
-//            throw new RuntimeException("Unable to login. Please contact your Administrator!");
-//        }
+	private synchronized OAuth2User getOAuth2User(OAuth2AuthenticationToken token, String providerAccessToken,
+			OAuth2CustomMapperConfig custom) {
+		// if (!StringUtils.isEmpty(custom.getUsername()) &&
+		// !StringUtils.isEmpty(custom.getPassword())) {
+		// restTemplateBuilder =
+		// restTemplateBuilder.basicAuthentication(custom.getUsername(),
+		// custom.getPassword());
+		// }
+		// if (custom.isSendToken() && !StringUtils.isEmpty(providerAccessToken)) {
+		// restTemplateBuilder = restTemplateBuilder.defaultHeader(PROVIDER_ACCESS_TOKEN,
+		// providerAccessToken);
+		// }
+		//
+		// RestTemplate restTemplate = restTemplateBuilder.build();
+		// String request;
+		// try {
+		// request =
+		// JacksonUtil.getObjectMapperWithJavaTimeModule().writeValueAsString(token.getPrincipal());
+		// } catch (JsonProcessingException e) {
+		// log.error("Can't convert principal to JSON string", e);
+		// throw new RuntimeException("Can't convert principal to JSON string", e);
+		// }
+		// try {
+		// return restTemplate.postForEntity(custom.getUrl(), request,
+		// OAuth2User.class).getBody();
+		// } catch (Exception e) {
+		// log.error("There was an error during connection to custom mapper endpoint", e);
+		// throw new RuntimeException("Unable to login. Please contact your
+		// Administrator!");
+		// }
 
-        return null;
-    }
+		return null;
+	}
+
 }

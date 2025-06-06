@@ -33,16 +33,14 @@ public class CustomCodeGrantAuthenticationConverter implements AuthenticationCon
 
 		// code (REQUIRED)
 		String code = parameters.getFirst(OAuth2ParameterNames.CODE); // <2>
-		if (!StringUtils.hasText(code) ||
-				parameters.get(OAuth2ParameterNames.CODE).size() != 1) {
+		if (!StringUtils.hasText(code) || parameters.get(OAuth2ParameterNames.CODE).size() != 1) {
 			throw new OAuth2AuthenticationException(OAuth2ErrorCodes.INVALID_REQUEST);
 		}
 
 		Map<String, Object> additionalParameters = new HashMap<>();
 		parameters.forEach((key, value) -> {
-			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) &&
-					!key.equals(OAuth2ParameterNames.CLIENT_ID) &&
-					!key.equals(OAuth2ParameterNames.CODE)) {
+			if (!key.equals(OAuth2ParameterNames.GRANT_TYPE) && !key.equals(OAuth2ParameterNames.CLIENT_ID)
+					&& !key.equals(OAuth2ParameterNames.CODE)) {
 				additionalParameters.put(key, value.get(0));
 			}
 		});

@@ -24,34 +24,36 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class OAuth2ClientMapperProvider {
 
-    @Autowired
-    @Qualifier("basicOAuth2ClientMapper")
-    private OAuth2ClientMapper basicOAuth2ClientMapper;
+	@Autowired
+	@Qualifier("basicOAuth2ClientMapper")
+	private OAuth2ClientMapper basicOAuth2ClientMapper;
 
-    @Autowired
-    @Qualifier("customOAuth2ClientMapper")
-    private OAuth2ClientMapper customOAuth2ClientMapper;
+	@Autowired
+	@Qualifier("customOAuth2ClientMapper")
+	private OAuth2ClientMapper customOAuth2ClientMapper;
 
-    @Autowired
-    @Qualifier("githubOAuth2ClientMapper")
-    private OAuth2ClientMapper githubOAuth2ClientMapper;
+	@Autowired
+	@Qualifier("githubOAuth2ClientMapper")
+	private OAuth2ClientMapper githubOAuth2ClientMapper;
 
-    @Autowired
-    @Qualifier("appleOAuth2ClientMapper")
-    private OAuth2ClientMapper appleOAuth2ClientMapper;
+	@Autowired
+	@Qualifier("appleOAuth2ClientMapper")
+	private OAuth2ClientMapper appleOAuth2ClientMapper;
 
-    public OAuth2ClientMapper getOAuth2ClientMapperByType(MapperType oauth2MapperType) {
-        switch (oauth2MapperType) {
-            case CUSTOM:
-                return customOAuth2ClientMapper;
-            case BASIC:
-                return basicOAuth2ClientMapper;
-            case GITHUB:
-                return githubOAuth2ClientMapper;
-            case APPLE:
-                return appleOAuth2ClientMapper;
-            default:
-                throw new RuntimeException("OAuth2ClientRegistrationMapper with type " + oauth2MapperType + " is not supported!");
-        }
-    }
+	public OAuth2ClientMapper getOAuth2ClientMapperByType(MapperType oauth2MapperType) {
+		switch (oauth2MapperType) {
+			case CUSTOM:
+				return customOAuth2ClientMapper;
+			case BASIC:
+				return basicOAuth2ClientMapper;
+			case GITHUB:
+				return githubOAuth2ClientMapper;
+			case APPLE:
+				return appleOAuth2ClientMapper;
+			default:
+				throw new RuntimeException(
+						"OAuth2ClientRegistrationMapper with type " + oauth2MapperType + " is not supported!");
+		}
+	}
+
 }

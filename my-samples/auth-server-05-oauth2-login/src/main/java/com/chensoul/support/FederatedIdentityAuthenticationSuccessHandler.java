@@ -38,34 +38,38 @@ import java.util.function.Consumer;
  * @since 1.1
  */
 public final class FederatedIdentityAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-    private static final Logger log = LoggerFactory.getLogger(FederatedIdentityAuthenticationSuccessHandler.class);
-    private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 
-    private Consumer<OAuth2User> oauth2UserHandler = (user) -> {
-        log.info("OAuth2User: {}", user);
-    };
+	private static final Logger log = LoggerFactory.getLogger(FederatedIdentityAuthenticationSuccessHandler.class);
 
-    private Consumer<OidcUser> oidcUserHandler = (user) -> this.oauth2UserHandler.accept(user);
+	private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        if (authentication instanceof OAuth2AuthenticationToken) {
-            if (authentication.getPrincipal() instanceof OidcUser oidcUser) {
-                this.oidcUserHandler.accept(oidcUser);
-            } else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
-                this.oauth2UserHandler.accept(oauth2User);
-            }
-        }
+	private Consumer<OAuth2User> oauth2UserHandler = (user) -> {
+		log.info("OAuth2User: {}", user);
+	};
 
-        this.delegate.onAuthenticationSuccess(request, response, authentication);
-    }
+	private Consumer<OidcUser> oidcUserHandler = (user) -> this.oauth2UserHandler.accept(user);
 
-    public void setOAuth2UserHandler(Consumer<OAuth2User> oauth2UserHandler) {
-        this.oauth2UserHandler = oauth2UserHandler;
-    }
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+		if (authentication instanceof OAuth2AuthenticationToken) {
+			if (authentication.getPrincipal() instanceof OidcUser oidcUser) {
+				this.oidcUserHandler.accept(oidcUser);
+			}
+			else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
+				this.oauth2UserHandler.accept(oauth2User);
+			}
+		}
 
-    public void setOidcUserHandler(Consumer<OidcUser> oidcUserHandler) {
-        this.oidcUserHandler = oidcUserHandler;
-    }
+		this.delegate.onAuthenticationSuccess(request, response, authentication);
+	}
+
+	public void setOAuth2UserHandler(Consumer<OAuth2User> oauth2UserHandler) {
+		this.oauth2UserHandler = oauth2UserHandler;
+	}
+
+	public void setOidcUserHandler(Consumer<OidcUser> oidcUserHandler) {
+		this.oidcUserHandler = oidcUserHandler;
+	}
 
 }

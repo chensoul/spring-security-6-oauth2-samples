@@ -11,14 +11,15 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class WelcomeController {
-	
+
 	@Autowired
-    RestTemplateBuilder restTemplateBuilderConfigured;
-	
+	RestTemplateBuilder restTemplateBuilderConfigured;
+
 	@GetMapping("/")
 	public String welcome() {
 		RestTemplate restTemplate = restTemplateBuilderConfigured.build();
-		String welcome = restTemplate.getForEntity("/", String.class).getBody();	
-		return "<h1>" +  welcome + "</h1>";
+		String welcome = restTemplate.getForEntity("/", String.class).getBody();
+		return "<h1>" + welcome + "</h1>";
 	}
+
 }

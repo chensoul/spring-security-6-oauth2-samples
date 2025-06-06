@@ -273,23 +273,24 @@ final class ModelMapper {
 		TokenSettings tokenSettings = tokenSettingsBuilder.build();
 
 		RegisteredClient.Builder registeredClientBuilder = RegisteredClient.withId(oauth2RegisteredClient.getId())
-				.clientId(oauth2RegisteredClient.getClientId())
-				.clientIdIssuedAt(oauth2RegisteredClient.getClientIdIssuedAt())
-				.clientSecret(oauth2RegisteredClient.getClientSecret())
-				.clientSecretExpiresAt(oauth2RegisteredClient.getClientSecretExpiresAt())
-				.clientName(oauth2RegisteredClient.getClientName())
-				.clientAuthenticationMethods((clientAuthenticationMethods) -> clientAuthenticationMethods
-						.addAll(oauth2RegisteredClient.getClientAuthenticationMethods()))
-				.authorizationGrantTypes((authorizationGrantTypes) -> authorizationGrantTypes
-						.addAll(oauth2RegisteredClient.getAuthorizationGrantTypes()))
-				.clientSettings(clientSettings)
-				.tokenSettings(tokenSettings);
+			.clientId(oauth2RegisteredClient.getClientId())
+			.clientIdIssuedAt(oauth2RegisteredClient.getClientIdIssuedAt())
+			.clientSecret(oauth2RegisteredClient.getClientSecret())
+			.clientSecretExpiresAt(oauth2RegisteredClient.getClientSecretExpiresAt())
+			.clientName(oauth2RegisteredClient.getClientName())
+			.clientAuthenticationMethods((clientAuthenticationMethods) -> clientAuthenticationMethods
+				.addAll(oauth2RegisteredClient.getClientAuthenticationMethods()))
+			.authorizationGrantTypes((authorizationGrantTypes) -> authorizationGrantTypes
+				.addAll(oauth2RegisteredClient.getAuthorizationGrantTypes()))
+			.clientSettings(clientSettings)
+			.tokenSettings(tokenSettings);
 		if (!CollectionUtils.isEmpty(oauth2RegisteredClient.getRedirectUris())) {
-			registeredClientBuilder.redirectUris((redirectUris) -> redirectUris.addAll(oauth2RegisteredClient.getRedirectUris()));
+			registeredClientBuilder
+				.redirectUris((redirectUris) -> redirectUris.addAll(oauth2RegisteredClient.getRedirectUris()));
 		}
 		if (!CollectionUtils.isEmpty(oauth2RegisteredClient.getPostLogoutRedirectUris())) {
-			registeredClientBuilder.postLogoutRedirectUris((postLogoutRedirectUris) ->
-					postLogoutRedirectUris.addAll(oauth2RegisteredClient.getPostLogoutRedirectUris()));
+			registeredClientBuilder.postLogoutRedirectUris((postLogoutRedirectUris) -> postLogoutRedirectUris
+				.addAll(oauth2RegisteredClient.getPostLogoutRedirectUris()));
 		}
 		if (!CollectionUtils.isEmpty(oauth2RegisteredClient.getScopes())) {
 			registeredClientBuilder.scopes((scopes) -> scopes.addAll(oauth2RegisteredClient.getScopes()));

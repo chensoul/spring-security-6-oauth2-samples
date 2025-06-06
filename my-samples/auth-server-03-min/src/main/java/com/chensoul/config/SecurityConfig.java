@@ -24,9 +24,10 @@ import java.util.UUID;
 @Configuration(proxyBeanMethods = false)
 @EnableWebSecurity
 public class SecurityConfig {
-    @Bean
-    public RegisteredClientRepository registeredClientRepository() {
-        // @formatter:off
+
+	@Bean
+	public RegisteredClientRepository registeredClientRepository() {
+		// @formatter:off
         RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId("oidc-client")
                 .clientSecret("{noop}oidc-client")
@@ -94,6 +95,7 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
+
 }

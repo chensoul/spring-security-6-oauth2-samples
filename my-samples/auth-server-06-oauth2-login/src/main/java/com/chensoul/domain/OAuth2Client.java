@@ -22,32 +22,61 @@ import java.util.UUID;
 
 @Data
 public class OAuth2Client {
-    private UUID tenantId;
-    private String title;
-    private String clientId;
-    private String clientSecret;
-    private OAuth2MapperConfig mapperConfig;
-    private String authorizationUri;
-    private String tokenUri;
-    private String scope;
-    private String platforms;
-    private String userInfoUri;
-    private String userNameAttributeName;
-    private String jwkSetUri;
-    private String clientAuthenticationMethod;
-    private String loginButtonLabel;
-    private String loginButtonIcon;
-    private Boolean activateUser;
-    private MapperType type;
-    private String emailAttributeKey;
-    private String firstNameAttributeKey;
-    private String lastNameAttributeKey;
-    private TenantNameStrategyType tenantNameStrategy;
-    private String tenantNamePattern;
-    private String customerNamePattern;
-    private String url;
-    private String username;
-    private String password;
-    private Boolean sendToken;
-    private JsonNode additionalInfo;
+
+	private UUID tenantId;
+
+	private String title;
+
+	private String clientId;
+
+	private String clientSecret;
+
+	private OAuth2MapperConfig mapperConfig;
+
+	private String authorizationUri;
+
+	private String tokenUri;
+
+	private String scope;
+
+	private String platforms;
+
+	private String userInfoUri;
+
+	private String userNameAttributeName;
+
+	private String jwkSetUri;
+
+	private String clientAuthenticationMethod;
+
+	private String loginButtonLabel;
+
+	private String loginButtonIcon;
+
+	private Boolean activateUser;
+
+	private MapperType type;
+
+	private String emailAttributeKey;
+
+	private String firstNameAttributeKey;
+
+	private String lastNameAttributeKey;
+
+	private TenantNameStrategyType tenantNameStrategy;
+
+	private String tenantNamePattern;
+
+	private String customerNamePattern;
+
+	private String url;
+
+	private String username;
+
+	private String password;
+
+	private Boolean sendToken;
+
+	private JsonNode additionalInfo;
+
 }

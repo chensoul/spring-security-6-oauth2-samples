@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Controller
-@RequestMapping(path = {"/webclient", "/public/webclient"})
+@RequestMapping(path = { "/webclient", "/public/webclient" })
 public class WebClientController {
-    private final WebClient webClient;
 
-    public WebClientController(WebClient webClient) {
-        this.webClient = webClient;
-    }
+	private final WebClient webClient;
 
-    @GetMapping("/explicit")
-    String explicit(Model model) {
-        // @formatter:off
+	public WebClientController(WebClient webClient) {
+		this.webClient = webClient;
+	}
+
+	@GetMapping("/explicit")
+	String explicit(Model model) {
+		// @formatter:off
 		String body = this.webClient
 				.get()
                 .uri("https://api.github.com/user/repos")
@@ -27,13 +28,13 @@ public class WebClientController {
 				.bodyToMono(String.class)
 				.block();
 		// @formatter:on
-        model.addAttribute("body", body);
-        return "response";
-    }
+		model.addAttribute("body", body);
+		return "response";
+	}
 
-    @GetMapping("/implicit")
-    String implicit(Model model) {
-        // @formatter:off
+	@GetMapping("/implicit")
+	String implicit(Model model) {
+		// @formatter:off
 		String body = this.webClient
 				.get()
                 .uri("https://api.github.com/user/repos")
@@ -41,8 +42,8 @@ public class WebClientController {
 				.bodyToMono(String.class)
 				.block();
 		// @formatter:on
-        model.addAttribute("body", body);
-        return "response";
-    }
+		model.addAttribute("body", body);
+		return "response";
+	}
 
 }

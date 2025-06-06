@@ -44,8 +44,7 @@ public class TokenExchangeConfig {
 	private static final String IMPERSONATION_CLIENT_REGISTRATION_ID = "messaging-client-token-exchange-with-impersonation";
 
 	@Bean
-	public OAuth2AuthorizedClientProvider tokenExchange(
-			ClientRegistrationRepository clientRegistrationRepository,
+	public OAuth2AuthorizedClientProvider tokenExchange(ClientRegistrationRepository clientRegistrationRepository,
 			OAuth2AuthorizedClientService authorizedClientService) {
 
 		OAuth2AuthorizedClientManager authorizedClientManager = tokenExchangeAuthorizedClientManager(
@@ -53,16 +52,15 @@ public class TokenExchangeConfig {
 		Function<OAuth2AuthorizationContext, OAuth2Token> actorTokenResolver = createTokenResolver(
 				authorizedClientManager, ACTOR_TOKEN_CLIENT_REGISTRATION_ID);
 
-		TokenExchangeOAuth2AuthorizedClientProvider tokenExchangeAuthorizedClientProvider =
-				new TokenExchangeOAuth2AuthorizedClientProvider();
+		TokenExchangeOAuth2AuthorizedClientProvider tokenExchangeAuthorizedClientProvider = new TokenExchangeOAuth2AuthorizedClientProvider();
 		tokenExchangeAuthorizedClientProvider.setActorTokenResolver(actorTokenResolver);
 
 		return tokenExchangeAuthorizedClientProvider;
 	}
 
 	/**
-	 * Create a standalone {@link OAuth2AuthorizedClientManager} for resolving the actor token
-	 * using {@code client_credentials}.
+	 * Create a standalone {@link OAuth2AuthorizedClientManager} for resolving the actor
+	 * token using {@code client_credentials}.
 	 */
 	private static OAuth2AuthorizedClientManager tokenExchangeAuthorizedClientManager(
 			ClientRegistrationRepository clientRegistrationRepository,

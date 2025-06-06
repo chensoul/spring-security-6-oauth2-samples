@@ -10,23 +10,23 @@ import org.springframework.security.oauth2.server.authorization.jackson2.OAuth2A
 
 @WritingConverter
 public class ClaimsHolderToBytesConverter
-        implements Converter<OAuth2AuthorizationGrantAuthorization.ClaimsHolder, byte[]> {
+		implements Converter<OAuth2AuthorizationGrantAuthorization.ClaimsHolder, byte[]> {
 
-    private final Jackson2JsonRedisSerializer<OAuth2AuthorizationGrantAuthorization.ClaimsHolder> serializer;
+	private final Jackson2JsonRedisSerializer<OAuth2AuthorizationGrantAuthorization.ClaimsHolder> serializer;
 
-    public ClaimsHolderToBytesConverter() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper
-                .registerModules(SecurityJackson2Modules.getModules(ClaimsHolderToBytesConverter.class.getClassLoader()));
-        objectMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
-        objectMapper.addMixIn(OAuth2AuthorizationGrantAuthorization.ClaimsHolder.class, ClaimsHolderMixin.class);
-        this.serializer = new Jackson2JsonRedisSerializer<>(objectMapper,
-                OAuth2AuthorizationGrantAuthorization.ClaimsHolder.class);
-    }
+	public ClaimsHolderToBytesConverter() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper
+			.registerModules(SecurityJackson2Modules.getModules(ClaimsHolderToBytesConverter.class.getClassLoader()));
+		objectMapper.registerModules(new OAuth2AuthorizationServerJackson2Module());
+		objectMapper.addMixIn(OAuth2AuthorizationGrantAuthorization.ClaimsHolder.class, ClaimsHolderMixin.class);
+		this.serializer = new Jackson2JsonRedisSerializer<>(objectMapper,
+				OAuth2AuthorizationGrantAuthorization.ClaimsHolder.class);
+	}
 
-    @Override
-    public byte[] convert(OAuth2AuthorizationGrantAuthorization.ClaimsHolder value) {
-        return this.serializer.serialize(value);
-    }
+	@Override
+	public byte[] convert(OAuth2AuthorizationGrantAuthorization.ClaimsHolder value) {
+		return this.serializer.serialize(value);
+	}
 
 }

@@ -21,29 +21,32 @@ import java.util.Map;
  */
 @Configuration
 public class SecurityConfig {
-    @Bean
-    SecurityFilterChain jwtSecurityFilterChain(HttpSecurity http) throws Exception {
-        Map<String, AuthenticationManager> authenticationManagers = new HashMap<>();
-        JwtIssuerAuthenticationManagerResolver authenticationManagerResolver = new JwtIssuerAuthenticationManagerResolver(authenticationManagers::get);
 
-        List<String> issuers = new ArrayList<>();
-        issuers.add("http://localhost:9000/issuer1");
-        issuers.add("http://localhost:9000/issuer2");
-        issuers.stream().forEach(issuer -> addManager(authenticationManagers, issuer));
+	@Bean
+	SecurityFilterChain jwtSecurityFilterChain(HttpSecurity http) throws Exception {
+		Map<String, AuthenticationManager> authenticationManagers = new HashMap<>();
+		JwtIssuerAuthenticationManagerResolver authenticationManagerResolver = new JwtIssuerAuthenticationManagerResolver(
+				authenticationManagers::get);
 
-        http.authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(HttpMethod.GET, "/message/**").hasAuthority("SCOPE_read")
-                        .requestMatchers(HttpMethod.POST, "/message/**").hasAuthority("SCOPE_write")
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth2 -> oauth2
-                        .authenticationManagerResolver(authenticationManagerResolver));
-        return http.build();
-    }
+		List<String> issuers = new ArrayList<>();
+		issuers.add("http://localhost:9000/issuer1");
+		issuers.add("http://localhost:9000/issuer2");
+		issuers.stream().forEach(issuer -> addManager(authenticationManagers, issuer));
 
-    private void addManager(Map<String, AuthenticationManager> authenticationManagers, String issuer) {
-        JwtAuthenticationProvider authenticationProvider = new JwtAuthenticationProvider
-                (JwtDecoders.fromIssuerLocation(issuer));
-        authenticationManagers.put(issuer, authenticationProvider::authenticate);
-    }
+		http.authorizeHttpRequests((authorize) -> authorize.requestMatchers(HttpMethod.GET, "/message/**")
+			.hasAuthority("SCOPE_read")
+			.requestMatchers(HttpMethod.POST, "/message/**")
+			.hasAuthority("SCOPE_write")
+			.anyRequest()
+			.authenticated())
+			.oauth2ResourceServer(oauth2 -> oauth2.authenticationManagerResolver(authenticationManagerResolver));
+		return http.build();
+	}
+
+	private void addManager(Map<String, AuthenticationManager> authenticationManagers, String issuer) {
+		JwtAuthenticationProvider authenticationProvider = new JwtAuthenticationProvider(
+				JwtDecoders.fromIssuerLocation(issuer));
+		authenticationManagers.put(issuer, authenticationProvider::authenticate);
+	}
+
 }

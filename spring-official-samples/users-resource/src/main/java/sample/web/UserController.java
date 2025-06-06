@@ -37,22 +37,18 @@ public class UserController {
 	private final RestClient restClient;
 
 	public UserController(@Value("${messages.base-uri}") String baseUrl) {
-		this.restClient = RestClient.builder()
-				.baseUrl(baseUrl)
-				.build();
+		this.restClient = RestClient.builder().baseUrl(baseUrl).build();
 	}
 
 	@GetMapping(value = "/user/messages", params = "use_case=delegation")
 	public List<String> getMessagesWithDelegation(
-			@RegisteredOAuth2AuthorizedClient("messaging-client-token-exchange-with-delegation")
-					OAuth2AuthorizedClient authorizedClient) {
+			@RegisteredOAuth2AuthorizedClient("messaging-client-token-exchange-with-delegation") OAuth2AuthorizedClient authorizedClient) {
 		return getUserMessages(authorizedClient);
 	}
 
 	@GetMapping(value = "/user/messages", params = "use_case=impersonation")
 	public List<String> getMessagesWithImpersonation(
-			@RegisteredOAuth2AuthorizedClient("messaging-client-token-exchange-with-impersonation")
-					OAuth2AuthorizedClient authorizedClient) {
+			@RegisteredOAuth2AuthorizedClient("messaging-client-token-exchange-with-impersonation") OAuth2AuthorizedClient authorizedClient) {
 		return getUserMessages(authorizedClient);
 	}
 

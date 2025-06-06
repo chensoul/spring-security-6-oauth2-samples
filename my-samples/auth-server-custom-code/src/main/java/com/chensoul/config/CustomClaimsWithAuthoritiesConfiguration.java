@@ -17,13 +17,14 @@ import java.util.stream.Collectors;
 
 @Configuration
 public class CustomClaimsWithAuthoritiesConfiguration {
+
 	@Bean
 	public UserDetailsService users() {
 		UserDetails user = User.withDefaultPasswordEncoder()
-				.username("user1") // <1>
-				.password("password")
-				.roles("user", "admin") // <2>
-				.build();
+			.username("user1") // <1>
+			.password("password")
+			.roles("user", "admin") // <2>
+			.build();
 		return new InMemoryUserDetailsManager(user);
 	}
 
@@ -33,12 +34,13 @@ public class CustomClaimsWithAuthoritiesConfiguration {
 			if (OAuth2TokenType.ACCESS_TOKEN.equals(context.getTokenType())) { // <4>
 				context.getClaims().claims((claims) -> { // <5>
 					Set<String> roles = AuthorityUtils.authorityListToSet(context.getPrincipal().getAuthorities())
-							.stream()
-							.map(c -> c.replaceFirst("^ROLE_", ""))
-							.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet)); // <6>
+						.stream()
+						.map(c -> c.replaceFirst("^ROLE_", ""))
+						.collect(Collectors.collectingAndThen(Collectors.toSet(), Collections::unmodifiableSet)); // <6>
 					claims.put("roles", roles); // <7>
 				});
 			}
 		};
 	}
+
 }

@@ -36,21 +36,22 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 @Configuration
 public class SecurityConfig {
-    private final JWSAlgorithm jwsAlgorithm = JWSAlgorithm.RS256;
 
-    private final JWEAlgorithm jweAlgorithm = JWEAlgorithm.RSA_OAEP_256;
+	private final JWSAlgorithm jwsAlgorithm = JWSAlgorithm.RS256;
 
-    private final EncryptionMethod encryptionMethod = EncryptionMethod.A256GCM;
+	private final JWEAlgorithm jweAlgorithm = JWEAlgorithm.RSA_OAEP_256;
 
-    @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
-    URL jwkSetUri;
+	private final EncryptionMethod encryptionMethod = EncryptionMethod.A256GCM;
 
-    @Value("${sample.private-key-location}")
-    RSAPrivateKey key;
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+	URL jwkSetUri;
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // @formatter:off
+	@Value("${sample.private-key-location}")
+	RSAPrivateKey key;
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		// @formatter:off
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/message/**").hasAuthority("SCOPE_read")
@@ -58,35 +59,35 @@ public class SecurityConfig {
                 )
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(withDefaults()));
         // @formatter:on
-        return http.build();
-    }
+		return http.build();
+	}
 
-    @Bean
-    JwtDecoder jwtDecoder() {
-        return new NimbusJwtDecoder(jwtProcessor());
-    }
+	@Bean
+	JwtDecoder jwtDecoder() {
+		return new NimbusJwtDecoder(jwtProcessor());
+	}
 
-    private JWTProcessor<SecurityContext> jwtProcessor() {
-        JWKSource<SecurityContext> jwsJwkSource = new RemoteJWKSet<>(this.jwkSetUri);
-        JWSKeySelector<SecurityContext> jwsKeySelector = new JWSVerificationKeySelector<>(this.jwsAlgorithm,
-                jwsJwkSource);
+	private JWTProcessor<SecurityContext> jwtProcessor() {
+		JWKSource<SecurityContext> jwsJwkSource = new RemoteJWKSet<>(this.jwkSetUri);
+		JWSKeySelector<SecurityContext> jwsKeySelector = new JWSVerificationKeySelector<>(this.jwsAlgorithm,
+				jwsJwkSource);
 
-        JWKSource<SecurityContext> jweJwkSource = new ImmutableJWKSet<>(new JWKSet(rsaKey()));
-        JWEKeySelector<SecurityContext> jweKeySelector = new JWEDecryptionKeySelector<>(this.jweAlgorithm,
-                this.encryptionMethod, jweJwkSource);
+		JWKSource<SecurityContext> jweJwkSource = new ImmutableJWKSet<>(new JWKSet(rsaKey()));
+		JWEKeySelector<SecurityContext> jweKeySelector = new JWEDecryptionKeySelector<>(this.jweAlgorithm,
+				this.encryptionMethod, jweJwkSource);
 
-        ConfigurableJWTProcessor<SecurityContext> jwtProcessor = new DefaultJWTProcessor<>();
-        jwtProcessor.setJWSKeySelector(jwsKeySelector);
-        jwtProcessor.setJWEKeySelector(jweKeySelector);
+		ConfigurableJWTProcessor<SecurityContext> jwtProcessor = new DefaultJWTProcessor<>();
+		jwtProcessor.setJWSKeySelector(jwsKeySelector);
+		jwtProcessor.setJWEKeySelector(jweKeySelector);
 
-        return jwtProcessor;
-    }
+		return jwtProcessor;
+	}
 
-    private RSAKey rsaKey() {
-        RSAPrivateCrtKey crtKey = (RSAPrivateCrtKey) this.key;
-        Base64URL n = Base64URL.encode(crtKey.getModulus());
-        Base64URL e = Base64URL.encode(crtKey.getPublicExponent());
-        return new RSAKey.Builder(n, e).privateKey(this.key).keyUse(KeyUse.ENCRYPTION).build();
-    }
+	private RSAKey rsaKey() {
+		RSAPrivateCrtKey crtKey = (RSAPrivateCrtKey) this.key;
+		Base64URL n = Base64URL.encode(crtKey.getModulus());
+		Base64URL e = Base64URL.encode(crtKey.getPublicExponent());
+		return new RSAKey.Builder(n, e).privateKey(this.key).keyUse(KeyUse.ENCRYPTION).build();
+	}
 
 }

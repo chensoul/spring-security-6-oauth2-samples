@@ -11,19 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Controller
-@RequestMapping(path = {"/annotation", "/public/annotation"})
+@RequestMapping(path = { "/annotation", "/public/annotation" })
 public class RegisteredClientController {
 
-    private final WebClient webClient;
+	private final WebClient webClient;
 
-    public RegisteredClientController(WebClient webClient) {
-        this.webClient = webClient;
-    }
+	public RegisteredClientController(WebClient webClient) {
+		this.webClient = webClient;
+	}
 
-    @GetMapping("/explicit")
-    String explicit(Model model,
-                    @RegisteredOAuth2AuthorizedClient("github") OAuth2AuthorizedClient authorizedClient) {
-        // @formatter:off
+	@GetMapping("/explicit")
+	String explicit(Model model, @RegisteredOAuth2AuthorizedClient("github") OAuth2AuthorizedClient authorizedClient) {
+		// @formatter:off
 		String body = this.webClient
 				.get()
                 .uri("https://api.github.com/user/repos")
@@ -32,13 +31,13 @@ public class RegisteredClientController {
 				.bodyToMono(String.class)
 				.block();
 		// @formatter:on
-        model.addAttribute("body", body);
-        return "response";
-    }
+		model.addAttribute("body", body);
+		return "response";
+	}
 
-    @GetMapping("/implicit")
-    String implicit(Model model, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient) {
-        // @formatter:off
+	@GetMapping("/implicit")
+	String implicit(Model model, @RegisteredOAuth2AuthorizedClient OAuth2AuthorizedClient authorizedClient) {
+		// @formatter:off
 		String body = this.webClient
 				.get()
                 .uri("https://api.github.com/user/repos")
@@ -47,8 +46,8 @@ public class RegisteredClientController {
 				.bodyToMono(String.class)
 				.block();
 		// @formatter:on
-        model.addAttribute("body", body);
-        return "response";
-    }
+		model.addAttribute("body", body);
+		return "response";
+	}
 
 }

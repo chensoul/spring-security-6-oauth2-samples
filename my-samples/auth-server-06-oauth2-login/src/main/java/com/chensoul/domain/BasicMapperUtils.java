@@ -21,8 +21,10 @@ import java.util.Map;
 
 @Slf4j
 public class BasicMapperUtils {
-    public static OAuth2User getOAuth2User(String email, Map<String, Object> attributes, OAuth2MapperConfig config) {
 
-        return new OAuth2User();
-    }
+	public static OAuth2User getOAuth2User(String email, Map<String, Object> attributes, OAuth2MapperConfig config) {
+
+		return new OAuth2User();
+	}
+
 }

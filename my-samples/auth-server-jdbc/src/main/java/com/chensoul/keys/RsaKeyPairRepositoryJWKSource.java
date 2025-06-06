@@ -12,29 +12,34 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class RsaKeyPairRepositoryJWKSource implements JWKSource<SecurityContext>, OAuth2TokenCustomizer<JwtEncodingContext> {
+public class RsaKeyPairRepositoryJWKSource
+		implements JWKSource<SecurityContext>, OAuth2TokenCustomizer<JwtEncodingContext> {
 
-    private final RsaKeyPairRepository keyPairRepository;
+	private final RsaKeyPairRepository keyPairRepository;
 
-    public RsaKeyPairRepositoryJWKSource(RsaKeyPairRepository keyPairRepository) {
-        this.keyPairRepository = keyPairRepository;
-    }
+	public RsaKeyPairRepositoryJWKSource(RsaKeyPairRepository keyPairRepository) {
+		this.keyPairRepository = keyPairRepository;
+	}
 
-    @Override
-    public List<JWK> get(JWKSelector jwkSelector, SecurityContext securityContext) {
-        return keyPairRepository.findKeyPairs().stream()
-                .map(keyPair -> new RSAKey.Builder(keyPair.publicKey()).privateKey(keyPair.privateKey()).keyID(keyPair.id()).build())
-                .filter(rsaKey -> jwkSelector.getMatcher().matches(rsaKey))
-                .map(JWK.class::cast)
-                .toList();
-    }
+	@Override
+	public List<JWK> get(JWKSelector jwkSelector, SecurityContext securityContext) {
+		return keyPairRepository.findKeyPairs()
+			.stream()
+			.map(keyPair -> new RSAKey.Builder(keyPair.publicKey()).privateKey(keyPair.privateKey())
+				.keyID(keyPair.id())
+				.build())
+			.filter(rsaKey -> jwkSelector.getMatcher().matches(rsaKey))
+			.map(JWK.class::cast)
+			.toList();
+	}
 
-    @Override
-    public void customize(JwtEncodingContext context) {
-        List<RsaKeyPair> keyPairs = keyPairRepository.findKeyPairs();
-        if (!keyPairs.isEmpty()) {
-            String kid = keyPairs.get(0).id();
-            context.getJwsHeader().keyId(kid);
-        }
-    }
+	@Override
+	public void customize(JwtEncodingContext context) {
+		List<RsaKeyPair> keyPairs = keyPairRepository.findKeyPairs();
+		if (!keyPairs.isEmpty()) {
+			String kid = keyPairs.get(0).id();
+			context.getJwsHeader().keyId(kid);
+		}
+	}
+
 }

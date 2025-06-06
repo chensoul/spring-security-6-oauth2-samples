@@ -48,7 +48,8 @@ import static org.mockito.Mockito.when;
  * @author Dmitriy Dubson
  */
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, properties = {"spring.profiles.include=test"})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		properties = { "spring.profiles.include=test" })
 @AutoConfigureMockMvc
 public class DemoAuthorizationServerConsentTests {
 
@@ -60,14 +61,13 @@ public class DemoAuthorizationServerConsentTests {
 
 	private final String redirectUri = "http://127.0.0.1/login/oauth2/code/messaging-client-oidc";
 
-	private final String authorizationRequestUri = UriComponentsBuilder
-			.fromPath("/oauth2/authorize")
-			.queryParam("response_type", "code")
-			.queryParam("client_id", "messaging-client")
-			.queryParam("scope", "openid message.read message.write")
-			.queryParam("state", "state")
-			.queryParam("redirect_uri", this.redirectUri)
-			.toUriString();
+	private final String authorizationRequestUri = UriComponentsBuilder.fromPath("/oauth2/authorize")
+		.queryParam("response_type", "code")
+		.queryParam("client_id", "messaging-client")
+		.queryParam("scope", "openid message.read message.write")
+		.queryParam("state", "state")
+		.queryParam("redirect_uri", this.redirectUri)
+		.toUriString();
 
 	@BeforeEach
 	public void setUp() {
@@ -84,8 +84,7 @@ public class DemoAuthorizationServerConsentTests {
 		assertThat(consentPage.getTitleText()).isEqualTo("Custom consent page - Consent required");
 
 		List<HtmlCheckBoxInput> scopes = new ArrayList<>();
-		consentPage.querySelectorAll("input[name='scope']").forEach(scope ->
-				scopes.add((HtmlCheckBoxInput) scope));
+		consentPage.querySelectorAll("input[name='scope']").forEach(scope -> scopes.add((HtmlCheckBoxInput) scope));
 		for (HtmlCheckBoxInput scope : scopes) {
 			scope.click();
 		}

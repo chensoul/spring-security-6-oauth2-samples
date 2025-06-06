@@ -47,7 +47,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * "https://tools.ietf.org/html/draft-ietf-oauth-v2-1-01#section-9.7.1">Loopback Redirect
  * Considerations in Native Apps</a>
  */
-//@Component
+// @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class LoopbackIpRedirectFilter extends OncePerRequestFilter {
 

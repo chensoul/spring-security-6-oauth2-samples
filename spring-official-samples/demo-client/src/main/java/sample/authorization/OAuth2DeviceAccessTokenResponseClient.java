@@ -39,13 +39,14 @@ import org.springframework.web.client.RestTemplate;
  * @author Steve Riesenberg
  * @since 1.1
  */
-public final class OAuth2DeviceAccessTokenResponseClient implements OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> {
+public final class OAuth2DeviceAccessTokenResponseClient
+		implements OAuth2AccessTokenResponseClient<OAuth2DeviceGrantRequest> {
 
 	private RestOperations restOperations;
 
 	public OAuth2DeviceAccessTokenResponseClient() {
-		RestTemplate restTemplate = new RestTemplate(Arrays.asList(new FormHttpMessageConverter(),
-				new OAuth2AccessTokenResponseHttpMessageConverter()));
+		RestTemplate restTemplate = new RestTemplate(
+				Arrays.asList(new FormHttpMessageConverter(), new OAuth2AccessTokenResponseHttpMessageConverter()));
 		restTemplate.setErrorHandler(new OAuth2ErrorResponseErrorHandler());
 		this.restOperations = restTemplate;
 	}
@@ -60,15 +61,15 @@ public final class OAuth2DeviceAccessTokenResponseClient implements OAuth2Access
 
 		HttpHeaders headers = new HttpHeaders();
 		/*
-		 * This sample demonstrates the use of a public client that does not
-		 * store credentials or authenticate with the authorization server.
+		 * This sample demonstrates the use of a public client that does not store
+		 * credentials or authenticate with the authorization server.
 		 *
-		 * See DeviceClientAuthenticationProvider in the authorization server
-		 * sample for an example customization that allows public clients.
+		 * See DeviceClientAuthenticationProvider in the authorization server sample for
+		 * an example customization that allows public clients.
 		 *
-		 * For a confidential client, change the client-authentication-method
-		 * to client_secret_basic and set the client-secret to send the
-		 * OAuth 2.0 Token Request with a clientId/clientSecret.
+		 * For a confidential client, change the client-authentication-method to
+		 * client_secret_basic and set the client-secret to send the OAuth 2.0 Token
+		 * Request with a clientId/clientSecret.
 		 */
 		if (!clientRegistration.getClientAuthenticationMethod().equals(ClientAuthenticationMethod.NONE)) {
 			headers.setBasicAuth(clientRegistration.getClientId(), clientRegistration.getClientSecret());
@@ -88,10 +89,12 @@ public final class OAuth2DeviceAccessTokenResponseClient implements OAuth2Access
 
 		try {
 			return this.restOperations.exchange(requestEntity, OAuth2AccessTokenResponse.class).getBody();
-		} catch (RestClientException ex) {
+		}
+		catch (RestClientException ex) {
 			OAuth2Error oauth2Error = new OAuth2Error("invalid_token_response",
 					"An error occurred while attempting to retrieve the OAuth 2.0 Access Token Response: "
-							+ ex.getMessage(), null);
+							+ ex.getMessage(),
+					null);
 			throw new OAuth2AuthorizationException(oauth2Error, ex);
 		}
 	}

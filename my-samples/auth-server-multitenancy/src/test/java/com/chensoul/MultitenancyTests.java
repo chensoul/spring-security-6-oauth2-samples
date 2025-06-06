@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author Joe Grandja
  */
-@SpringBootTest(classes = {MultitenancyTests.AuthorizationServerConfig.class} )
+@SpringBootTest(classes = { MultitenancyTests.AuthorizationServerConfig.class })
 @AutoConfigureMockMvc
 public class MultitenancyTests {
 
@@ -85,6 +85,7 @@ public class MultitenancyTests {
 	@EnableWebSecurity
 	@ComponentScan
 	static class AuthorizationServerConfig {
+
 	}
 
 }

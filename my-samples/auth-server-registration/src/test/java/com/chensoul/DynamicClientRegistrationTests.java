@@ -27,43 +27,42 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  * @author Dmitriy Dubson
  */
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
-        classes = {DynamicClientRegistrationTests.AuthorizationServerConfig.class}
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
+		classes = { DynamicClientRegistrationTests.AuthorizationServerConfig.class })
 @AutoConfigureMockMvc
 public class DynamicClientRegistrationTests {
 
-    @Autowired
-    private MockMvc mvc;
+	@Autowired
+	private MockMvc mvc;
 
-    @LocalServerPort
-    private String port;
+	@LocalServerPort
+	private String port;
 
-    @Test
-    public void dynamicallyRegisterClientWithCustomClientMetadata() throws Exception {
-        MockHttpServletResponse tokenResponse = this.mvc.perform(post("/oauth2/token")
-                        .with(httpBasic("credentials-client", "credentials-client"))
-                        .param(OAuth2ParameterNames.GRANT_TYPE, AuthorizationGrantType.CLIENT_CREDENTIALS.getValue())
-                        .param(OAuth2ParameterNames.SCOPE, "client.create")
-                        .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.access_token").isNotEmpty())
-                .andReturn()
-                .getResponse();
+	@Test
+	public void dynamicallyRegisterClientWithCustomClientMetadata() throws Exception {
+		MockHttpServletResponse tokenResponse = this.mvc
+			.perform(post("/oauth2/token").with(httpBasic("credentials-client", "credentials-client"))
+				.param(OAuth2ParameterNames.GRANT_TYPE, AuthorizationGrantType.CLIENT_CREDENTIALS.getValue())
+				.param(OAuth2ParameterNames.SCOPE, "client.create")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.access_token").isNotEmpty())
+			.andReturn()
+			.getResponse();
 
-        String initialAccessToken = JsonPath.parse(tokenResponse.getContentAsString()).read("$.access_token");
+		String initialAccessToken = JsonPath.parse(tokenResponse.getContentAsString()).read("$.access_token");
 
-        WebClient webClient = WebClient.builder().baseUrl("http://127.0.0.1:%s".formatted(this.port)).build();
-        ClientRegistrar clientRegistrar = new ClientRegistrar(webClient);
+		WebClient webClient = WebClient.builder().baseUrl("http://127.0.0.1:%s".formatted(this.port)).build();
+		ClientRegistrar clientRegistrar = new ClientRegistrar(webClient);
 
-        clientRegistrar.exampleRegistration(initialAccessToken);
-    }
+		clientRegistrar.exampleRegistration(initialAccessToken);
+	}
 
-    @EnableAutoConfiguration
-    @EnableWebSecurity
-    @ComponentScan
-    static class AuthorizationServerConfig {
-    }
+	@EnableAutoConfiguration
+	@EnableWebSecurity
+	@ComponentScan
+	static class AuthorizationServerConfig {
+
+	}
 
 }

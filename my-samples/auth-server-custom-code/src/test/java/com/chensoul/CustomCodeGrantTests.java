@@ -37,8 +37,7 @@ public class CustomCodeGrantTests {
 		RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("oidc-client");
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.setBasicAuth(registeredClient.getClientId(),
-				registeredClient.getClientSecret().replace("{noop}", ""));
+		headers.setBasicAuth(registeredClient.getClientId(), registeredClient.getClientSecret().replace("{noop}", ""));
 
 		// @formatter:off
 		this.mvc.perform(post("/oauth2/token")
@@ -54,6 +53,7 @@ public class CustomCodeGrantTests {
 	@EnableAutoConfiguration
 	@ComponentScan
 	static class AuthorizationServerConfig {
+
 	}
 
 }

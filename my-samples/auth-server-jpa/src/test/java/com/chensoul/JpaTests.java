@@ -52,134 +52,136 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ExtendWith(SpringTestContextExtension.class)
 public class JpaTests {
-    public final SpringTestContext spring = new SpringTestContext(this);
 
-    @Autowired
-    private MockMvc mockMvc;
+	public final SpringTestContext spring = new SpringTestContext(this);
 
-    @Autowired
-    private RegisteredClientRepository registeredClientRepository;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Autowired
-    private OAuth2AuthorizationService authorizationService;
+	@Autowired
+	private RegisteredClientRepository registeredClientRepository;
 
-    @Autowired
-    private OAuth2AuthorizationConsentService authorizationConsentService;
+	@Autowired
+	private OAuth2AuthorizationService authorizationService;
 
-    @Test
-    public void oidcLoginWhenJpaCoreServicesAutowiredThenUsed() throws Exception {
-        this.spring.register(AuthorizationServerConfig.class).autowire();
-        assertThat(this.registeredClientRepository).isInstanceOf(JpaRegisteredClientRepository.class);
-        assertThat(this.authorizationService).isInstanceOf(JpaOAuth2AuthorizationService.class);
-        assertThat(this.authorizationConsentService).isInstanceOf(JpaOAuth2AuthorizationConsentService.class);
+	@Autowired
+	private OAuth2AuthorizationConsentService authorizationConsentService;
 
-        RegisteredClient registeredClient = messagingClient();
-        this.registeredClientRepository.save(registeredClient);
+	@Test
+	public void oidcLoginWhenJpaCoreServicesAutowiredThenUsed() throws Exception {
+		this.spring.register(AuthorizationServerConfig.class).autowire();
+		assertThat(this.registeredClientRepository).isInstanceOf(JpaRegisteredClientRepository.class);
+		assertThat(this.authorizationService).isInstanceOf(JpaOAuth2AuthorizationService.class);
+		assertThat(this.authorizationConsentService).isInstanceOf(JpaOAuth2AuthorizationConsentService.class);
 
-        AuthorizationCodeGrantFlow authorizationCodeGrantFlow = new AuthorizationCodeGrantFlow(this.mockMvc);
-        authorizationCodeGrantFlow.setUsername("user");
-        authorizationCodeGrantFlow.addScope("message.read");
-        authorizationCodeGrantFlow.addScope("message.write");
+		RegisteredClient registeredClient = messagingClient();
+		this.registeredClientRepository.save(registeredClient);
 
-        String state = authorizationCodeGrantFlow.authorize(registeredClient);
-        assertThatAuthorization(state, OAuth2ParameterNames.STATE).isNotNull();
-        assertThatAuthorization(state, null).isNotNull();
+		AuthorizationCodeGrantFlow authorizationCodeGrantFlow = new AuthorizationCodeGrantFlow(this.mockMvc);
+		authorizationCodeGrantFlow.setUsername("user");
+		authorizationCodeGrantFlow.addScope("message.read");
+		authorizationCodeGrantFlow.addScope("message.write");
 
-        String authorizationCode = authorizationCodeGrantFlow.submitConsent(registeredClient, state);
-        assertThatAuthorization(authorizationCode, OAuth2ParameterNames.CODE).isNotNull();
-        assertThatAuthorization(authorizationCode, null).isNotNull();
+		String state = authorizationCodeGrantFlow.authorize(registeredClient);
+		assertThatAuthorization(state, OAuth2ParameterNames.STATE).isNotNull();
+		assertThatAuthorization(state, null).isNotNull();
 
-        Map<String, Object> tokenResponse = authorizationCodeGrantFlow.getTokenResponse(registeredClient, authorizationCode);
-        String accessToken = (String) tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN);
-        assertThatAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN).isNotNull();
-        assertThatAuthorization(accessToken, null).isNotNull();
+		String authorizationCode = authorizationCodeGrantFlow.submitConsent(registeredClient, state);
+		assertThatAuthorization(authorizationCode, OAuth2ParameterNames.CODE).isNotNull();
+		assertThatAuthorization(authorizationCode, null).isNotNull();
 
-        String refreshToken = (String) tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN);
-        assertThatAuthorization(refreshToken, OAuth2ParameterNames.REFRESH_TOKEN).isNotNull();
-        assertThatAuthorization(refreshToken, null).isNotNull();
+		Map<String, Object> tokenResponse = authorizationCodeGrantFlow.getTokenResponse(registeredClient,
+				authorizationCode);
+		String accessToken = (String) tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN);
+		assertThatAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN).isNotNull();
+		assertThatAuthorization(accessToken, null).isNotNull();
 
-        String idToken = (String) tokenResponse.get(OidcParameterNames.ID_TOKEN);
-        assertThatAuthorization(idToken, OidcParameterNames.ID_TOKEN).isNotNull();
-        assertThatAuthorization(idToken, null).isNotNull();
+		String refreshToken = (String) tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN);
+		assertThatAuthorization(refreshToken, OAuth2ParameterNames.REFRESH_TOKEN).isNotNull();
+		assertThatAuthorization(refreshToken, null).isNotNull();
 
-        OAuth2Authorization authorization = findAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN);
-        assertThat(authorization.getToken(idToken)).isNotNull();
+		String idToken = (String) tokenResponse.get(OidcParameterNames.ID_TOKEN);
+		assertThatAuthorization(idToken, OidcParameterNames.ID_TOKEN).isNotNull();
+		assertThatAuthorization(idToken, null).isNotNull();
 
-        String scopes = (String) tokenResponse.get(OAuth2ParameterNames.SCOPE);
-        OAuth2AuthorizationConsent authorizationConsent = this.authorizationConsentService.findById(
-                registeredClient.getId(), "user");
-        assertThat(authorizationConsent).isNotNull();
-        assertThat(authorizationConsent.getScopes()).containsExactlyInAnyOrder(
-                StringUtils.delimitedListToStringArray(scopes, " "));
-    }
+		OAuth2Authorization authorization = findAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN);
+		assertThat(authorization.getToken(idToken)).isNotNull();
 
-    @Test
-    public void deviceAuthorizationWhenJpaCoreServicesAutowiredThenSuccess() throws Exception {
-        this.spring.register(AuthorizationServerConfig.class).autowire();
-        assertThat(this.registeredClientRepository).isInstanceOf(JpaRegisteredClientRepository.class);
-        assertThat(this.authorizationService).isInstanceOf(JpaOAuth2AuthorizationService.class);
-        assertThat(this.authorizationConsentService).isInstanceOf(JpaOAuth2AuthorizationConsentService.class);
+		String scopes = (String) tokenResponse.get(OAuth2ParameterNames.SCOPE);
+		OAuth2AuthorizationConsent authorizationConsent = this.authorizationConsentService
+			.findById(registeredClient.getId(), "user");
+		assertThat(authorizationConsent).isNotNull();
+		assertThat(authorizationConsent.getScopes())
+			.containsExactlyInAnyOrder(StringUtils.delimitedListToStringArray(scopes, " "));
+	}
 
-        RegisteredClient registeredClient = messagingClient();
-        this.registeredClientRepository.save(registeredClient);
+	@Test
+	public void deviceAuthorizationWhenJpaCoreServicesAutowiredThenSuccess() throws Exception {
+		this.spring.register(AuthorizationServerConfig.class).autowire();
+		assertThat(this.registeredClientRepository).isInstanceOf(JpaRegisteredClientRepository.class);
+		assertThat(this.authorizationService).isInstanceOf(JpaOAuth2AuthorizationService.class);
+		assertThat(this.authorizationConsentService).isInstanceOf(JpaOAuth2AuthorizationConsentService.class);
 
-        DeviceAuthorizationGrantFlow deviceAuthorizationGrantFlow = new DeviceAuthorizationGrantFlow(this.mockMvc);
-        deviceAuthorizationGrantFlow.setUsername("user");
-        deviceAuthorizationGrantFlow.addScope("message.read");
-        deviceAuthorizationGrantFlow.addScope("message.write");
+		RegisteredClient registeredClient = messagingClient();
+		this.registeredClientRepository.save(registeredClient);
 
-        Map<String, Object> deviceAuthorizationResponse = deviceAuthorizationGrantFlow.authorize(registeredClient);
-        String userCode = (String) deviceAuthorizationResponse.get(OAuth2ParameterNames.USER_CODE);
-        assertThatAuthorization(userCode, OAuth2ParameterNames.USER_CODE).isNotNull();
-        assertThatAuthorization(userCode, null).isNotNull();
+		DeviceAuthorizationGrantFlow deviceAuthorizationGrantFlow = new DeviceAuthorizationGrantFlow(this.mockMvc);
+		deviceAuthorizationGrantFlow.setUsername("user");
+		deviceAuthorizationGrantFlow.addScope("message.read");
+		deviceAuthorizationGrantFlow.addScope("message.write");
 
-        String deviceCode = (String) deviceAuthorizationResponse.get(OAuth2ParameterNames.DEVICE_CODE);
-        assertThatAuthorization(deviceCode, OAuth2ParameterNames.DEVICE_CODE).isNotNull();
-        assertThatAuthorization(deviceCode, null).isNotNull();
+		Map<String, Object> deviceAuthorizationResponse = deviceAuthorizationGrantFlow.authorize(registeredClient);
+		String userCode = (String) deviceAuthorizationResponse.get(OAuth2ParameterNames.USER_CODE);
+		assertThatAuthorization(userCode, OAuth2ParameterNames.USER_CODE).isNotNull();
+		assertThatAuthorization(userCode, null).isNotNull();
 
-        String state = deviceAuthorizationGrantFlow.submitCode(userCode);
-        assertThatAuthorization(state, OAuth2ParameterNames.STATE).isNotNull();
-        assertThatAuthorization(state, null).isNotNull();
+		String deviceCode = (String) deviceAuthorizationResponse.get(OAuth2ParameterNames.DEVICE_CODE);
+		assertThatAuthorization(deviceCode, OAuth2ParameterNames.DEVICE_CODE).isNotNull();
+		assertThatAuthorization(deviceCode, null).isNotNull();
 
-        deviceAuthorizationGrantFlow.submitConsent(registeredClient, state, userCode);
+		String state = deviceAuthorizationGrantFlow.submitCode(userCode);
+		assertThatAuthorization(state, OAuth2ParameterNames.STATE).isNotNull();
+		assertThatAuthorization(state, null).isNotNull();
 
-        Map<String, Object> tokenResponse = deviceAuthorizationGrantFlow.getTokenResponse(registeredClient, deviceCode);
-        String accessToken = (String) tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN);
-        assertThatAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN).isNotNull();
-        assertThatAuthorization(accessToken, null).isNotNull();
+		deviceAuthorizationGrantFlow.submitConsent(registeredClient, state, userCode);
 
-        String refreshToken = (String) tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN);
-        assertThatAuthorization(refreshToken, OAuth2ParameterNames.REFRESH_TOKEN).isNotNull();
-        assertThatAuthorization(refreshToken, null).isNotNull();
+		Map<String, Object> tokenResponse = deviceAuthorizationGrantFlow.getTokenResponse(registeredClient, deviceCode);
+		String accessToken = (String) tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN);
+		assertThatAuthorization(accessToken, OAuth2ParameterNames.ACCESS_TOKEN).isNotNull();
+		assertThatAuthorization(accessToken, null).isNotNull();
 
-        String scopes = (String) tokenResponse.get(OAuth2ParameterNames.SCOPE);
-        OAuth2AuthorizationConsent authorizationConsent = this.authorizationConsentService.findById(
-                registeredClient.getId(), "user");
-        assertThat(authorizationConsent).isNotNull();
-        assertThat(authorizationConsent.getScopes()).containsExactlyInAnyOrder(
-                StringUtils.delimitedListToStringArray(scopes, " "));
-    }
+		String refreshToken = (String) tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN);
+		assertThatAuthorization(refreshToken, OAuth2ParameterNames.REFRESH_TOKEN).isNotNull();
+		assertThatAuthorization(refreshToken, null).isNotNull();
 
-    private ObjectAssert<OAuth2Authorization> assertThatAuthorization(String token, String tokenType) {
-        return assertThat(findAuthorization(token, tokenType));
-    }
+		String scopes = (String) tokenResponse.get(OAuth2ParameterNames.SCOPE);
+		OAuth2AuthorizationConsent authorizationConsent = this.authorizationConsentService
+			.findById(registeredClient.getId(), "user");
+		assertThat(authorizationConsent).isNotNull();
+		assertThat(authorizationConsent.getScopes())
+			.containsExactlyInAnyOrder(StringUtils.delimitedListToStringArray(scopes, " "));
+	}
 
-    private OAuth2Authorization findAuthorization(String token, String tokenType) {
-        return this.authorizationService.findByToken(token, tokenType == null ? null : new OAuth2TokenType(tokenType));
-    }
+	private ObjectAssert<OAuth2Authorization> assertThatAuthorization(String token, String tokenType) {
+		return assertThat(findAuthorization(token, tokenType));
+	}
 
-    @EnableWebSecurity
-    @EnableAutoConfiguration
-    @ComponentScan
-    static class AuthorizationServerConfig {
+	private OAuth2Authorization findAuthorization(String token, String tokenType) {
+		return this.authorizationService.findByToken(token, tokenType == null ? null : new OAuth2TokenType(tokenType));
+	}
 
-        @Bean
-        @Order(Ordered.HIGHEST_PRECEDENCE)
-        public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-            OAuth2AuthorizationServerConfigurer authorizationServerConfigurer =
-                    OAuth2AuthorizationServerConfigurer.authorizationServer();
+	@EnableWebSecurity
+	@EnableAutoConfiguration
+	@ComponentScan
+	static class AuthorizationServerConfig {
 
-            // @formatter:off
+		@Bean
+		@Order(Ordered.HIGHEST_PRECEDENCE)
+		public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+			OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = OAuth2AuthorizationServerConfigurer
+				.authorizationServer();
+
+			// @formatter:off
 			http
 				.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
 				.with(authorizationServerConfigurer, (authorizationServer) ->
@@ -197,24 +199,25 @@ public class JpaTests {
 					)
 				);
 			// @formatter:on
-            return http.build();
-        }
+			return http.build();
+		}
 
-        @Bean
-        public JWKSource<SecurityContext> jwkSource() {
-            JWKSet jwkSet = new JWKSet(TestJwks.DEFAULT_RSA_JWK);
-            return new ImmutableJWKSet<>(jwkSet);
-        }
+		@Bean
+		public JWKSource<SecurityContext> jwkSource() {
+			JWKSet jwkSet = new JWKSet(TestJwks.DEFAULT_RSA_JWK);
+			return new ImmutableJWKSet<>(jwkSet);
+		}
 
-        @Bean
-        public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
-            return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
-        }
+		@Bean
+		public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+			return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
+		}
 
-        @Bean
-        public AuthorizationServerSettings authorizationServerSettings() {
-            return AuthorizationServerSettings.builder().build();
-        }
-    }
+		@Bean
+		public AuthorizationServerSettings authorizationServerSettings() {
+			return AuthorizationServerSettings.builder().build();
+		}
+
+	}
 
 }

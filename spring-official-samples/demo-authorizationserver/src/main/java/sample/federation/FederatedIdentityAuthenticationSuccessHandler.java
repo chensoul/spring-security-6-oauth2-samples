@@ -43,16 +43,19 @@ public final class FederatedIdentityAuthenticationSuccessHandler implements Auth
 
 	private final AuthenticationSuccessHandler delegate = new SavedRequestAwareAuthenticationSuccessHandler();
 
-	private Consumer<OAuth2User> oauth2UserHandler = (user) -> {};
+	private Consumer<OAuth2User> oauth2UserHandler = (user) -> {
+	};
 
 	private Consumer<OidcUser> oidcUserHandler = (user) -> this.oauth2UserHandler.accept(user);
 
 	@Override
-	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
 		if (authentication instanceof OAuth2AuthenticationToken) {
 			if (authentication.getPrincipal() instanceof OidcUser oidcUser) {
 				this.oidcUserHandler.accept(oidcUser);
-			} else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
+			}
+			else if (authentication.getPrincipal() instanceof OAuth2User oauth2User) {
 				this.oauth2UserHandler.accept(oauth2User);
 			}
 		}

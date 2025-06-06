@@ -11,19 +11,21 @@ import java.util.Optional;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
-    private final AuthorityRepository authorityRepository;
+	private final UserRepository userRepository;
 
-    public MyUserDetailsService(UserRepository userRepository, AuthorityRepository authorityRepository) {
-        this.userRepository = userRepository;
-        this.authorityRepository = authorityRepository;
-    }
+	private final AuthorityRepository authorityRepository;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByUsername(username);
-        List<Authority> authorities = authorityRepository.findByUsername(username);
-        return user.map(u -> new MyUserDetails(u, authorities)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-    }
+	public MyUserDetailsService(UserRepository userRepository, AuthorityRepository authorityRepository) {
+		this.userRepository = userRepository;
+		this.authorityRepository = authorityRepository;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByUsername(username);
+		List<Authority> authorities = authorityRepository.findByUsername(username);
+		return user.map(u -> new MyUserDetails(u, authorities))
+			.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+	}
 
 }

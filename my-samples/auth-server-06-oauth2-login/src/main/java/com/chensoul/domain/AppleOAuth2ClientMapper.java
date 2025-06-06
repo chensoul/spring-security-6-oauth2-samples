@@ -24,8 +24,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class AppleOAuth2ClientMapper extends AbstractOAuth2ClientMapper implements OAuth2ClientMapper {
 
-    @Override
-    public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token, String providerAccessToken, OAuth2Client oAuth2Client) {
-        return null;
-    }
+	@Override
+	public SecurityUser getOrCreateUserByClientPrincipal(HttpServletRequest request, OAuth2AuthenticationToken token,
+			String providerAccessToken, OAuth2Client oAuth2Client) {
+		return null;
+	}
+
 }

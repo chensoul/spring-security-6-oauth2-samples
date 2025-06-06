@@ -19,20 +19,21 @@ public class OAuth2AuthorizationConsentServiceConfig {
 	public OAuth2AuthorizationConsentService authorizationConsentService(
 			@Qualifier("issuer1-data-source") DataSource issuer1DataSource,
 			@Qualifier("issuer2-data-source") DataSource issuer2DataSource,
-			TenantPerIssuerComponentRegistry componentRegistry,
-			RegisteredClientRepository registeredClientRepository) {
+			TenantPerIssuerComponentRegistry componentRegistry, RegisteredClientRepository registeredClientRepository) {
 
 		componentRegistry.register("issuer1", OAuth2AuthorizationConsentService.class,
-				new JdbcOAuth2AuthorizationConsentService(	// <1>
+				new JdbcOAuth2AuthorizationConsentService( // <1>
 						new JdbcTemplate(issuer1DataSource), registeredClientRepository));
 		componentRegistry.register("issuer2", OAuth2AuthorizationConsentService.class,
-				new JdbcOAuth2AuthorizationConsentService(	// <2>
+				new JdbcOAuth2AuthorizationConsentService( // <2>
 						new JdbcTemplate(issuer2DataSource), registeredClientRepository));
 
 		return new DelegatingOAuth2AuthorizationConsentService(componentRegistry);
 	}
 
-	private static class DelegatingOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {	// <3>
+	private static class DelegatingOAuth2AuthorizationConsentService implements OAuth2AuthorizationConsentService {
+
+	// <3>
 
 		private final TenantPerIssuerComponentRegistry componentRegistry;
 
@@ -56,10 +57,10 @@ public class OAuth2AuthorizationConsentServiceConfig {
 		}
 
 		private OAuth2AuthorizationConsentService getAuthorizationConsentService() {
-			OAuth2AuthorizationConsentService authorizationConsentService =
-					this.componentRegistry.get(OAuth2AuthorizationConsentService.class);	// <4>
+			OAuth2AuthorizationConsentService authorizationConsentService = this.componentRegistry
+				.get(OAuth2AuthorizationConsentService.class); // <4>
 			Assert.state(authorizationConsentService != null,
-					"OAuth2AuthorizationConsentService not found for \"requested\" issuer identifier.");	// <5>
+					"OAuth2AuthorizationConsentService not found for \"requested\" issuer identifier."); // <5>
 			return authorizationConsentService;
 		}
 

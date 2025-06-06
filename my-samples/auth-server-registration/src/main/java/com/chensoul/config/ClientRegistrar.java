@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class ClientRegistrar {
+
 	// @fold:on
 	private final WebClient webClient;
 
@@ -20,42 +21,31 @@ public class ClientRegistrar {
 	}
 	// @fold:off
 
-	public record ClientRegistrationRequest(	// <1>
-			@JsonProperty("client_name") String clientName,
-			@JsonProperty("grant_types") List<String> grantTypes,
-			@JsonProperty("redirect_uris") List<String> redirectUris,
-			@JsonProperty("logo_uri") String logoUri,
-			List<String> contacts,
-			String scope) {
+	public record ClientRegistrationRequest( // <1>
+			@JsonProperty("client_name") String clientName, @JsonProperty("grant_types") List<String> grantTypes,
+			@JsonProperty("redirect_uris") List<String> redirectUris, @JsonProperty("logo_uri") String logoUri,
+			List<String> contacts, String scope) {
 	}
 
-	public record ClientRegistrationResponse(	// <2>
+	public record ClientRegistrationResponse( // <2>
 			@JsonProperty("registration_access_token") String registrationAccessToken,
 			@JsonProperty("registration_client_uri") String registrationClientUri,
-			@JsonProperty("client_name") String clientName,
-			@JsonProperty("client_id") String clientId,
-			@JsonProperty("client_secret") String clientSecret,
-			@JsonProperty("grant_types") List<String> grantTypes,
-			@JsonProperty("redirect_uris") List<String> redirectUris,
-		 	@JsonProperty("logo_uri") String logoUri,
-		 	List<String> contacts,
-			String scope) {
+			@JsonProperty("client_name") String clientName, @JsonProperty("client_id") String clientId,
+			@JsonProperty("client_secret") String clientSecret, @JsonProperty("grant_types") List<String> grantTypes,
+			@JsonProperty("redirect_uris") List<String> redirectUris, @JsonProperty("logo_uri") String logoUri,
+			List<String> contacts, String scope) {
 	}
 
-	public void exampleRegistration(String initialAccessToken) {	// <3>
-		ClientRegistrationRequest clientRegistrationRequest = new ClientRegistrationRequest(	// <4>
-				"client-1",
-				List.of(AuthorizationGrantType.AUTHORIZATION_CODE.getValue()),
+	public void exampleRegistration(String initialAccessToken) { // <3>
+		ClientRegistrationRequest clientRegistrationRequest = new ClientRegistrationRequest( // <4>
+				"client-1", List.of(AuthorizationGrantType.AUTHORIZATION_CODE.getValue()),
 				List.of("https://client.example.org/callback", "https://client.example.org/callback2"),
-				"https://client.example.org/logo",
-				List.of("contact-1", "contact-2"),
-				"openid email profile"
-		);
+				"https://client.example.org/logo", List.of("contact-1", "contact-2"), "openid email profile");
 
-		ClientRegistrationResponse clientRegistrationResponse =
-				registerClient(initialAccessToken, clientRegistrationRequest);	// <5>
+		ClientRegistrationResponse clientRegistrationResponse = registerClient(initialAccessToken,
+				clientRegistrationRequest); // <5>
 
-		assert (clientRegistrationResponse.clientName().contentEquals("client-1"));	// <6>
+		assert (clientRegistrationResponse.clientName().contentEquals("client-1")); // <6>
 		assert (!Objects.isNull(clientRegistrationResponse.clientSecret()));
 		assert (clientRegistrationResponse.scope().contentEquals("openid profile email"));
 		assert (clientRegistrationResponse.grantTypes().contains(AuthorizationGrantType.AUTHORIZATION_CODE.getValue()));
@@ -68,12 +58,12 @@ public class ClientRegistrar {
 		assert (clientRegistrationResponse.contacts().contains("contact-1"));
 		assert (clientRegistrationResponse.contacts().contains("contact-2"));
 
-		String registrationAccessToken = clientRegistrationResponse.registrationAccessToken();	// <7>
+		String registrationAccessToken = clientRegistrationResponse.registrationAccessToken(); // <7>
 		String registrationClientUri = clientRegistrationResponse.registrationClientUri();
 
-		ClientRegistrationResponse retrievedClient = retrieveClient(registrationAccessToken, registrationClientUri);	// <8>
+		ClientRegistrationResponse retrievedClient = retrieveClient(registrationAccessToken, registrationClientUri); // <8>
 
-		assert (retrievedClient.clientName().contentEquals("client-1"));	// <9>
+		assert (retrievedClient.clientName().contentEquals("client-1")); // <9>
 		assert (!Objects.isNull(retrievedClient.clientId()));
 		assert (!Objects.isNull(retrievedClient.clientSecret()));
 		assert (retrievedClient.scope().contentEquals("openid profile email"));
@@ -88,27 +78,25 @@ public class ClientRegistrar {
 		assert (!retrievedClient.registrationClientUri().isEmpty());
 	}
 
-	public ClientRegistrationResponse registerClient(String initialAccessToken, ClientRegistrationRequest request) {	// <10>
-		return this.webClient
-				.post()
-				.uri("/connect/register")
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON)
-				.header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(initialAccessToken))
-				.body(Mono.just(request), ClientRegistrationRequest.class)
-				.retrieve()
-				.bodyToMono(ClientRegistrationResponse.class)
-				.block();
+	public ClientRegistrationResponse registerClient(String initialAccessToken, ClientRegistrationRequest request) { // <10>
+		return this.webClient.post()
+			.uri("/connect/register")
+			.contentType(MediaType.APPLICATION_JSON)
+			.accept(MediaType.APPLICATION_JSON)
+			.header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(initialAccessToken))
+			.body(Mono.just(request), ClientRegistrationRequest.class)
+			.retrieve()
+			.bodyToMono(ClientRegistrationResponse.class)
+			.block();
 	}
 
-	public ClientRegistrationResponse retrieveClient(String registrationAccessToken, String registrationClientUri) {	// <11>
-		return this.webClient
-				.get()
-				.uri(registrationClientUri)
-				.header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(registrationAccessToken))
-				.retrieve()
-				.bodyToMono(ClientRegistrationResponse.class)
-				.block();
+	public ClientRegistrationResponse retrieveClient(String registrationAccessToken, String registrationClientUri) { // <11>
+		return this.webClient.get()
+			.uri(registrationClientUri)
+			.header(HttpHeaders.AUTHORIZATION, "Bearer %s".formatted(registrationAccessToken))
+			.retrieve()
+			.bodyToMono(ClientRegistrationResponse.class)
+			.block();
 	}
 
 }

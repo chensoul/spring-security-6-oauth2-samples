@@ -36,7 +36,8 @@ public class DefaultErrorController implements ErrorController {
 		if (errorMessage.startsWith("[access_denied]")) {
 			model.addAttribute("errorTitle", "Access Denied");
 			model.addAttribute("errorMessage", "You have denied access.");
-		} else {
+		}
+		else {
 			model.addAttribute("errorTitle", "Error");
 			model.addAttribute("errorMessage", errorMessage);
 		}

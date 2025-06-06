@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 
 @Configuration
 public class IdTokenCustomizerConfig {
+
 	@Bean
 	public OidcUserInfoService userInfoService() {
 		return new OidcUserInfoService();

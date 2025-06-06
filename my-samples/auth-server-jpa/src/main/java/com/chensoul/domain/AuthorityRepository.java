@@ -7,5 +7,7 @@ import java.util.List;
 
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority, Integer> {
-    List<Authority> findByUsername(String username);
+
+	List<Authority> findByUsername(String username);
+
 }

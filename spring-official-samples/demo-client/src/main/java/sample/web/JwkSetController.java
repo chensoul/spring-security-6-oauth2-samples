@@ -38,6 +38,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class JwkSetController {
+
 	private final JWKSet jwkSet;
 
 	public JwkSetController(SslBundles sslBundles) throws Exception {
@@ -56,11 +57,10 @@ public class JwkSetController {
 
 		Certificate certificate = keyStore.getCertificate(alias);
 
-		RSAKey rsaKey = new RSAKey.Builder((RSAPublicKey) certificate.getPublicKey())
-				.keyUse(KeyUse.SIGNATURE)
-				.keyID(UUID.randomUUID().toString())
-				.x509CertChain(Collections.singletonList(Base64.encode(certificate.getEncoded())))
-				.build();
+		RSAKey rsaKey = new RSAKey.Builder((RSAPublicKey) certificate.getPublicKey()).keyUse(KeyUse.SIGNATURE)
+			.keyID(UUID.randomUUID().toString())
+			.x509CertChain(Collections.singletonList(Base64.encode(certificate.getEncoded())))
+			.build();
 
 		return new JWKSet(rsaKey);
 	}

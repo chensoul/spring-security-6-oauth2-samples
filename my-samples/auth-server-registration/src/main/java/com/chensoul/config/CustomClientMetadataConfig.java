@@ -20,22 +20,22 @@ import org.springframework.util.CollectionUtils;
 
 public class CustomClientMetadataConfig {
 
-	public static Consumer<List<AuthenticationProvider>> configureCustomClientMetadataConverters() {	// <1>
-		List<String> customClientMetadata = List.of("logo_uri", "contacts");	// <2>
+	public static Consumer<List<AuthenticationProvider>> configureCustomClientMetadataConverters() { // <1>
+		List<String> customClientMetadata = List.of("logo_uri", "contacts"); // <2>
 
 		return (authenticationProviders) -> {
-			CustomRegisteredClientConverter registeredClientConverter =
-					new CustomRegisteredClientConverter(customClientMetadata);
-			CustomClientRegistrationConverter clientRegistrationConverter =
-					new CustomClientRegistrationConverter(customClientMetadata);
+			CustomRegisteredClientConverter registeredClientConverter = new CustomRegisteredClientConverter(
+					customClientMetadata);
+			CustomClientRegistrationConverter clientRegistrationConverter = new CustomClientRegistrationConverter(
+					customClientMetadata);
 
 			authenticationProviders.forEach((authenticationProvider) -> {
 				if (authenticationProvider instanceof OidcClientRegistrationAuthenticationProvider provider) {
-					provider.setRegisteredClientConverter(registeredClientConverter);	// <3>
-					provider.setClientRegistrationConverter(clientRegistrationConverter);	// <4>
+					provider.setRegisteredClientConverter(registeredClientConverter); // <3>
+					provider.setClientRegistrationConverter(clientRegistrationConverter); // <4>
 				}
 				if (authenticationProvider instanceof OidcClientConfigurationAuthenticationProvider provider) {
-					provider.setClientRegistrationConverter(clientRegistrationConverter);	// <5>
+					provider.setClientRegistrationConverter(clientRegistrationConverter); // <5>
 				}
 			});
 		};
@@ -45,6 +45,7 @@ public class CustomClientMetadataConfig {
 			implements Converter<OidcClientRegistration, RegisteredClient> {
 
 		private final List<String> customClientMetadata;
+
 		private final OidcClientRegistrationRegisteredClientConverter delegate;
 
 		private CustomRegisteredClientConverter(List<String> customClientMetadata) {
@@ -55,8 +56,8 @@ public class CustomClientMetadataConfig {
 		@Override
 		public RegisteredClient convert(OidcClientRegistration clientRegistration) {
 			RegisteredClient registeredClient = this.delegate.convert(clientRegistration);
-			ClientSettings.Builder clientSettingsBuilder = ClientSettings.withSettings(
-					registeredClient.getClientSettings().getSettings());
+			ClientSettings.Builder clientSettingsBuilder = ClientSettings
+				.withSettings(registeredClient.getClientSettings().getSettings());
 			if (!CollectionUtils.isEmpty(this.customClientMetadata)) {
 				clientRegistration.getClaims().forEach((claim, value) -> {
 					if (this.customClientMetadata.contains(claim)) {
@@ -65,16 +66,16 @@ public class CustomClientMetadataConfig {
 				});
 			}
 
-			return RegisteredClient.from(registeredClient)
-					.clientSettings(clientSettingsBuilder.build())
-					.build();
+			return RegisteredClient.from(registeredClient).clientSettings(clientSettingsBuilder.build()).build();
 		}
+
 	}
 
 	private static class CustomClientRegistrationConverter
 			implements Converter<RegisteredClient, OidcClientRegistration> {
 
 		private final List<String> customClientMetadata;
+
 		private final RegisteredClientOidcClientRegistrationConverter delegate;
 
 		private CustomClientRegistrationConverter(List<String> customClientMetadata) {
@@ -89,8 +90,8 @@ public class CustomClientMetadataConfig {
 			if (!CollectionUtils.isEmpty(this.customClientMetadata)) {
 				ClientSettings clientSettings = registeredClient.getClientSettings();
 				claims.putAll(this.customClientMetadata.stream()
-						.filter(metadata -> clientSettings.getSetting(metadata) != null)
-						.collect(Collectors.toMap(Function.identity(), clientSettings::getSetting)));
+					.filter(metadata -> clientSettings.getSetting(metadata) != null)
+					.collect(Collectors.toMap(Function.identity(), clientSettings::getSetting)));
 			}
 
 			return OidcClientRegistration.withClaims(claims).build();

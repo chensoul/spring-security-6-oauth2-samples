@@ -34,8 +34,8 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 // end::imports[]
 
 /**
- * An {@link OAuth2TokenCustomizer} to map claims from a federated identity to
- * the {@code id_token} produced by this authorization server.
+ * An {@link OAuth2TokenCustomizer} to map claims from a federated identity to the
+ * {@code id_token} produced by this authorization server.
  *
  * @author Steve Riesenberg
  * @since 1.1
@@ -43,20 +43,11 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Toke
 // tag::class[]
 public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCustomizer<JwtEncodingContext> {
 
-	private static final Set<String> ID_TOKEN_CLAIMS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-			IdTokenClaimNames.ISS,
-			IdTokenClaimNames.SUB,
-			IdTokenClaimNames.AUD,
-			IdTokenClaimNames.EXP,
-			IdTokenClaimNames.IAT,
-			IdTokenClaimNames.AUTH_TIME,
-			IdTokenClaimNames.NONCE,
-			IdTokenClaimNames.ACR,
-			IdTokenClaimNames.AMR,
-			IdTokenClaimNames.AZP,
-			IdTokenClaimNames.AT_HASH,
-			IdTokenClaimNames.C_HASH
-	)));
+	private static final Set<String> ID_TOKEN_CLAIMS = Collections
+		.unmodifiableSet(new HashSet<>(Arrays.asList(IdTokenClaimNames.ISS, IdTokenClaimNames.SUB,
+				IdTokenClaimNames.AUD, IdTokenClaimNames.EXP, IdTokenClaimNames.IAT, IdTokenClaimNames.AUTH_TIME,
+				IdTokenClaimNames.NONCE, IdTokenClaimNames.ACR, IdTokenClaimNames.AMR, IdTokenClaimNames.AZP,
+				IdTokenClaimNames.AT_HASH, IdTokenClaimNames.C_HASH)));
 
 	@Override
 	public void customize(JwtEncodingContext context) {
@@ -80,9 +71,11 @@ public final class FederatedIdentityIdTokenCustomizer implements OAuth2TokenCust
 		if (principal.getPrincipal() instanceof OidcUser oidcUser) {
 			OidcIdToken idToken = oidcUser.getIdToken();
 			claims = idToken.getClaims();
-		} else if (principal.getPrincipal() instanceof OAuth2User oauth2User) {
+		}
+		else if (principal.getPrincipal() instanceof OAuth2User oauth2User) {
 			claims = oauth2User.getAttributes();
-		} else {
+		}
+		else {
 			claims = Collections.emptyMap();
 		}
 

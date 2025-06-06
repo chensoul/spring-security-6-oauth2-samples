@@ -20,15 +20,15 @@ import java.util.UUID;
 @Configuration
 public class ClientConfig {
 
-    @Bean
-    public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
-        return new JdbcRegisteredClientRepository(jdbcTemplate);
-    }
+	@Bean
+	public RegisteredClientRepository registeredClientRepository(JdbcTemplate jdbcTemplate) {
+		return new JdbcRegisteredClientRepository(jdbcTemplate);
+	}
 
-    @Bean
-    ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
-        return args -> {
-            // @formatter:off
+	@Bean
+	ApplicationRunner clientsRunner(RegisteredClientRepository repository) {
+		return args -> {
+			// @formatter:off
             RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
                     .clientId("oidc-client")
                     .clientSecret("{noop}oidc-client")
@@ -88,18 +88,19 @@ public class ClientConfig {
 
             // @formatter:on
 
-            if (repository.findByClientId(oidcClient.getClientId()) == null) {
-                repository.save(oidcClient);
-            }
-            if (repository.findByClientId(credentialsClient.getClientId()) == null) {
-                repository.save(credentialsClient);
-            }
-            if (repository.findByClientId(opaqueClient.getClientId()) == null) {
-                repository.save(opaqueClient);
-            }
-            if (repository.findByClientId(pkceClient.getClientId()) == null) {
-                repository.save(pkceClient);
-            }
-        };
-    }
+			if (repository.findByClientId(oidcClient.getClientId()) == null) {
+				repository.save(oidcClient);
+			}
+			if (repository.findByClientId(credentialsClient.getClientId()) == null) {
+				repository.save(credentialsClient);
+			}
+			if (repository.findByClientId(opaqueClient.getClientId()) == null) {
+				repository.save(opaqueClient);
+			}
+			if (repository.findByClientId(pkceClient.getClientId()) == null) {
+				repository.save(pkceClient);
+			}
+		};
+	}
+
 }

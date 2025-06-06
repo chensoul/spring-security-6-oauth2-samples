@@ -24,8 +24,8 @@ public class RegisteredClientRepositoryConfig {
 			@Qualifier("issuer2-data-source") DataSource issuer2DataSource,
 			TenantPerIssuerComponentRegistry componentRegistry) {
 
-		JdbcRegisteredClientRepository issuer1RegisteredClientRepository =
-				new JdbcRegisteredClientRepository(new JdbcTemplate(issuer1DataSource));	// <1>
+		JdbcRegisteredClientRepository issuer1RegisteredClientRepository = new JdbcRegisteredClientRepository(
+				new JdbcTemplate(issuer1DataSource)); // <1>
 
 		// @fold:on
 		// @formatter:off
@@ -41,8 +41,8 @@ public class RegisteredClientRepositoryConfig {
 		// @formatter:on
 		// @fold:off
 
-		JdbcRegisteredClientRepository issuer2RegisteredClientRepository =
-				new JdbcRegisteredClientRepository(new JdbcTemplate(issuer2DataSource));	// <2>
+		JdbcRegisteredClientRepository issuer2RegisteredClientRepository = new JdbcRegisteredClientRepository(
+				new JdbcTemplate(issuer2DataSource)); // <2>
 
 		// @fold:on
 		// @formatter:off
@@ -64,7 +64,9 @@ public class RegisteredClientRepositoryConfig {
 		return new DelegatingRegisteredClientRepository(componentRegistry);
 	}
 
-	private static class DelegatingRegisteredClientRepository implements RegisteredClientRepository {	// <3>
+	private static class DelegatingRegisteredClientRepository implements RegisteredClientRepository {
+
+	// <3>
 
 		private final TenantPerIssuerComponentRegistry componentRegistry;
 
@@ -88,10 +90,10 @@ public class RegisteredClientRepositoryConfig {
 		}
 
 		private RegisteredClientRepository getRegisteredClientRepository() {
-			RegisteredClientRepository registeredClientRepository =
-					this.componentRegistry.get(RegisteredClientRepository.class);	// <4>
+			RegisteredClientRepository registeredClientRepository = this.componentRegistry
+				.get(RegisteredClientRepository.class); // <4>
 			Assert.state(registeredClientRepository != null,
-					"RegisteredClientRepository not found for \"requested\" issuer identifier.");	// <5>
+					"RegisteredClientRepository not found for \"requested\" issuer identifier."); // <5>
 			return registeredClientRepository;
 		}
 

@@ -21,25 +21,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringTestContextExtension.class)
 public class CustomPasswordGrantTests {
 
-    public final SpringTestContext spring = new SpringTestContext(this);
+	public final SpringTestContext spring = new SpringTestContext(this);
 
-    @Autowired
-    private RegisteredClientRepository registeredClientRepository;
+	@Autowired
+	private RegisteredClientRepository registeredClientRepository;
 
-    @Autowired
-    private MockMvc mvc;
+	@Autowired
+	private MockMvc mvc;
 
-    @Test
-    public void requestWhenTokenRequestValidThenTokenResponse() throws Exception {
-        this.spring.register(AuthorizationServerConfig.class).autowire();
+	@Test
+	public void requestWhenTokenRequestValidThenTokenResponse() throws Exception {
+		this.spring.register(AuthorizationServerConfig.class).autowire();
 
-        RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("oidc-client");
+		RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("oidc-client");
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBasicAuth(registeredClient.getClientId(),
-                registeredClient.getClientSecret().replace("{noop}", ""));
+		HttpHeaders headers = new HttpHeaders();
+		headers.setBasicAuth(registeredClient.getClientId(), registeredClient.getClientSecret().replace("{noop}", ""));
 
-        // @formatter:off
+		// @formatter:off
 		this.mvc.perform(post("/oauth2/token")
 				.param(OAuth2ParameterNames.GRANT_TYPE, "urn:ietf:params:oauth:grant-type:custom_password")
 				.param(OAuth2ParameterNames.USERNAME, "user")
@@ -49,12 +48,13 @@ public class CustomPasswordGrantTests {
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.access_token").isNotEmpty());
 		// @formatter:on
-    }
+	}
 
-    @EnableWebSecurity
-    @EnableAutoConfiguration
-    @ComponentScan
-    static class AuthorizationServerConfig {
-    }
+	@EnableWebSecurity
+	@EnableAutoConfiguration
+	@ComponentScan
+	static class AuthorizationServerConfig {
+
+	}
 
 }

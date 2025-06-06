@@ -36,8 +36,8 @@ public class DeviceClientAuthenticationToken extends OAuth2ClientAuthenticationT
 		super(clientId, clientAuthenticationMethod, credentials, additionalParameters);
 	}
 
-	public DeviceClientAuthenticationToken(RegisteredClient registeredClient, ClientAuthenticationMethod clientAuthenticationMethod,
-			@Nullable Object credentials) {
+	public DeviceClientAuthenticationToken(RegisteredClient registeredClient,
+			ClientAuthenticationMethod clientAuthenticationMethod, @Nullable Object credentials) {
 		super(registeredClient, clientAuthenticationMethod, credentials);
 	}
 

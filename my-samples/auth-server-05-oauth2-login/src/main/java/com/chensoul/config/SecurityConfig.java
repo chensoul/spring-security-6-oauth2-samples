@@ -49,60 +49,48 @@ import static org.springframework.security.oauth2.server.authorization.config.an
  */
 @Configuration
 public class SecurityConfig {
-    private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
 
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = authorizationServer();
+	private static final String CUSTOM_CONSENT_PAGE_URI = "/oauth2/consent";
 
-        http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
-                .with(authorizationServerConfigurer, (authorizationServer) ->
-                        authorizationServer
-                                .authorizationEndpoint(authorizationEndpoint ->
-                                        authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
-                                .tokenEndpoint(token ->
-                                        token.accessTokenResponseHandler(new AccessTokenResponseHandler()))
-                                .oidc(Customizer.withDefaults())    // Enable OpenID Connect 1.0
-                )
-                // Redirect to the login page when not authenticated from the
-                // authorization endpoint
-                .exceptionHandling((exceptions) -> exceptions
-                        .defaultAuthenticationEntryPointFor(
-                                new LoginUrlAuthenticationEntryPoint("/login"),
-                                new MediaTypeRequestMatcher(MediaType.TEXT_HTML)
-                        )
-                );
+	@Bean
+	@Order(Ordered.HIGHEST_PRECEDENCE)
+	SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+		OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = authorizationServer();
 
-        return http.build();
-    }
+		http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
+			.with(authorizationServerConfigurer,
+					(authorizationServer) -> authorizationServer
+						.authorizationEndpoint(
+								authorizationEndpoint -> authorizationEndpoint.consentPage(CUSTOM_CONSENT_PAGE_URI))
+						.tokenEndpoint(token -> token.accessTokenResponseHandler(new AccessTokenResponseHandler()))
+						.oidc(Customizer.withDefaults()) // Enable OpenID Connect 1.0
+			)
+			// Redirect to the login page when not authenticated from the
+			// authorization endpoint
+			.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(
+					new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
 
-    @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(authorize ->
-                        authorize
-                                .requestMatchers("/webjars/**", "/assets/**", "/login", "/logged-out").permitAll()
-                                .anyRequest().authenticated()
-                )
-                .formLogin(formLogin ->
-                        formLogin
-                                .loginPage("/login")
-                )
-                .oauth2Login(oauth2Login ->
-                        oauth2Login
-                                .loginPage("/login")
-                                .successHandler(authenticationSuccessHandler())
-                );
+		return http.build();
+	}
 
-        return http.build();
-    }
+	@Bean
+	public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests(
+				authorize -> authorize.requestMatchers("/webjars/**", "/assets/**", "/login", "/logged-out")
+					.permitAll()
+					.anyRequest()
+					.authenticated())
+			.formLogin(formLogin -> formLogin.loginPage("/login"))
+			.oauth2Login(oauth2Login -> oauth2Login.loginPage("/login").successHandler(authenticationSuccessHandler()));
 
-    private AuthenticationSuccessHandler authenticationSuccessHandler() {
-        return new FederatedIdentityAuthenticationSuccessHandler();
-    }
+		return http.build();
+	}
 
-    // @formatter:off
+	private AuthenticationSuccessHandler authenticationSuccessHandler() {
+		return new FederatedIdentityAuthenticationSuccessHandler();
+	}
+
+	// @formatter:off
     @Bean
     public UserDetailsService users() {
         UserDetails user = User.withDefaultPasswordEncoder()
@@ -183,32 +171,32 @@ public class SecurityConfig {
                 ).build();
 
         // @formatter:on
-        return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
-    }
+		return new InMemoryRegisteredClientRepository(oidcClient, credentialsClient, pkceClient, opaqueClient);
+	}
 
-    @Bean
-    public AuthorizationServerSettings authorizationServerSettings() {
-        return AuthorizationServerSettings.builder().build();
-    }
+	@Bean
+	public AuthorizationServerSettings authorizationServerSettings() {
+		return AuthorizationServerSettings.builder().build();
+	}
 
-    @Bean
-    public OAuth2AuthorizationService authorizationService() {
-        return new InMemoryOAuth2AuthorizationService();
-    }
+	@Bean
+	public OAuth2AuthorizationService authorizationService() {
+		return new InMemoryOAuth2AuthorizationService();
+	}
 
-    @Bean
-    public OAuth2AuthorizationConsentService authorizationConsentService() {
-        return new InMemoryOAuth2AuthorizationConsentService();
-    }
+	@Bean
+	public OAuth2AuthorizationConsentService authorizationConsentService() {
+		return new InMemoryOAuth2AuthorizationConsentService();
+	}
 
+	@Bean
+	public SessionRegistry sessionRegistry() {
+		return new SessionRegistryImpl();
+	}
 
-    @Bean
-    public SessionRegistry sessionRegistry() {
-        return new SessionRegistryImpl();
-    }
+	@Bean
+	public HttpSessionEventPublisher httpSessionEventPublisher() {
+		return new HttpSessionEventPublisher();
+	}
 
-    @Bean
-    public HttpSessionEventPublisher httpSessionEventPublisher() {
-        return new HttpSessionEventPublisher();
-    }
 }

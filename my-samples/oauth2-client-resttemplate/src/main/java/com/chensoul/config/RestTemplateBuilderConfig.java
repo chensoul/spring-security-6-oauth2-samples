@@ -1,6 +1,5 @@
 package com.chensoul.config;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.client.RestTemplateBuilderConfigurer;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -19,35 +18,33 @@ public class RestTemplateBuilderConfig {
 
 	@Value("http://localhost:8090")
 	String resourceServerUrl;
-	
-	@Bean
-    public RestTemplateBuilder restTemplateBuilder(RestTemplateBuilderConfigurer configurer,
-                                            OAuth2ClientInterceptor interceptor){
 
-        assert resourceServerUrl != null;
-        return configurer.configure(new RestTemplateBuilder())
-                .additionalInterceptors(interceptor)
-                .uriTemplateHandler(new DefaultUriBuilderFactory(resourceServerUrl));
-    }
-	
+	@Bean
+	public RestTemplateBuilder restTemplateBuilder(RestTemplateBuilderConfigurer configurer,
+			OAuth2ClientInterceptor interceptor) {
+
+		assert resourceServerUrl != null;
+		return configurer.configure(new RestTemplateBuilder())
+			.additionalInterceptors(interceptor)
+			.uriTemplateHandler(new DefaultUriBuilderFactory(resourceServerUrl));
+	}
+
 	@Bean
 	public OAuth2AuthorizedClientManager authorizedClientManager(
-	        ClientRegistrationRepository clientRegistrationRepository,
-	        OAuth2AuthorizedClientRepository authorizedClientRepository) {
-	    
-	    OAuth2AuthorizedClientProvider authorizedClientProvider = 
-	            OAuth2AuthorizedClientProviderBuilder.builder()
-	            .authorizationCode()
-	            .refreshToken()
-	            .build();
-	    
-	    DefaultOAuth2AuthorizedClientManager authorizedClientManager =
-	            new DefaultOAuth2AuthorizedClientManager(
-	                    clientRegistrationRepository, authorizedClientRepository);
-	   
-	    authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
+			ClientRegistrationRepository clientRegistrationRepository,
+			OAuth2AuthorizedClientRepository authorizedClientRepository) {
 
-	    return authorizedClientManager;
+		OAuth2AuthorizedClientProvider authorizedClientProvider = OAuth2AuthorizedClientProviderBuilder.builder()
+			.authorizationCode()
+			.refreshToken()
+			.build();
+
+		DefaultOAuth2AuthorizedClientManager authorizedClientManager = new DefaultOAuth2AuthorizedClientManager(
+				clientRegistrationRepository, authorizedClientRepository);
+
+		authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
+
+		return authorizedClientManager;
 	}
 
 }

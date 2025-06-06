@@ -20,20 +20,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class ClientCredentialsTests {
-    private static final String CLIENT_ID = "credentials-client";
-    private static final String CLIENT_SECRET = "credentials-client";
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+	private static final String CLIENT_ID = "credentials-client";
 
-    @Autowired
-    private MockMvc mockMvc;
+	private static final String CLIENT_SECRET = "credentials-client";
 
-    @LocalServerPort
-    private long port;
+	private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @Test
-    void performTokenRequestWhenValidClientCredentialsThenOk() throws Exception {
-        // @formatter:off
+	@Autowired
+	private MockMvc mockMvc;
+
+	@LocalServerPort
+	private long port;
+
+	@Test
+	void performTokenRequestWhenValidClientCredentialsThenOk() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
@@ -44,11 +46,11 @@ public class ClientCredentialsTests {
 				.andExpect(jsonPath("$.scope").value("read"))
 				.andExpect(jsonPath("$.token_type").value("Bearer"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performTokenRequestWhenMissingScopeThenOk() throws Exception {
-        // @formatter:off
+	@Test
+	void performTokenRequestWhenMissingScopeThenOk() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
@@ -57,11 +59,11 @@ public class ClientCredentialsTests {
 				.andExpect(jsonPath("$.expires_in").isNumber())
 				.andExpect(jsonPath("$.token_type").value("Bearer"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performTokenRequestWhenInvalidClientCredentialsThenUnauthorized() throws Exception {
-        // @formatter:off
+	@Test
+	void performTokenRequestWhenInvalidClientCredentialsThenUnauthorized() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
@@ -69,32 +71,32 @@ public class ClientCredentialsTests {
 				.andExpect(status().isUnauthorized())
 				.andExpect(jsonPath("$.error").value("invalid_client"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performTokenRequestWhenMissingGrantTypeThenUnauthorized() throws Exception {
-        // @formatter:off
+	@Test
+	void performTokenRequestWhenMissingGrantTypeThenUnauthorized() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.with(httpBasic("bad", "password")))
 				.andExpect(status().isUnauthorized())
 				.andExpect(jsonPath("$.error").value("invalid_client"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performTokenRequestWhenGrantTypeNotRegisteredThenBadRequest() throws Exception {
-        // @formatter:off
+	@Test
+	void performTokenRequestWhenGrantTypeNotRegisteredThenBadRequest() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.with(httpBasic("oidc-client", "oidc-client")))
 				.andExpect(status().isBadRequest())
 				.andExpect(jsonPath("$.error").value("unauthorized_client"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performIntrospectionRequestWhenValidTokenThenOk() throws Exception {
-        // @formatter:off
+	@Test
+	void performIntrospectionRequestWhenValidTokenThenOk() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/introspect")
 				.param("token", getAccessToken())
 				.with(httpBasic(CLIENT_ID, CLIENT_SECRET)))
@@ -110,21 +112,21 @@ public class ClientCredentialsTests {
 				.andExpect(jsonPath("$.sub").value(CLIENT_ID))
 				.andExpect(jsonPath("$.token_type").value("Bearer"));
 		// @formatter:on
-    }
+	}
 
-    @Test
-    void performIntrospectionRequestWhenInvalidCredentialsThenUnauthorized() throws Exception {
-        // @formatter:off
+	@Test
+	void performIntrospectionRequestWhenInvalidCredentialsThenUnauthorized() throws Exception {
+		// @formatter:off
 		this.mockMvc.perform(post("/oauth2/introspect")
 				.param("token", getAccessToken())
 				.with(httpBasic("bad", "password")))
 				.andExpect(status().isUnauthorized())
 				.andExpect(jsonPath("$.error").value("invalid_client"));
 		// @formatter:on
-    }
+	}
 
-    private String getAccessToken() throws Exception {
-        // @formatter:off
+	private String getAccessToken() throws Exception {
+		// @formatter:off
 		MvcResult mvcResult = this.mockMvc.perform(post("http://localhost:" + port + "/oauth2/token")
 				.param("grant_type", "client_credentials")
 				.param("scope", "read")
@@ -134,11 +136,11 @@ public class ClientCredentialsTests {
 				.andReturn();
 		// @formatter:on
 
-        String tokenResponseJson = mvcResult.getResponse().getContentAsString();
-        Map<String, Object> tokenResponse = this.objectMapper.readValue(tokenResponseJson, new TypeReference<>() {
-        });
+		String tokenResponseJson = mvcResult.getResponse().getContentAsString();
+		Map<String, Object> tokenResponse = this.objectMapper.readValue(tokenResponseJson, new TypeReference<>() {
+		});
 
-        return tokenResponse.get("access_token").toString();
-    }
+		return tokenResponse.get("access_token").toString();
+	}
 
 }

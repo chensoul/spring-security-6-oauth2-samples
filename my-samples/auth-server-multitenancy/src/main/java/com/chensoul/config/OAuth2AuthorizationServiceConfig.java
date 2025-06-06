@@ -20,20 +20,19 @@ public class OAuth2AuthorizationServiceConfig {
 	public OAuth2AuthorizationService authorizationService(
 			@Qualifier("issuer1-data-source") DataSource issuer1DataSource,
 			@Qualifier("issuer2-data-source") DataSource issuer2DataSource,
-			TenantPerIssuerComponentRegistry componentRegistry,
-			RegisteredClientRepository registeredClientRepository) {
+			TenantPerIssuerComponentRegistry componentRegistry, RegisteredClientRepository registeredClientRepository) {
 
-		componentRegistry.register("issuer1", OAuth2AuthorizationService.class,
-				new JdbcOAuth2AuthorizationService(	// <1>
-						new JdbcTemplate(issuer1DataSource), registeredClientRepository));
-		componentRegistry.register("issuer2", OAuth2AuthorizationService.class,
-				new JdbcOAuth2AuthorizationService(	// <2>
-						new JdbcTemplate(issuer2DataSource), registeredClientRepository));
+		componentRegistry.register("issuer1", OAuth2AuthorizationService.class, new JdbcOAuth2AuthorizationService( // <1>
+				new JdbcTemplate(issuer1DataSource), registeredClientRepository));
+		componentRegistry.register("issuer2", OAuth2AuthorizationService.class, new JdbcOAuth2AuthorizationService( // <2>
+				new JdbcTemplate(issuer2DataSource), registeredClientRepository));
 
 		return new DelegatingOAuth2AuthorizationService(componentRegistry);
 	}
 
-	private static class DelegatingOAuth2AuthorizationService implements OAuth2AuthorizationService {	// <3>
+	private static class DelegatingOAuth2AuthorizationService implements OAuth2AuthorizationService {
+
+	// <3>
 
 		private final TenantPerIssuerComponentRegistry componentRegistry;
 
@@ -62,10 +61,10 @@ public class OAuth2AuthorizationServiceConfig {
 		}
 
 		private OAuth2AuthorizationService getAuthorizationService() {
-			OAuth2AuthorizationService authorizationService =
-					this.componentRegistry.get(OAuth2AuthorizationService.class);	// <4>
+			OAuth2AuthorizationService authorizationService = this.componentRegistry
+				.get(OAuth2AuthorizationService.class); // <4>
 			Assert.state(authorizationService != null,
-					"OAuth2AuthorizationService not found for \"requested\" issuer identifier.");	// <5>
+					"OAuth2AuthorizationService not found for \"requested\" issuer identifier."); // <5>
 			return authorizationService;
 		}
 

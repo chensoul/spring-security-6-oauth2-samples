@@ -27,45 +27,46 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ExtendWith(SpringTestContextExtension.class)
 public class PkceClientTests {
-    public final SpringTestContext spring = new SpringTestContext(this);
 
-    @Autowired
-    private MockMvc mockMvc;
+	public final SpringTestContext spring = new SpringTestContext(this);
 
-    @Autowired
-    private RegisteredClientRepository registeredClientRepository;
+	@Autowired
+	private MockMvc mockMvc;
 
-    @Test
-    public void oidcLoginWhenpkceClientThenSuccess() throws Exception {
-        this.spring.register(AuthorizationServerConfig.class).autowire();
+	@Autowired
+	private RegisteredClientRepository registeredClientRepository;
 
-        RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("pkce-client");
-        assertThat(registeredClient).isNotNull();
+	@Test
+	public void oidcLoginWhenpkceClientThenSuccess() throws Exception {
+		this.spring.register(AuthorizationServerConfig.class).autowire();
 
-        AuthorizationCodeGrantFlow authorizationCodeGrantFlow = new AuthorizationCodeGrantFlow(this.mockMvc);
-        authorizationCodeGrantFlow.setUsername("user");
-        authorizationCodeGrantFlow.addScope(OidcScopes.OPENID);
-        authorizationCodeGrantFlow.addScope(OidcScopes.PROFILE);
+		RegisteredClient registeredClient = this.registeredClientRepository.findByClientId("pkce-client");
+		assertThat(registeredClient).isNotNull();
 
-        String state = authorizationCodeGrantFlow.authorize(registeredClient, withCodeChallenge());
-        assertThat(state).isNotNull();
+		AuthorizationCodeGrantFlow authorizationCodeGrantFlow = new AuthorizationCodeGrantFlow(this.mockMvc);
+		authorizationCodeGrantFlow.setUsername("user");
+		authorizationCodeGrantFlow.addScope(OidcScopes.OPENID);
+		authorizationCodeGrantFlow.addScope(OidcScopes.PROFILE);
 
-        String authorizationCode = authorizationCodeGrantFlow.submitConsent(registeredClient, state);
-        assertThat(authorizationCode).isNotNull();
+		String state = authorizationCodeGrantFlow.authorize(registeredClient, withCodeChallenge());
+		assertThat(state).isNotNull();
 
-        Map<String, Object> tokenResponse = authorizationCodeGrantFlow.getTokenResponse(registeredClient,
-                authorizationCode, withCodeVerifier());
-        assertThat(tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN)).isNotNull();
-        // Note: Refresh tokens are not issued to public clients
-        assertThat(tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN)).isNull();
-        assertThat(tokenResponse.get(OidcParameterNames.ID_TOKEN)).isNotNull();
-    }
+		String authorizationCode = authorizationCodeGrantFlow.submitConsent(registeredClient, state);
+		assertThat(authorizationCode).isNotNull();
 
-    @EnableWebSecurity
-    @EnableAutoConfiguration
-    @ComponentScan
-    static class AuthorizationServerConfig {
+		Map<String, Object> tokenResponse = authorizationCodeGrantFlow.getTokenResponse(registeredClient,
+				authorizationCode, withCodeVerifier());
+		assertThat(tokenResponse.get(OAuth2ParameterNames.ACCESS_TOKEN)).isNotNull();
+		// Note: Refresh tokens are not issued to public clients
+		assertThat(tokenResponse.get(OAuth2ParameterNames.REFRESH_TOKEN)).isNull();
+		assertThat(tokenResponse.get(OidcParameterNames.ID_TOKEN)).isNotNull();
+	}
 
-    }
+	@EnableWebSecurity
+	@EnableAutoConfiguration
+	@ComponentScan
+	static class AuthorizationServerConfig {
+
+	}
 
 }
