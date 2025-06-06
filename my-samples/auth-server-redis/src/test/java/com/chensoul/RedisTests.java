@@ -1,8 +1,8 @@
 package com.chensoul;
 
-import com.chensoul.domain.RedisOAuth2AuthorizationConsentService;
-import com.chensoul.domain.RedisOAuth2AuthorizationService;
-import com.chensoul.domain.RedisRegisteredClientRepository;
+import com.chensoul.support.RedisOAuth2AuthorizationConsentService;
+import com.chensoul.support.RedisOAuth2AuthorizationService;
+import com.chensoul.support.RedisRegisteredClientRepository;
 import com.chensoul.test.AuthorizationCodeGrantFlow;
 import com.chensoul.test.DeviceAuthorizationGrantFlow;
 import com.chensoul.test.RegisteredClients;

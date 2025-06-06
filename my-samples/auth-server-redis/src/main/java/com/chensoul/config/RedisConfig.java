@@ -1,7 +1,7 @@
 package com.chensoul.config;
 
 import com.chensoul.convertor.*;
-import com.chensoul.domain.*;
+import com.chensoul.support.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -12,7 +12,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 
 import java.util.Arrays;
 
-@EnableRedisRepositories("com.chensoul.domain")
+@EnableRedisRepositories("com.chensoul.support")
 @Configuration(proxyBeanMethods = false)
 public class RedisConfig {
     @Bean

@@ -1,7 +1,7 @@
 
 package com.chensoul.convertor;
 
-import com.chensoul.domain.OAuth2AuthorizationGrantAuthorization;
+import com.chensoul.support.OAuth2AuthorizationGrantAuthorization;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.core.convert.converter.Converter;

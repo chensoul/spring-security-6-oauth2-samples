@@ -16,6 +16,7 @@
         <module>auth-server-03-min</module>
         <module>auth-server-04-jwks-keypair</module>
         <module>auth-server-05-oauth2-login</module>
+        <module>auth-server-06-oauth2-login</module>
         <module>auth-server-userinfo</module>
         <module>auth-server-jdbc</module>
         <module>auth-server-jpa</module>

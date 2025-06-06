@@ -1,0 +1,40 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+
+
+spring:
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: your-app-client-id
+            client-secret: your-app-client-secret
+            scope:
+              - email
+              - profile
+          github:
+            client-id: ${GITHUB_CLIENT_ID:Ov23likOi21AwqpT9WUP}
+            client-secret: ${GITHUB_CLIENT_SECRET:2cd0d78fe7a1c34add13c3452fd94c75db70995f}
+            scope:
+              - user:email
+              - read:user
+          okta:
+            client-id: your-app-client-id
+            client-secret: your-app-client-secret
+        provider:
+          google:
+            user-name-attribute: email
+          github:
+            user-name-attribute: login
+          okta:
+            authorization-uri: https://your-subdomain.oktapreview.com/oauth2/v1/authorize
+            token-uri: https://your-subdomain.oktapreview.com/oauth2/v1/token
+            user-info-uri: https://your-subdomain.oktapreview.com/oauth2/v1/userinfo
+            jwk-set-uri: https://your-subdomain.oktapreview.com/oauth2/v1/keys
